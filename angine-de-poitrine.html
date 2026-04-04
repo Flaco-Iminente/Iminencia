@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angine de Poitrine — O Duo Mascarado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --fg: #e8e4dc;
+    --accent: #d4a017;
+    --accent2: #c23b22;
+    --muted: #6b6560;
+    --card-bg: #141210;
+    --border: #2a2622;
+    --dot-size: 4px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Polka dot background pattern — nod to their costumes */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(212,160,23,0.04) var(--dot-size), transparent var(--dot-size));
+    background-size: 28px 28px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ——— HERO ——— */
+  .hero {
+    padding: 56px 0 40px;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero-pyramid {
+    display: inline-block;
+    width: 0; height: 0;
+    border-left: 36px solid transparent;
+    border-right: 36px solid transparent;
+    border-bottom: 60px solid var(--accent);
+    margin-bottom: 20px;
+    opacity: 0.85;
+    animation: float 4s ease-in-out infinite;
+    position: relative;
+  }
+  .hero-pyramid::after {
+    content: '◉';
+    position: absolute;
+    top: 28px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    color: var(--bg);
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .hero-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(32px, 9vw, 52px);
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 380px;
+    margin: 0 auto 24px;
+    line-height: 1.6;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+  }
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ——— DIVIDER ——— */
+  .divider {
+    border: none;
+    height: 1px;
+    background: var(--border);
+    margin: 36px 0;
+    position: relative;
+  }
+  .divider::after {
+    content: '▲';
+    position: absolute;
+    top: -8px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: var(--accent);
+    background: var(--bg);
+    padding: 0 8px;
+  }
+
+  /* ——— SECTIONS ——— */
+  .section {
+    margin-bottom: 40px;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(22px, 6vw, 30px);
+    line-height: 1.2;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  p {
+    margin-bottom: 16px;
+    color: var(--fg);
+  }
+
+  strong {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* ——— CALLOUT CARDS ——— */
+  .callout {
+    background: var(--card-bg);
+    border-left: 3px solid var(--accent);
+    padding: 16px 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 20px 0;
+  }
+  .callout p {
+    margin-bottom: 0;
+    font-size: 14px;
+    font-style: italic;
+    color: rgba(232,228,220,0.85);
+  }
+  .callout cite {
+    display: block;
+    margin-top: 8px;
+    font-style: normal;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* ——— DISC LIST ——— */
+  .disc-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    margin: 16px 0;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .disc-icon {
+    width: 48px; height: 48px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: conic-gradient(var(--accent) 0deg, var(--bg) 120deg, var(--accent) 240deg, var(--bg) 360deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .disc-icon::after {
+    content: '';
+    width: 10px; height: 10px;
+    background: var(--bg);
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+  }
+  .disc-info h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .disc-info .disc-meta {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .disc-info .disc-tracks {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: rgba(232,228,220,0.55);
+    line-height: 1.6;
+  }
+
+  /* ——— MYTH BUSTERS ——— */
+  .myth {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    margin: 16px 0;
+  }
+  .myth-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .myth-icon {
+    width: 28px; height: 28px;
+    background: var(--accent2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .myth-header strong {
+    font-size: 14px;
+    color: var(--accent2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Space Mono', monospace;
+  }
+  .myth p {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+  /* ——— TIMELINE ——— */
+  .timeline {
+    position: relative;
+    padding-left: 24px;
+    margin: 20px 0;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 4px; top: 6px; bottom: 6px;
+    width: 1px;
+    background: var(--border);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -22px; top: 7px;
+    width: 7px; height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .timeline-year {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 2px;
+  }
+  .timeline-text {
+    font-size: 14px;
+    color: var(--fg);
+    line-height: 1.6;
+  }
+
+  /* ——— FOOTER ——— */
+  footer {
+    text-align: center;
+    padding: 40px 0 56px;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+  }
+  footer .tri {
+    font-size: 20px;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 12px;
+    letter-spacing: 8px;
+  }
+  footer p {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 0;
+  }
+
+  /* ——— FADE IN ANIMATIONS ——— */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+  <header class="hero fade-in">
+    <div class="hero-pyramid"></div>
+    <div class="hero-tag">Orchestre Rock Microtonal Dada-Pythago-Cubiste</div>
+    <h1>Angine de Poitrine</h1>
+    <p class="hero-sub">O duo mascarado de Saguenay, Quebec, que viralizou com rock microtonal e uma estética dadaísta provocativa.</p>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">6.2M</span><span class="stat-label">views KEXP</span></div>
+      <div class="stat"><span class="stat-num">974K</span><span class="stat-label">Spotify mensal</span></div>
+      <div class="stat"><span class="stat-num">433K</span><span class="stat-label">Instagram</span></div>
+    </div>
+  </header>
+
+  <hr class="divider">
+
+  <!-- QUEM SÃO -->
+  <section class="section fade-in delay-1">
+    <div class="section-label">01 — Identidade</div>
+    <h2>Dois irmãos mascarados</h2>
+    <p><strong>Khn de Poitrine</strong> (guitarra/baixo microtonal, loops, sintetizadores, voz) e <strong>Klek de Poitrine</strong> (bateria, percussão, voz) se apresentam totalmente anônimos sob máscaras gigantes de papel machê — inspiradas no macaco-narigudo — e macacões de corpo inteiro com estampa de bolinhas preto-e-branco.</p>
+    <p>O nome significa literalmente <em>"angina de peito"</em> em francês — a dor cardíaca. O projeto foi formalizado em 2019, mas os dois tocam juntos desde os 13 anos. O disfarce nasceu por acidente: proibidos de tocar duas semanas seguidas no mesmo bar, se fantasiaram para o segundo show. A máscara virou identidade permanente.</p>
+    <p>Quando participaram do <strong>Tout le monde en parle</strong> (o maior talk show do Quebec) em março de 2026, conduziram toda a entrevista em sua <strong>linguagem inventada</strong> — uma espécie de idioma gutural alienígena que remete ao Kobaïano da banda Magma.</p>
+
+    <div class="callout">
+      <p>"Viajantes do espaço-tempo, Klek e Khn de Poitrine contemplam maravilhados os hot dogs, as pirâmides e o rock em todo o seu glorioso excesso."</p>
+      <cite>— Bio oficial no Spotify</cite>
+    </div>
+
+    <p>O universo ficcional inclui vários "personagens" creditados nos álbuns: <strong>Tek de Poitrine</strong> (mixagem), <strong>Glegg de Poitrine</strong> (gravação) e <strong>Gogu de Poitrine</strong>. O produtor real é Fabien Peterson, a gestão é da Spectacles Bonzaï, e a agência internacional é a Earth Agency.</p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- O SOM -->
+  <section class="section fade-in delay-2">
+    <div class="section-label">02 — O Som</div>
+    <h2>Math rock microtonal com DNA global</h2>
+    <p>Khn toca um instrumento híbrido customizado — metade Fender Stratocaster, metade baixo — com <strong>dois braços e trastes microtonais esculpidos à mão</strong>, construído por um luthier de Saguenay em mais de 150 horas. Os trastes possuem marcações fosforescentes para compensar a visão limitada dentro das máscaras.</p>
+    <p>Enquanto a música ocidental padrão usa 12 notas na escala cromática, Khn trabalha com um sistema de <strong>24 tons (quartos de tom)</strong>, incorporando intervalos das tradições musicais turca, indiana, japonesa, árabe e indonésia. O loop station (RC-500) é elemento central: Khn camada baixo e guitarra ao vivo, criando texturas densas a partir de apenas dois músicos.</p>
+    <p>As composições são predominantemente <strong>instrumentais</strong>, construídas sobre polirritmias complexas e compassos incomuns, com vocais guturais em linguagem inventada. O resultado é hipnótico e dançante — complexidade progressiva com grooves de pista. Influências declaradas incluem <strong>King Gizzard</strong> (<em>Flying Microtonal Banana</em>), <strong>Gentle Giant</strong>, <strong>King Crimson</strong>, <strong>Frank Zappa</strong>, rock anatoliano dos anos 70, disco, acid techno e krautrock.</p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- DISCOGRAFIA -->
+  <section class="section fade-in delay-2">
+    <div class="section-label">03 — Discografia</div>
+    <h2>Dois volumes, zero palavras reconhecíveis</h2>
+
+    <div class="disc-card">
+      <div class="disc-icon"></div>
+      <div class="disc-info">
+        <h3>Vol. 1</h3>
+        <div class="disc-meta">Junho 2024 · 6 faixas · 32 min</div>
+        <div class="disc-tracks">Sherpa · Tohogd · Tamebsz · Ababa Hotel · Sahardnieh · L'Aberek</div>
+      </div>
+    </div>
+    <p>Tornou-se o <strong>disco mais procurado no Discogs</strong> em fevereiro de 2026, com cópias usadas vendidas por até <strong>US$ 600</strong>.</p>
+
+    <div class="disc-card">
+      <div class="disc-icon"></div>
+      <div class="disc-info">
+        <h3>Vol. II</h3>
+        <div class="disc-meta">3 de abril de 2026 · 6 faixas · ~12 min</div>
+        <div class="disc-tracks">Fabienk · Mata Zyklek · Sarniezz · Utzp · Yor Zarad · Angor</div>
+      </div>
+    </div>
+    <p>Produzido com apoio do Conseil des Arts du Canada. Tiragem inicial de <strong>10 mil vinis</strong> só para o Quebec.</p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ESTÉTICA E CONTROVÉRSIAS -->
+  <section class="section fade-in delay-3">
+    <div class="section-label">04 — Estética & Controvérsias</div>
+    <h2>Pirâmides, bolinhas e acusações de Illuminati</h2>
+    <p>A identidade visual se constrói sobre <strong>máscaras enormes de papel machê</strong> com narizes exagerados, macacões de corpo inteiro em preto e branco com bolinhas, pintura corporal cobrindo toda a pele exposta (ritual de ~1 hora antes de cada show, com temperaturas de até 40°C dentro das máscaras), e <strong>símbolos de pirâmide dourada</strong> aplicados nos figurinos.</p>
+    <p>O gesto mais marcante é a <strong>formação de triângulos com as mãos</strong> (polegares unidos a polegares, indicadores a indicadores) antes e depois das músicas, como saudação ritual. Isso, junto às pirâmides nos figurinos, desencadeou uma onda de teorias conspiratórias online.</p>
+
+    <div class="myth">
+      <div class="myth-header">
+        <div class="myth-icon">✕</div>
+        <strong>Mito: KKK</strong>
+      </div>
+      <p>Nenhuma evidência de referência ao Ku Klux Klan. As fantasias são macacões de bolinhas com máscaras de animal estilizado inspiradas no macaco-narigudo e na estética dadaísta — não túnicas brancas com capuzes pontudos.</p>
+    </div>
+
+    <div class="myth">
+      <div class="myth-header">
+        <div class="myth-icon">✕</div>
+        <strong>Mito: Notas de dólar</strong>
+      </div>
+      <p>Nenhuma fonte confirma notas de dólar nos olhos como parte do projeto. A associação parece derivar da pirâmide com olho presente na cédula americana — conexão feita por internautas conspiracionistas, não pelo projeto em si.</p>
+    </div>
+
+    <div class="myth">
+      <div class="myth-header">
+        <div class="myth-icon">✕</div>
+        <strong>Mito: Illuminati</strong>
+      </div>
+      <p>O gestor Sébastien Collin negou qualquer conexão. Khn declarou à FLOOD Magazine que não há processo conceitual profundo por trás da simbologia. A rádio FM93 de Quebec dedicou um segmento inteiro desmistificando as acusações.</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- TRAJETÓRIA -->
+  <section class="section fade-in delay-3">
+    <div class="section-label">05 — Trajetória</div>
+    <h2>Da piada de bar ao fenômeno global</h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">~2006</div>
+        <div class="timeline-text">Os dois começam a tocar juntos aos 13 anos em Saguenay, Quebec.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2019</div>
+        <div class="timeline-text">O projeto Angine de Poitrine é formalizado com máscaras e linguagem própria.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2023–2024</div>
+        <div class="timeline-text">Circuito de festivais do Quebec: Montreal Jazz Fest, Pop Montreal, M pour Montréal.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Jun 2024</div>
+        <div class="timeline-text"><strong>Vol. 1</strong> é lançado. Recepção calorosa na cena underground.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Dez 2025</div>
+        <div class="timeline-text">Performance gravada no KEXP durante o Trans Musicales de Rennes, França.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Fev 2026</div>
+        <div class="timeline-text">Vídeo do KEXP publicado — ultrapassa <strong>6,2 milhões de views</strong>. Mike Portnoy (Dream Theater) se declara "viciado". Rick Beato diz receber "25 e-mails por dia" sobre eles.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Mar 2026</div>
+        <div class="timeline-text">Entrevista (em linguagem inventada) no Tout le monde en parle. Prêmio de <strong>Artista do Ano no GAMIQ</strong>.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Abr 2026</div>
+        <div class="timeline-text"><strong>Vol. II</strong> lançado. Turnê europeia com 10 datas esgotadas na França, shows no Reino Unido, Portugal (Tremor Festival, MEO Kalorama).</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Set–Out 2026</div>
+        <div class="timeline-text">Primeiros shows nos EUA (Nova York). Élysée Montmartre em Paris. 3 shows esgotados no Mod Club de Toronto.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- CONCLUSÃO -->
+  <section class="section fade-in delay-4">
+    <div class="section-label">06 — Conclusão</div>
+    <h2>Dadaísmo sonoro sem agenda oculta</h2>
+    <p>Angine de Poitrine é um projeto de <strong>arte total</strong> — som, visual e performance inseparáveis — enraizado na tradição dadaísta do absurdo como provocação estética, não política. A microtonalidade não é ornamento: é a base composicional que distingue o projeto de qualquer outro duo de rock no mundo.</p>
+    <p>As acusações conspiracionistas revelam mais sobre a ansiedade contemporânea com símbolos visuais do que sobre qualquer intenção do projeto. O fato de dois músicos anônimos de uma cidade de 150 mil habitantes no interior do Quebec estarem esgotando shows na Europa com um instrumento de trastes feitos à serra é, por si só, mais surreal que qualquer teoria conspiratória sobre eles.</p>
+
+    <div class="callout">
+      <p>"É o tipo de banda que surge uma vez por geração, se tanto."</p>
+      <cite>— SOCAN Magazine</cite>
+    </div>
+  </section>
+
+  <footer>
+    <span class="tri">▲ ▲ ▲</span>
+    <p>Pesquisa compilada em abril de 2026<br>com fontes de Wikipedia, CBC Music, SOCAN Magazine,<br>Guitar Player, Billboard Brasil, Le Devoir e outros.</p>
+  </footer>
+
+</div>
+
+</body>
+</html>

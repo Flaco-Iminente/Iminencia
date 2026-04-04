@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glass Beams — A Psicodelia Mascarada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne+Mono&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0a07;
+    --bg2: #13100a;
+    --fg: #e8dfc8;
+    --gold: #c8920a;
+    --gold2: #e8b44a;
+    --amber: #d4611a;
+    --muted: #7a6d55;
+    --border: #2a2218;
+    --card: #16130d;
+    --mask: #b8841a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Jost', sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Mandala / raga pattern background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse at 20% 30%, rgba(200,146,10,0.06) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 70%, rgba(212,97,26,0.05) 0%, transparent 55%),
+      repeating-conic-gradient(
+        rgba(200,146,10,0.015) 0deg 10deg,
+        transparent 10deg 20deg
+      );
+    background-size: 100% 100%, 100% 100%, 180px 180px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Grain texture overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 660px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ——— HERO ——— */
+  .hero {
+    padding: 64px 0 44px;
+    text-align: center;
+  }
+
+  /* Animated mask glyph */
+  .mask-icon {
+    display: inline-block;
+    width: 72px;
+    height: 72px;
+    margin-bottom: 24px;
+    position: relative;
+    animation: breathe 5s ease-in-out infinite;
+  }
+  .mask-icon svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 18px rgba(200,146,10,0.5));
+  }
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(200,146,10,0.3)); }
+    50% { transform: scale(1.06); filter: drop-shadow(0 0 24px rgba(200,146,10,0.7)); }
+  }
+
+  .hero-tag {
+    font-family: 'Syne Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+    opacity: 0.85;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(38px, 10vw, 62px);
+    line-height: 1.05;
+    color: #fff;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold2);
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 400px;
+    margin: 0 auto 28px;
+    font-weight: 300;
+    letter-spacing: 0.2px;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Syne Mono', monospace;
+    font-size: 20px;
+    color: var(--gold2);
+    display: block;
+    letter-spacing: -0.5px;
+  }
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ——— DIVIDER ——— */
+  .divider {
+    border: none;
+    height: 1px;
+    background: var(--border);
+    margin: 40px 0;
+    position: relative;
+  }
+  .divider::after {
+    content: '◈';
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    color: var(--gold);
+    background: var(--bg);
+    padding: 0 10px;
+    letter-spacing: 0;
+  }
+
+  /* ——— SECTIONS ——— */
+  .section { margin-bottom: 44px; }
+
+  .section-label {
+    font-family: 'Syne Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+    opacity: 0.8;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(24px, 6vw, 34px);
+    line-height: 1.15;
+    color: #fff;
+    margin-bottom: 18px;
+    letter-spacing: -0.3px;
+  }
+  h2 em { font-style: italic; color: var(--gold2); }
+
+  p {
+    margin-bottom: 16px;
+    color: var(--fg);
+    font-weight: 300;
+    font-size: 15.5px;
+  }
+
+  strong { color: #fff; font-weight: 500; }
+
+  /* ——— CALLOUT ——— */
+  .callout {
+    background: var(--card);
+    border-left: 2px solid var(--gold);
+    padding: 18px 20px;
+    border-radius: 0 8px 8px 0;
+    margin: 22px 0;
+    position: relative;
+  }
+  .callout::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    color: var(--gold);
+    opacity: 0.18;
+    position: absolute;
+    top: -8px;
+    left: 12px;
+    line-height: 1;
+  }
+  .callout p {
+    margin-bottom: 0;
+    font-size: 14.5px;
+    font-style: italic;
+    color: rgba(232,223,200,0.88);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.55;
+    padding-left: 8px;
+  }
+  .callout cite {
+    display: block;
+    margin-top: 10px;
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    font-family: 'Syne Mono', monospace;
+    padding-left: 8px;
+  }
+
+  /* ——— DISC CARDS ——— */
+  .disc-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 16px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+  .disc-card:hover { border-color: var(--gold); }
+
+  .disc-vinyl {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    background: conic-gradient(
+      #1a1508 0deg, #2a2010 30deg, #1a1508 60deg, #2a2010 90deg,
+      #1a1508 120deg, #2a2010 150deg, #1a1508 180deg, #2a2010 210deg,
+      #1a1508 240deg, #2a2010 270deg, #1a1508 300deg, #2a2010 330deg, #1a1508 360deg
+    );
+    border-radius: 50%;
+    position: relative;
+    border: 2px solid #2a2010;
+    animation: spin 10s linear infinite paused;
+  }
+  .disc-card:hover .disc-vinyl { animation-play-state: running; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .disc-vinyl::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px; height: 14px;
+    background: radial-gradient(circle, var(--gold2), var(--gold));
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(200,146,10,0.4);
+  }
+
+  .disc-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .disc-meta {
+    font-family: 'Syne Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .disc-tracks {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .disc-tracks span {
+    display: inline-block;
+    background: rgba(200,146,10,0.08);
+    border: 1px solid rgba(200,146,10,0.2);
+    border-radius: 20px;
+    padding: 2px 10px;
+    margin: 3px 3px 3px 0;
+    font-size: 12px;
+    color: rgba(232,223,200,0.7);
+    transition: all 0.2s;
+  }
+  .disc-tracks span:hover {
+    background: rgba(200,146,10,0.15);
+    color: var(--gold2);
+    border-color: var(--gold);
+  }
+
+  /* ——— TIMELINE ——— */
+  .timeline { position: relative; padding-left: 0; }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 16px;
+    margin-bottom: 0;
+    position: relative;
+  }
+  .timeline-item::after {
+    content: '';
+    position: absolute;
+    left: 72px;
+    top: 14px;
+    bottom: -100%;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    opacity: 0.25;
+  }
+  .timeline-item:last-child::after { display: none; }
+
+  .timeline-year {
+    font-family: 'Syne Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    padding-top: 2px;
+    text-align: right;
+    padding-right: 16px;
+  }
+  .timeline-text {
+    font-size: 14.5px;
+    color: var(--fg);
+    font-weight: 300;
+    padding-bottom: 22px;
+    border-left: 1px solid rgba(200,146,10,0.15);
+    padding-left: 16px;
+    position: relative;
+  }
+  .timeline-text::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 6px;
+    width: 7px;
+    height: 7px;
+    background: var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(200,146,10,0.5);
+  }
+
+  /* ——— INFLUENCE TAGS ——— */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0;
+  }
+  .tag {
+    font-size: 12px;
+    font-family: 'Syne Mono', monospace;
+    letter-spacing: 0.5px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 5px 12px;
+    color: var(--muted);
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .tag:hover {
+    border-color: var(--gold);
+    color: var(--gold2);
+    background: rgba(200,146,10,0.06);
+  }
+
+  /* ——— MEMBERS GRID ——— */
+  .member-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+  }
+  .member-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--gold2);
+    margin-bottom: 4px;
+  }
+  .member-role {
+    font-family: 'Syne Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .member-desc {
+    font-size: 14px;
+    color: var(--fg);
+    font-weight: 300;
+    margin-bottom: 0;
+  }
+
+  /* ——— STAT HIGHLIGHT BOX ——— */
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(200,146,10,0.08) 0%, rgba(212,97,26,0.05) 100%);
+    border: 1px solid rgba(200,146,10,0.2);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 16px;
+    text-align: center;
+  }
+  .hl-item {}
+  .hl-num {
+    font-family: 'Syne Mono', monospace;
+    font-size: 22px;
+    color: var(--gold2);
+    display: block;
+    letter-spacing: -0.5px;
+  }
+  .hl-label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* ——— FOOTER ——— */
+  footer {
+    text-align: center;
+    padding: 40px 0 52px;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+  }
+  .footer-mask {
+    font-size: 28px;
+    letter-spacing: 12px;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 14px;
+    opacity: 0.6;
+  }
+  footer p {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 0;
+    font-family: 'Syne Mono', monospace;
+    letter-spacing: 0.5px;
+  }
+
+  /* ——— FADE ANIMATIONS ——— */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.7s ease forwards;
+  }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .d1 { animation-delay: 0.05s; }
+  .d2 { animation-delay: 0.15s; }
+  .d3 { animation-delay: 0.25s; }
+  .d4 { animation-delay: 0.35s; }
+  .d5 { animation-delay: 0.45s; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+  <header class="hero fade-in">
+    <div class="mask-icon">
+      <!-- Stylized mask SVG inspired by their jeweled masks -->
+      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- outer glow ring -->
+        <circle cx="40" cy="40" r="38" stroke="#c8920a" stroke-width="0.5" opacity="0.4"/>
+        <circle cx="40" cy="40" r="30" stroke="#c8920a" stroke-width="0.3" opacity="0.25"/>
+        <!-- decorative petals — mandala -->
+        <ellipse cx="40" cy="14" rx="4" ry="8" fill="#c8920a" opacity="0.25"/>
+        <ellipse cx="40" cy="66" rx="4" ry="8" fill="#c8920a" opacity="0.25"/>
+        <ellipse cx="14" cy="40" rx="8" ry="4" fill="#c8920a" opacity="0.25"/>
+        <ellipse cx="66" cy="40" rx="8" ry="4" fill="#c8920a" opacity="0.25"/>
+        <ellipse cx="21" cy="21" rx="4" ry="8" fill="#c8920a" opacity="0.15" transform="rotate(-45 21 21)"/>
+        <ellipse cx="59" cy="21" rx="4" ry="8" fill="#c8920a" opacity="0.15" transform="rotate(45 59 21)"/>
+        <ellipse cx="21" cy="59" rx="4" ry="8" fill="#c8920a" opacity="0.15" transform="rotate(45 21 59)"/>
+        <ellipse cx="59" cy="59" rx="4" ry="8" fill="#c8920a" opacity="0.15" transform="rotate(-45 59 59)"/>
+        <!-- mask face shape -->
+        <path d="M40 20 C52 20 60 28 60 40 C60 52 52 56 40 58 C28 56 20 52 20 40 C20 28 28 20 40 20Z"
+              fill="#1a1508" stroke="#c8920a" stroke-width="1.2"/>
+        <!-- eye cutouts -->
+        <ellipse cx="31" cy="38" rx="5" ry="4" fill="none" stroke="#e8b44a" stroke-width="1"/>
+        <ellipse cx="49" cy="38" rx="5" ry="4" fill="none" stroke="#e8b44a" stroke-width="1"/>
+        <!-- jewel dots -->
+        <circle cx="31" cy="38" r="1.5" fill="#e8b44a"/>
+        <circle cx="49" cy="38" r="1.5" fill="#e8b44a"/>
+        <circle cx="40" cy="26" r="2" fill="#c8920a"/>
+        <circle cx="40" cy="50" r="1.5" fill="#c8920a" opacity="0.7"/>
+        <!-- forehead gem -->
+        <path d="M38 24 L40 21 L42 24 L40 26Z" fill="#e8b44a"/>
+      </svg>
+    </div>
+    <div class="hero-tag">Melbourne, Austrália — Psicodelia Sul-Asiática</div>
+    <h1><em>Glass</em> Beams</h1>
+    <p class="hero-sub">O trio mascarado que fundiu raga indiano, krautrock e funk, e conquistou Coachella com apenas nove faixas — e nenhuma palavra dita no palco.</p>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">888K</span><span class="stat-label">Instagram</span></div>
+      <div class="stat"><span class="stat-num">9</span><span class="stat-label">Faixas originais</span></div>
+      <div class="stat"><span class="stat-num">148+</span><span class="stat-label">Shows ao vivo</span></div>
+      <div class="stat"><span class="stat-num">0</span><span class="stat-label">Palavras no palco</span></div>
+    </div>
+  </header>
+
+  <hr class="divider">
+
+  <!-- ORIGEM -->
+  <section class="section fade-in d1">
+    <div class="section-label">01 — Origem</div>
+    <h2>Um DVD, um pai imigrante<br>e o silêncio da pandemia</h2>
+    <p>Em 2020, enquanto Melbourne entrava em um dos lockdowns mais longos do mundo, o multi-instrumentista indo-australiano <strong>Rajan Silva</strong> sentou-se em seu home studio sem direção criativa. Uma memória de infância veio à tona: assistir repetidamente ao DVD <em>Concert for George</em> — o tributo de 2002 a George Harrison no Royal Albert Hall — ao lado de seu pai. Naquele show, <strong>Ravi Shankar e Anoushka Shankar</strong> tocaram ao lado de Eric Clapton, Paul McCartney e Jeff Lynne.</p>
+    <p>O pai de Silva emigrou da Índia para Melbourne no final dos anos 1970, trazendo consigo uma coleção eclética onde <strong>Asha Bhosle e Lata Mangeshkar conviviam com B.B. King e Muddy Waters</strong>. Foi nessa coleção que Silva mergulhou durante a pandemia. "Vasculhei a música da cidade natal do meu pai e das regiões ao redor. Encontrei uma riqueza de música clássica indiana, disco e pop dos anos 70 que formaram os alicerces deste disco. Assim que tive a visão do que queria escrever e por que queria escrever, as músicas simplesmente fluíram", explicou à Rolling Stone India.</p>
+    <p>O primeiro EP, <em>Mirage</em>, foi inteiramente <strong>composto, gravado, produzido e mixado por Silva sozinho</strong> em seu estúdio caseiro. O projeto nasceu como empreitada solo e só depois se expandiu para um trio nas performances ao vivo.</p>
+
+    <div class="callout">
+      <p>"Adoro a ideia de deixar as pessoas querendo saber mais. O lado do ego de ser artista pode distorcer as coisas e atrapalhar a arte. Quando coloco a máscara, consigo incorporar a sensação de ser apenas um veículo para a música."</p>
+      <cite>— Rajan Silva, Vogue India</cite>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- QUEM SÃO -->
+  <section class="section fade-in d2">
+    <div class="section-label">02 — Os Membros</div>
+    <h2>Um rosto revelado,<br><em>dois eternamente ocultos</em></h2>
+
+    <div class="member-card">
+      <div class="member-name">Rajan Silva</div>
+      <div class="member-role">Compositor · Produtor · Baixo ao vivo</div>
+      <p class="member-desc">Primariamente baterista de formação, Silva toca todos os instrumentos nas gravações: guitarra, baixo, bateria, percussão e sintetizadores. Antes do Glass Beams, <strong>assinou com a Capitol Records aos 20 anos</strong> e mudou-se para Los Angeles, onde passou seis anos como produtor. A experiência foi exaustiva; voltou a Melbourne e abandonou a música por um período, antes de recomeçar do zero durante a pandemia.</p>
+    </div>
+
+    <div class="member-card">
+      <div class="member-name">Membros Anônimos</div>
+      <div class="member-role">Identidades permanentemente não reveladas</div>
+      <p class="member-desc">Os outros integrantes permanecem completamente anônimos. Nenhum nome, instrumento fixo ou background foi confirmado. A agência de booking WAT Artists os descreve como um <em>"quarteto mascarado"</em> — embora a maioria dos shows apresente três performers. Nos palcos do mundo, <strong>não falam uma sílaba com a plateia</strong>.</p>
+    </div>
+
+    <p style="font-size:13.5px; color:var(--muted); font-style:italic; margin-top:4px;">O Guardian notou em março de 2024 que "os outros membros até agora não foram identificados". A Far Out Magazine observou que "vestir as toalhinhas douradas certamente faz as pessoas espalharem rumores sobre quem eles podem ser".</p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- AS MÁSCARAS -->
+  <section class="section fade-in d2">
+    <div class="section-label">03 — As Máscaras</div>
+    <h2>Rede de Indra &<br><em>morte do ego</em></h2>
+    <p>Em todas as aparições públicas — shows, vídeos, fotos de imprensa — os membros usam <strong>máscaras de vidro dourado incrustadas com joias</strong>, criadas por um joalheiro russo. A Vogue India descreveu a estética como <em>"máscaras bejewelled semelhantes a toalhinhas rendadas e roupas andróginas em tons pastel, parecendo semideuses steampunk"</em>.</p>
+    <p>Silva compartilhou duas interpretações favoritas do significado das máscaras:</p>
+
+    <div class="callout">
+      <p>Rede de Indra: conceito budista de uma teia infinita ornamentada com gemas em cada nó — cada uma refletindo todas as outras, simbolizando a interconexão universal.</p>
+      <cite>— Interpretação nº 1</cite>
+    </div>
+
+    <div class="callout">
+      <p>Ego Death: "Uma perda completa da identidade subjetiva do eu. Transcendência total — além de si mesmo, além das palavras, além do espaço-tempo. Sem ego. Apenas consciência pura e liberdade extática."</p>
+      <cite>— Interpretação nº 2, pela própria banda</cite>
+    </div>
+
+    <p>Silva é deliberadamente evasivo: <em>"Assim como um cantor explicando a letra de uma música, somos hesitantes em dar a resposta definitiva do que elas significam para nós, por medo de destruir as belas interpretações dos fãs."</em></p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- O SOM -->
+  <section class="section fade-in d3">
+    <div class="section-label">04 — O Som</div>
+    <h2>Onde raga encontra krautrock<br>e funk encontra transe</h2>
+    <p>A música do Glass Beams desafia classificação fácil — e essa é parte da intenção. Silva citou Ananda Shankar, sobrinho de Ravi Shankar, cuja aspiração era criar <em>"uma nova forma de música que não tem nome particular"</em>. Na prática, o som opera na interseção de várias tradições simultâneas:</p>
+
+    <div class="highlight-box">
+      <div class="hl-item">
+        <span class="hl-num">∞</span>
+        <span class="hl-label">Raga indiano</span>
+      </div>
+      <div class="hl-item">
+        <span class="hl-num">◈</span>
+        <span class="hl-label">Krautrock</span>
+      </div>
+      <div class="hl-item">
+        <span class="hl-num">♬</span>
+        <span class="hl-label">Funk & groove</span>
+      </div>
+      <div class="hl-item">
+        <span class="hl-num">◯</span>
+        <span class="hl-label">Psicodelia</span>
+      </div>
+    </div>
+
+    <p><strong>Psicodelia e krautrock</strong> formam a espinha dorsal estrutural: riffs cíclicos hipnóticos, ritmos motorik propulsivos, repetição que induz a transe e texturas sonoras mergulhadas em reverb e delay. <strong>Influências sul-asiáticas</strong> fornecem a alma melódica: escalas indianas, tonalidades semelhantes a sitar na guitarra, ritmos inspirados em tabla, cantos evocando Bollywood e modos de raga. <strong>Funk e groove</strong> dão o corpo rítmico — <em>"pockets rítmicos tão profundos que deixariam The Meters orgulhosos"</em>, escreveu o In The Loop Magazine.</p>
+
+    <p>Toda a música é <strong>instrumental</strong> — sem letras convencionais. <em>"Desde que começamos a tocar internacionalmente, percebemos que nossa música tem uma qualidade universal. A primeira vez que tocamos na Turquia, a plateia estava 'cantando' as melodias de guitarra e ecoando os cantos vocais"</em>, contou Silva.</p>
+
+    <p style="font-size:13.5px; color:var(--muted);">Influências declaradas por Silva: Ravi Shankar · Ananda Shankar · R.D. Burman · Kalyanji-Anandji · Charanjit Singh · George Harrison · Asha Bhosle · B.B. King · Muddy Waters</p>
+    <div class="tags">
+      <span class="tag">Khruangbin</span>
+      <span class="tag">Altın Gün</span>
+      <span class="tag">Kikagaku Moyo</span>
+      <span class="tag">Thievery Corporation</span>
+      <span class="tag">Daft Punk (mascarados)</span>
+      <span class="tag">The Meters</span>
+      <span class="tag">Floating Points</span>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- DISCOGRAFIA -->
+  <section class="section fade-in d3">
+    <div class="section-label">05 — Discografia</div>
+    <h2>Nove faixas.<br><em>Um fenômeno global.</em></h2>
+
+    <div class="disc-card">
+      <div class="disc-vinyl"></div>
+      <div class="disc-info">
+        <h3>Mirage EP</h3>
+        <div class="disc-meta">25 Jun 2021 · Research Records · 4 faixas · ~19 min</div>
+        <div class="disc-tracks">
+          <span>Mirage</span>
+          <span>Taurus</span>
+          <span>Kong</span>
+          <span>Rattlesnake</span>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:14px; color:var(--muted); margin-bottom:24px;">Gravado inteiramente em home studio durante os lockdowns de 2020. Alcançou <strong style="color:var(--fg)">#8 no chart de Independentes australiano</strong>. "Taurus" foi selecionada por <strong style="color:var(--fg)">Jayda G</strong> para sua compilação <em>DJ-Kicks</em> e tocada por Gilles Peterson na BBC Radio 6 Music. Prensagens originais em vinil tornaram-se altamente cobiçadas; 50 cópias numeradas e assinadas para o Record Store Day 2022.</p>
+
+    <div class="disc-card">
+      <div class="disc-vinyl"></div>
+      <div class="disc-info">
+        <h3>Mahal EP</h3>
+        <div class="disc-meta">22 Mar 2024 · Ninja Tune · 5 faixas · ~19 min</div>
+        <div class="disc-tracks">
+          <span>Horizon</span>
+          <span>Mahal</span>
+          <span>Orb</span>
+          <span>Snake Oil</span>
+          <span>Black Sand</span>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:14px; color:var(--muted);">Estreia no <strong style="color:var(--fg)">Ninja Tune</strong> — selo de Bonobo, Floating Points e Bicep. Alcançou <strong style="color:var(--fg)">#1 no chart de Independentes australiano</strong>, <strong style="color:var(--fg)">#5 no Billboard Contemporary Jazz Albums</strong> e #13 no Billboard Jazz Albums. Vinil laranja 140g (45 RPM); relançamento japonês em outubro de 2025.</p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- EXPLOSÃO VIRAL -->
+  <section class="section fade-in d4">
+    <div class="section-label">06 — A Explosão</div>
+    <h2>De 10 mil a 888 mil seguidores.<br><em>99% orgânico.</em></h2>
+    <p>No final de 2023, clips de shows ao vivo com material inédito começaram a circular no Instagram e TikTok, impulsionados por criadores como <strong>Facemelts</strong> e <strong>Aaklab</strong>. O resultado foi sísmico:</p>
+
+    <div class="highlight-box" style="margin-bottom:20px;">
+      <div class="hl-item">
+        <span class="hl-num">25M</span>
+        <span class="hl-label">views em 1 semana</span>
+      </div>
+      <div class="hl-item">
+        <span class="hl-num">400K</span>
+        <span class="hl-label">novos seguidores em 2 semanas</span>
+      </div>
+      <div class="hl-item">
+        <span class="hl-num">1M+</span>
+        <span class="hl-label">ouvintes mensais no Spotify (pico)</span>
+      </div>
+      <div class="hl-item">
+        <span class="hl-num">14M</span>
+        <span class="hl-label">views YouTube totais</span>
+      </div>
+    </div>
+
+    <p>A sessão no <strong>KEXP</strong> (agosto de 2024) ultrapassou 1,5 milhão de views no primeiro mês, superando sessões de Jungle, Yussef Dayes, M83 e IDLES. Após ela, os streams do <em>Mahal</em> cresceram <strong>40% globalmente</strong> e <strong>43% nos EUA</strong>. "Mahal" acumulou mais de <strong>6 milhões de streams</strong> no Spotify. Com apenas 15 posts no Instagram, Glass Beams tem mais seguidores que Jungle, The xx, Wet Leg e IDLES.</p>
+
+    <div class="callout">
+      <p>"Com apenas algumas faixas em seu nome, Glass Beams já têm shows esgotados, uma base de seguidores em rápido crescimento e mais de 1 milhão de ouvintes mensais no Spotify."</p>
+      <cite>— The Guardian, março de 2024</cite>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- TRAJETÓRIA -->
+  <section class="section fade-in d4">
+    <div class="section-label">07 — Trajetória</div>
+    <h2>Do home studio ao<br><em>Coachella e Glastonbury</em></h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">2020</div>
+        <div class="timeline-text">Durante o lockdown em Melbourne, Rajan Silva começa a compor o que viria a ser o EP <em>Mirage</em> — inteiramente sozinho, em casa.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Jun 2021</div>
+        <div class="timeline-text"><strong>EP Mirage lançado</strong> pela Research Records. "Taurus" é selecionada por Jayda G e tocada por Gilles Peterson na BBC Radio 6.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2022</div>
+        <div class="timeline-text">NME nomeia Glass Beams entre os <strong>100 Artistas Emergentes Essenciais do ano</strong>. Início das primeiras turnês australianas ao vivo.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Dez 2023</div>
+        <div class="timeline-text"><strong>Magnetic Fields Festival</strong> no Rajasthan — Silva descreve como "um retorno ao lar". Início da explosão viral no TikTok e Instagram.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Mar 2024</div>
+        <div class="timeline-text"><strong>EP Mahal</strong> lançado pela Ninja Tune. #1 no chart de Independentes australiano. Guardian os destaca como "One to Watch".</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Ago 2024</div>
+        <div class="timeline-text">Sessão ao vivo no <strong>KEXP</strong>: 1,5 milhão de views no primeiro mês, superando artistas como IDLES e M83.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Fev 2025</div>
+        <div class="timeline-text">Show gratuito na <strong>Federation Square</strong>, Melbourne, como abertura do Asia TOPA: cerca de <strong>20.000 pessoas</strong>.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Abr 2025</div>
+        <div class="timeline-text"><strong>Coachella 2025</strong> (Gobi Stage, com transmissão ao vivo YouTube). Jun Takahashi do UNDERCOVER usa o Glass Beams como pano de fundo do desfile na Paris Fashion Week.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Jun 2025</div>
+        <div class="timeline-text"><strong>Glastonbury 2025</strong> (West Holts Stage). Continuação de turnê global com mais de 30.000 ingressos vendidos nos EUA, UK, Europa e Austrália.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- MODA -->
+  <section class="section fade-in d5">
+    <div class="section-label">08 — Além da Música</div>
+    <h2>Da psicodelia às<br><em>passarelas de Paris</em></h2>
+    <p>O mundo da moda também tomou nota. O designer japonês <strong>Jun Takahashi</strong> citou Glass Beams como inspiração direta para a coleção <strong>UNDERCOVER Primavera 2025</strong> de menswear na Paris Fashion Week. Takahashi descobriu a banda no YouTube e exibiu um <strong>vídeo exclusivo de performance ao vivo</strong> como pano de fundo de todo o desfile no Grand Plateau, coberto pela WWD, Hypebeast, NSS Magazine e SSENSE.</p>
+
+    <div class="callout">
+      <p>"De muitas formas, Glass Beams é o som que o próprio George Harrison queria ouvir quando introduziu a música clássica indiana na música pop ocidental via Beatles e sua carreira solo."</p>
+      <cite>— Spill Magazine</cite>
+    </div>
+
+    <p>Os shows ao vivo combinam <strong>iluminação sépia quente que evolui para âmbar e azul</strong>, projeções geométricas e mandalas sincronizadas com as polirritmias, máquinas de névoa e uma atmosfera que resenhas descrevem como "cinemática" e "ritualística". Os sets de headliner duram entre <strong>75 e 100 minutos</strong>, com arranjos estendidos das faixas de estúdio.</p>
+
+    <p>Em Londres, duas noites no <strong>EartH Theatre</strong> (700 lugares) esgotaram — a segunda <strong>em dois minutos</strong>. No In The Loop Magazine, após o show em Chicago: <em>"Após cada jam hipnótico, sinuoso e funky, os músicos simplesmente saudaram a plateia, afinaram seus instrumentos e partiram para a próxima seleção."</em></p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- CONCLUSÃO -->
+  <section class="section fade-in d5">
+    <div class="section-label">09 — Conclusão</div>
+    <h2>O poder do<br><em>mistério deliberado</em></h2>
+    <p>Glass Beams representa um caso fascinante de como <strong>menos pode ser exponencialmente mais</strong>. Nove faixas. Nenhuma letra. Nenhuma palavra no palco. Quinze posts no Instagram. Uma única entrevista concedida em três anos. Rostos permanentemente ocultos. E ainda assim: 888 mil seguidores, Coachella e Glastonbury, Ninja Tune, 20 mil pessoas em uma praça de Melbourne e uma coleção de alta moda em Paris.</p>
+    <p>O que torna o projeto singular não é apenas a fusão musical — outros artistas já cruzaram Oriente e Ocidente —, mas a <strong>intencionalidade radical com que Silva construiu cada camada de significado</strong>, da sonoridade às máscaras, do silêncio nas entrevistas à ausência de letras. É um projeto que opera como a Rede de Indra que inspira suas máscaras: cada elemento reflete e amplifica todos os outros, criando algo que transcende a soma das partes.</p>
+
+    <div class="callout">
+      <p>Quando a primeira vez que tocamos na Turquia, a plateia estava cantando as melodias de guitarra e ecoando os cantos vocais. É o poder de uma música que não pertence a nenhum lugar — e pertence a todos os lugares ao mesmo tempo.</p>
+      <cite>— Rajan Silva, Rolling Stone India</cite>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-mask">◈ ◈ ◈</span>
+    <p>Pesquisa compilada em abril de 2026<br>com fontes de Rolling Stone India, The Guardian, NME, Vogue India,<br>Ninja Tune, KEXP, Spill Magazine, In The Loop Magazine e outros.</p>
+  </footer>
+
+</div>
+
+</body>
+</html>

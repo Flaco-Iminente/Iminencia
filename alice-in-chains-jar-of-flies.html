@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alice in Chains — Nordeste Oculto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Fira+Code:wght@300;400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0c0b;
+    --bg2: #111310;
+    --moss: #3d4a2e;
+    --moss-light: #556b3a;
+    --amber: #b8860b;
+    --amber-light: #d4a017;
+    --rust: #7a4f2a;
+    --ash: #8a8c84;
+    --ash-light: #b0b3a8;
+    --white: #e8e9e4;
+    --muted: #5a5c55;
+    --accent: #6b7c50;
+    --fly: #2e3a20;
+
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-mono: 'Fira Code', monospace;
+    --font-body: 'Source Serif 4', Georgia, serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.72;
+    font-weight: 300;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Hex pattern background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(61,74,46,0.18) 0%, transparent 70%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='32'%3E%3Cpath d='M14 2 L26 9 L26 23 L14 30 L2 23 L2 9 Z' fill='none' stroke='%23222820' stroke-width='0.5'/%3E%3C/svg%3E");
+    background-size: 100%, 28px 32px;
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Grain overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 668px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── HERO ─────────────────────────────── */
+  .hero {
+    padding: 80px 0 64px;
+    text-align: center;
+  }
+
+  /* SVG Fly */
+  .fly-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+
+  .fly-svg {
+    animation: breathe 4.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 16px rgba(107,124,80,0.25));
+  }
+
+  @keyframes breathe {
+    0%, 100% { transform: scale(1) translateY(0); opacity: 0.85; }
+    50% { transform: scale(1.06) translateY(-4px); opacity: 1; }
+  }
+
+  .hero-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--moss-light);
+    margin-bottom: 20px;
+  }
+
+  .hero-band {
+    font-family: var(--font-display);
+    font-size: clamp(52px, 10vw, 78px);
+    font-weight: 900;
+    line-height: 0.95;
+    color: var(--white);
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+  }
+
+  .hero-album {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--amber);
+    margin-bottom: 20px;
+    letter-spacing: 0.3px;
+  }
+
+  .hero-sub {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--ash);
+    font-weight: 300;
+    max-width: 420px;
+    margin: 0 auto 48px;
+    line-height: 1.6;
+  }
+
+  /* Stats block */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--moss);
+    border: 1px solid var(--moss);
+    overflow: hidden;
+  }
+
+  .stat {
+    background: var(--bg2);
+    padding: 18px 12px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--amber-light);
+    display: block;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--ash);
+    line-height: 1.4;
+  }
+
+  /* ── DIVIDER ──────────────────────────── */
+  .divider {
+    border: none;
+    height: 1px;
+    background: var(--moss);
+    margin: 56px 0;
+    position: relative;
+  }
+
+  .divider::after {
+    content: '✦ ✦ ✦';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--bg);
+    padding: 0 16px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--moss-light);
+    letter-spacing: 6px;
+  }
+
+  /* ── SECTION ──────────────────────────── */
+  .section {
+    margin-bottom: 56px;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--moss-light);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+
+  p {
+    margin-bottom: 18px;
+    color: var(--ash-light);
+    font-weight: 300;
+  }
+
+  p strong {
+    color: var(--white);
+    font-weight: 400;
+  }
+
+  p em {
+    font-style: italic;
+    color: var(--ash-light);
+  }
+
+  /* ── CALLOUT ──────────────────────────── */
+  .callout {
+    border-left: 3px solid var(--amber);
+    padding: 18px 20px;
+    margin: 28px 0;
+    background: rgba(184,134,11,0.05);
+  }
+
+  .callout p {
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ash-light);
+    margin: 0 0 8px;
+  }
+
+  .callout cite {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--amber);
+    text-transform: uppercase;
+    font-style: normal;
+  }
+
+  /* ── HIGHLIGHT BOX ────────────────────── */
+  .highlight-box {
+    background: var(--bg2);
+    border: 1px solid var(--moss);
+    padding: 24px;
+    margin: 28px 0;
+  }
+
+  .highlight-box-title {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--moss-light);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .sound-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .sound-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .sound-icon {
+    font-size: 14px;
+    color: var(--moss-light);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .sound-text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ash);
+    line-height: 1.5;
+  }
+
+  /* ── TIMELINE ─────────────────────────── */
+  .timeline {
+    position: relative;
+    padding-left: 0;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(61,74,46,0.3);
+  }
+
+  .timeline-item:last-child {
+    border-bottom: none;
+  }
+
+  .timeline-year {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--amber);
+    font-weight: 500;
+    padding-top: 2px;
+  }
+
+  .timeline-content {
+    font-size: 14px;
+    color: var(--ash-light);
+    line-height: 1.55;
+  }
+
+  .timeline-content strong {
+    color: var(--white);
+    font-weight: 400;
+  }
+
+  /* ── DISC CARDS ───────────────────────── */
+  .disc-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .disc-card {
+    background: var(--bg2);
+    border: 1px solid rgba(61,74,46,0.4);
+    padding: 18px 20px;
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    gap: 16px;
+    align-items: start;
+    transition: border-color 0.2s;
+  }
+
+  .disc-card:hover {
+    border-color: var(--moss-light);
+  }
+
+  .disc-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    padding-top: 3px;
+  }
+
+  .disc-title {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    font-style: italic;
+    margin-bottom: 4px;
+  }
+
+  .disc-meta {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ash);
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+  }
+
+  .disc-cert {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--amber);
+    text-align: right;
+    white-space: nowrap;
+    padding-top: 3px;
+  }
+
+  /* ── TRACKLIST ────────────────────────── */
+  .tracklist {
+    background: var(--fly);
+    border: 1px solid var(--moss);
+    overflow: hidden;
+    margin: 28px 0;
+  }
+
+  .tracklist-header {
+    background: var(--moss);
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .tracklist-header-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .tracklist-header-meta {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .track {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    gap: 12px;
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(61,74,46,0.25);
+    cursor: pointer;
+    transition: background 0.15s;
+    align-items: start;
+  }
+
+  .track:last-child { border-bottom: none; }
+  .track:hover { background: rgba(107,124,80,0.1); }
+
+  .track-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    padding-top: 2px;
+  }
+
+  .track-info { flex: 1; }
+
+  .track-name {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 3px;
+  }
+
+  .track-desc {
+    font-size: 12px;
+    color: var(--ash);
+    line-height: 1.4;
+  }
+
+  .track-time {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--amber);
+    padding-top: 2px;
+    white-space: nowrap;
+  }
+
+  /* ── TAGS ─────────────────────────────── */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 20px 0;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 5px 12px;
+    border: 1px solid var(--moss);
+    color: var(--ash);
+    text-transform: uppercase;
+    background: rgba(61,74,46,0.08);
+  }
+
+  /* ── MEMBER GRID ──────────────────────── */
+  .member-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 24px 0;
+  }
+
+  .member-card {
+    background: var(--bg2);
+    border: 1px solid rgba(61,74,46,0.4);
+    padding: 16px;
+  }
+
+  .member-name {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .member-role {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--moss-light);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .member-detail {
+    font-size: 13px;
+    color: var(--ash);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ── FADE IN ──────────────────────────── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .d1 { transition-delay: 0.05s; }
+  .d2 { transition-delay: 0.15s; }
+  .d3 { transition-delay: 0.25s; }
+  .d4 { transition-delay: 0.35s; }
+  .d5 { transition-delay: 0.45s; }
+
+  /* ── FOOTER ───────────────────────────── */
+  footer {
+    border-top: 1px solid var(--moss);
+    padding: 40px 0 64px;
+    margin-top: 40px;
+  }
+
+  .footer-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  .footer-sources {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .footer-sources a {
+    color: var(--ash);
+    text-decoration: none;
+    border-bottom: 1px solid var(--moss);
+  }
+
+  .footer-meta {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 24px;
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ══ HERO ════════════════════════════ -->
+  <header class="hero">
+
+    <div class="fly-wrap fade-in">
+      <!-- SVG Fly -->
+      <svg class="fly-svg" width="90" height="70" viewBox="0 0 90 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Wings -->
+        <ellipse cx="23" cy="28" rx="22" ry="11" fill="rgba(107,124,80,0.18)" stroke="rgba(107,124,80,0.5)" stroke-width="0.8"/>
+        <ellipse cx="67" cy="28" rx="22" ry="11" fill="rgba(107,124,80,0.18)" stroke="rgba(107,124,80,0.5)" stroke-width="0.8"/>
+        <ellipse cx="21" cy="38" rx="17" ry="7" fill="rgba(85,107,58,0.12)" stroke="rgba(85,107,58,0.35)" stroke-width="0.6"/>
+        <ellipse cx="69" cy="38" rx="17" ry="7" fill="rgba(85,107,58,0.12)" stroke="rgba(85,107,58,0.35)" stroke-width="0.6"/>
+        <!-- Wing veins -->
+        <path d="M23 28 Q18 22 4 24" stroke="rgba(107,124,80,0.3)" stroke-width="0.5"/>
+        <path d="M23 28 Q28 20 40 22" stroke="rgba(107,124,80,0.3)" stroke-width="0.5"/>
+        <path d="M67 28 Q72 22 86 24" stroke="rgba(107,124,80,0.3)" stroke-width="0.5"/>
+        <path d="M67 28 Q62 20 50 22" stroke="rgba(107,124,80,0.3)" stroke-width="0.5"/>
+        <!-- Body -->
+        <ellipse cx="45" cy="30" rx="6" ry="9" fill="#2e3a20"/>
+        <ellipse cx="45" cy="42" rx="5" ry="12" fill="#1e2a14"/>
+        <ellipse cx="45" cy="55" rx="4" ry="8" fill="#253018"/>
+        <!-- Head -->
+        <ellipse cx="45" cy="20" rx="5" ry="5" fill="#2e3a20"/>
+        <!-- Eyes -->
+        <circle cx="43" cy="18" r="2.2" fill="rgba(184,134,11,0.7)"/>
+        <circle cx="47" cy="18" r="2.2" fill="rgba(184,134,11,0.7)"/>
+        <circle cx="43" cy="18" r="1" fill="#0b0c0b"/>
+        <circle cx="47" cy="18" r="1" fill="#0b0c0b"/>
+        <!-- Antennae -->
+        <path d="M43 14 Q38 8 33 5" stroke="rgba(107,124,80,0.6)" stroke-width="0.8" stroke-linecap="round"/>
+        <path d="M47 14 Q52 8 57 5" stroke="rgba(107,124,80,0.6)" stroke-width="0.8" stroke-linecap="round"/>
+        <circle cx="33" cy="5" r="1.5" fill="rgba(107,124,80,0.8)"/>
+        <circle cx="57" cy="5" r="1.5" fill="rgba(107,124,80,0.8)"/>
+        <!-- Legs -->
+        <path d="M41 34 Q33 37 28 40" stroke="rgba(61,74,46,0.7)" stroke-width="0.7" stroke-linecap="round"/>
+        <path d="M41 40 Q33 43 25 47" stroke="rgba(61,74,46,0.7)" stroke-width="0.7" stroke-linecap="round"/>
+        <path d="M41 47 Q34 51 29 57" stroke="rgba(61,74,46,0.7)" stroke-width="0.7" stroke-linecap="round"/>
+        <path d="M49 34 Q57 37 62 40" stroke="rgba(61,74,46,0.7)" stroke-width="0.7" stroke-linecap="round"/>
+        <path d="M49 40 Q57 43 65 47" stroke="rgba(61,74,46,0.7)" stroke-width="0.7" stroke-linecap="round"/>
+        <path d="M49 47 Q56 51 61 57" stroke="rgba(61,74,46,0.7)" stroke-width="0.7" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <p class="hero-tag fade-in d1">Nordeste Oculto · Crítica Musical</p>
+
+    <h1 class="hero-band fade-in d2">Alice in<br>Chains</h1>
+
+    <p class="hero-album fade-in d3">Jar of Flies & a trajetória completa</p>
+
+    <p class="hero-sub fade-in d4">A banda mais escura do grunge cantou o vício de dentro. Em 1994, gravou sete canções em sete dias sem ter escrito uma nota sequer — e estreou em primeiro lugar na Billboard.</p>
+
+    <div class="stats fade-in d5">
+      <div class="stat">
+        <span class="stat-number">30M+</span>
+        <span class="stat-label">discos vendidos</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">11</span>
+        <span class="stat-label">indicações Grammy</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">4×</span>
+        <span class="stat-label">platina (Jar of Flies)</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">1994</span>
+        <span class="stat-label">primeiro EP #1 na Billboard</span>
+      </div>
+    </div>
+  </header>
+
+  <hr class="divider fade-in">
+
+  <!-- ══ 01 ORIGEM ══════════════════════ -->
+  <section class="section fade-in">
+    <span class="section-label">01 — Origem</span>
+    <h2 class="section-title">Seattle como incubadora de germes</h2>
+
+    <p>No final dos anos 1980, Seattle era barata e isolada. A indústria musical ficava em Los Angeles ou Nova York — longe demais para pressionar, perto demais para ignorar. Essa distância criou um ecossistema único: bandas tocavam para si mesmas, para seus amigos, para bêbados em bares pequenos. O produtor <strong>Jack Endino</strong> chamava o ambiente de "cultura de germes." Algo crescia no isolamento.</p>
+
+    <p>Venues como o <strong>Central Tavern</strong>, o <strong>Off Ramp Café</strong> e o <strong>Crocodile Café</strong> formavam o circuito. O selo <strong>Sub Pop</strong>, a rádio <strong>KCMU</strong> (hoje KEXP), e — no centro de tudo — o <strong>Music Bank</strong>, um complexo de ensaio 24 horas perto da Ballard Bridge com cerca de 60 salas. Nirvana, Soundgarden, Mudhoney ensaiavam lá. E foi lá, num cômodo improvisado, que Alice in Chains nasceu.</p>
+
+    <div class="callout">
+      <p>"Minha primeira influência seria Black Sabbath, depois Ozzy, depois Ian Gillan com Deep Purple. O primeiro disco que peguei foi Black Sabbath."</p>
+      <cite>Layne Staley · RIP Magazine, 1991</cite>
+    </div>
+
+    <p>A diferença de Alice in Chains no contexto grunge era precisa: onde Nirvana vinha do punk e Pearl Jam do rock clássico, Alice in Chains bebia direto do <strong>heavy metal britânico</strong>. Tony Iommi, Jimmy Page, Ace Frehley, Angus Young. O produtor <strong>Dave Jerden</strong> capturou a essência quando conheceu a banda pela primeira vez: <em>"O Metallica pegou Tony Iommi e acelerou. O que vocês fizeram foi desacelerar de novo."</em> Cantrell olhou para ele e disse: <em>"Você entendeu."</em></p>
+  </section>
+
+  <hr class="divider fade-in">
+
+  <!-- ══ 02 FORMAÇÃO ═════════════════════ -->
+  <section class="section fade-in">
+    <span class="section-label">02 — Formação</span>
+    <h2 class="section-title">Como uma cadeia de coincidências se tornou uma banda</h2>
+
+    <p>Em agosto de 1987, <strong>Jerry Cantrell</strong> — filho de um veterano do Vietnã, sua mãe morta de câncer três semanas antes, sem-teto — assistiu a uma performance de um jovem vocalista no Tacoma Little Theatre. Ficou obcecado: <em>"Aquela voz parecia sair de um motoqueiro de 160 quilos, não do magrelo do Layne."</em> O vocalista era <strong>Layne Staley</strong>. Cantrell foi convidado para morar no Music Bank.</p>
+
+    <p>O que se seguiu foi uma cadeia de coincidências quase cinematográfica. Sean Kinney namorava <strong>Melinda Starr</strong> — irmã de <strong>Mike Starr</strong>, que já havia tocado com Cantrell. Cantrell precisava de um baterista, ligou para a namorada de Kinney. Kinney apontou para ela e disse: <em>"Que coincidência, porque esse é o irmão dela."</em> Em dias, a banda estava ensaiando. Para convencer Staley a ser o vocalista, fizeram audições deliberadamente horríveis — incluindo, segundo relatos, um stripper ruivo — até que Layne, exasperado, se juntou ao grupo.</p>
+
+    <div class="member-grid">
+      <div class="member-card">
+        <p class="member-name">Layne Staley</p>
+        <p class="member-role">Vocalista · 1987–2002</p>
+        <p class="member-detail">Nascido em 22 ago 1967, Bellevue, WA. Começou na bateria aos 12 anos, trocou pelo microfone. Voz com alcance incomum, capaz de soar brutal e delicada no mesmo compasso.</p>
+      </div>
+      <div class="member-card">
+        <p class="member-name">Jerry Cantrell</p>
+        <p class="member-role">Guitarra / Vocal · 1987–presente</p>
+        <p class="member-detail">Nascido em 18 mar 1966, Tacoma, WA. Compositor principal, arquiteto do som. Usa predominantemente afinação Eb e drop D. Talk box em "Man in the Box" é sua marca.</p>
+      </div>
+      <div class="member-card">
+        <p class="member-name">Sean Kinney</p>
+        <p class="member-role">Bateria · 1987–presente</p>
+        <p class="member-detail">Nascido em 27 mai 1966, Seattle, WA. Baterista desde os 5 anos. Exibe "LSMS" (Layne Staley, Mike Starr) em seu kit desde 2011. Carrega a batida da banda intacta.</p>
+      </div>
+      <div class="member-card">
+        <p class="member-name">Mike Inez</p>
+        <p class="member-role">Baixo · 1993–presente</p>
+        <p class="member-detail">Ex-baixista de Ozzy Osbourne. Entrou após a demissão de Mike Starr durante a turnê do <em>Dirt</em>. Sua primeira gravação com a banda foi <em>Jar of Flies</em>.</p>
+      </div>
+    </div>
+
+    <p>O nome passou por "Fuck" e "Diamond Lie" antes de se fixar em Alice in Chains. Em 1988, gravaram a demo <em>The Treehouse Tapes</em> — oito faixas registradas numa casa na árvore convertida em estúdio no topo de uma montanha em Issaquah. <strong>Alice in Chains foi contratada diretamente por uma major</strong>, a Columbia Records — diferente de seus pares grunge que começaram em selos indie.</p>
+  </section>
+
+  <hr class="divider fade-in">
+
+  <!-- ══ 03 JAR OF FLIES ══════════════════ -->
+  <section class="section fade-in">
+    <span class="section-label">03 — O Álbum Focal</span>
+    <h2 class="section-title">Jar of Flies: o acidente que se tornou obra-prima</h2>
+
+    <p>Em setembro de 1993, após meses exaustivos na turnê do <em>Dirt</em> e no Lollapalooza, Alice in Chains voltou a Seattle para descobrir que havia sido despejada por não pagar aluguel durante a turnê. O engenheiro <strong>Toby Wright</strong> reservou dez dias no London Bridge Studio. Quando pediu demos antecipadamente, Cantrell respondeu que a banda chegaria antes das fitas. Ao chegarem, Cantrell confessou: <em>"Coisa engraçada sobre aquelas músicas... não temos nenhuma."</em></p>
+
+    <p>Wright riu: <em>"Então o que vocês querem fazer pelos próximos 10 dias?"</em> Cantrell: <em>"Se importa se a gente só improvisar?"</em></p>
+
+    <p>As sete faixas foram <strong>escritas e gravadas entre 7 e 14 de setembro de 1993</strong>, com sessões de 14 a 18 horas diárias. Staley exigiu um console <strong>Neve 80-68</strong> analógico — sem Pro Tools. Sean Kinney usava escovas em vez de baquetas. Um quarteto de cordas, harmônica e violões Ovation completavam a paleta acústica.</p>
+
+    <div class="tracklist">
+      <div class="tracklist-header">
+        <span class="tracklist-header-title">Jar of Flies · EP · 1994</span>
+        <span class="tracklist-header-meta">Columbia Records · 7 faixas · 28:17</span>
+      </div>
+      <div class="track">
+        <span class="track-num">01</span>
+        <div class="track-info">
+          <p class="track-name">Rotten Apple</p>
+          <p class="track-desc">Abertura em maré lenta. Wah-wah de Cantrell sobre baixo hipnótico. Imagética religiosa como metáfora do vício.</p>
+        </div>
+        <span class="track-time">6:59</span>
+      </div>
+      <div class="track">
+        <span class="track-num">02</span>
+        <div class="track-info">
+          <p class="track-name">Nutshell</p>
+          <p class="track-desc">Votada #9 entre as músicas mais tristes de todos os tempos pela Rolling Stone. Abertura do MTV Unplugged 1996. "If I can't be my own / I'd feel better dead."</p>
+        </div>
+        <span class="track-time">4:19</span>
+      </div>
+      <div class="track">
+        <span class="track-num">03</span>
+        <div class="track-info">
+          <p class="track-name">I Stay Away</p>
+          <p class="track-desc">Violão de 12 cordas + quarteto de cordas. Videoclipe em stop-motion com moscas e circo em chamas. Dirigido por Nick Donkin (Flying Gherkin International).</p>
+        </div>
+        <span class="track-time">3:32</span>
+      </div>
+      <div class="track">
+        <span class="track-num">04</span>
+        <div class="track-info">
+          <p class="track-name">No Excuses</p>
+          <p class="track-desc">Primeiro #1 da banda no Mainstream Rock. Cantrell escreveu sobre a amizade com Staley. Bateria sincopada improvisada com side-stick e bongôs.</p>
+        </div>
+        <span class="track-time">4:15</span>
+      </div>
+      <div class="track">
+        <span class="track-num">05</span>
+        <div class="track-info">
+          <p class="track-name">Whale & Wasp</p>
+          <p class="track-desc">Instrumental. Guitarra elétrica com reverb sobre violão dedilhado e cordas sutis. Sem uma palavra, transmite vazio que nenhuma letra alcançaria.</p>
+        </div>
+        <span class="track-time">2:38</span>
+      </div>
+      <div class="track">
+        <span class="track-num">06</span>
+        <div class="track-info">
+          <p class="track-name">Don't Follow</p>
+          <p class="track-desc">Influências country e folk. Harmônica de David Atkinson. Peça de Cantrell cantada em dueto com Staley — um pedido para não seguir o mesmo caminho.</p>
+        </div>
+        <span class="track-time">4:15</span>
+      </div>
+      <div class="track">
+        <span class="track-num">07</span>
+        <div class="track-info">
+          <p class="track-name">Swing on This</p>
+          <p class="track-desc">Encerramento jazzy e swing. Walking bass de Inez. "Boogie-woogie pós-moderno" (Entertainment Weekly). Um lampejo de leveza intencional.</p>
+        </div>
+        <span class="track-time">3:38</span>
+      </div>
+    </div>
+
+    <p>Em 12 de fevereiro de 1994, <em>Jar of Flies</em> estreou em <strong>#1 na Billboard 200</strong> com mais de 141 mil cópias vendidas na primeira semana — desbancando temporariamente <em>Music Box</em> de Mariah Carey. Era <strong>o primeiro EP na história da música a alcançar esse feito</strong>. Um recorde que durou uma década inteira, até <em>Collision Course</em> (Jay-Z e Linkin Park) em 2004.</p>
+
+    <div class="callout">
+      <p>"Jar of Flies é uma beleza discreta e devastadora, dolorosamente belo e aterradoramente triste ao mesmo tempo... sobre viver com as consequências, cheio de reflexões profundas sobre solidão, isolamento autoimposto e conexões humanas perdidas."</p>
+      <cite>Steve Huey · AllMusic</cite>
+    </div>
+
+    <p>O nome vem de um experimento que Cantrell fez na terceira série: dois potes de moscas — um superalimentado (todas morreram por superpopulação), um subalimentado (a maioria sobreviveu). A capa foi fotografada por <strong>Rocky Schenck</strong> em sua sala de jantar, com centenas de moscas reais coletadas com uma rede de borboletas em estábulos próximos. Hoje é certificado <strong>4× Platina pela RIAA</strong> com mais de 4 milhões de cópias vendidas mundialmente.</p>
+  </section>
+
+  <hr class="divider fade-in">
+
+  <!-- ══ 04 O SOM ══════════════════════ -->
+  <section class="section fade-in">
+    <span class="section-label">04 — O Som</span>
+    <h2 class="section-title">As harmonias que ninguém mais sabia fazer</h2>
+
+    <p>As harmonias vocais de Alice in Chains não seguiam o modelo convencional de vocalista principal com backing. Eram <strong>dois vocalistas líderes cantando simultaneamente</strong>, com Staley encontrando notas "estranhas" — terças menores, quintas diminutas — que criavam uma beleza inquietante e levemente dissonante. O produtor Toby Wright comparou a dupla a <em>"John Lennon e Paul McCartney."</em></p>
+
+    <div class="highlight-box">
+      <p class="highlight-box-title">Vocabulário Sonoro</p>
+      <div class="sound-grid">
+        <div class="sound-item">
+          <span class="sound-icon">◆</span>
+          <span class="sound-text">Afinação Eb e drop D como padrão — guitarras meio-tom abaixo</span>
+        </div>
+        <div class="sound-item">
+          <span class="sound-icon">◆</span>
+          <span class="sound-text">Talk box e wah pedal (Dunlop JC95 Cry Baby signature)</span>
+        </div>
+        <div class="sound-item">
+          <span class="sound-icon">◆</span>
+          <span class="sound-text">Harmonias vocais paralelas em terças menores e quintas diminutas</span>
+        </div>
+        <div class="sound-item">
+          <span class="sound-icon">◆</span>
+          <span class="sound-text">Dinâmica extrema: pesadíssimo e acústico-delicado no mesmo álbum</span>
+        </div>
+        <div class="sound-item">
+          <span class="sound-icon">◆</span>
+          <span class="sound-text">Metal britânico desacelerado — Sabbath, Zeppelin, AC/DC filtrados</span>
+        </div>
+        <div class="sound-item">
+          <span class="sound-icon">◆</span>
+          <span class="sound-text">Letras de primeira pessoa sobre dependência — sem metáfora, sem distância</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tags">
+      <span class="tag">Black Sabbath</span>
+      <span class="tag">Led Zeppelin</span>
+      <span class="tag">Soundgarden</span>
+      <span class="tag">Nirvana</span>
+      <span class="tag">Metallica</span>
+      <span class="tag">Heart</span>
+      <span class="tag">Elton John</span>
+      <span class="tag">Prince</span>
+    </div>
+
+    <p>O que diferencia Alice in Chains de seus pares grunge é a recusa ao escudo da metáfora. Enquanto outros artistas <em>aludiam</em> à dor, Staley a descrevia em termos clínicos. Não era alienação existencial — era a sensação física de uma agulha, o peso de uma dívida química, o pânico de saber exatamente o que você está fazendo a si mesmo e continuar fazendo.</p>
+  </section>
+
+  <hr class="divider fade-in">
+
+  <!-- ══ 05 DISCOGRAFIA ═══════════════════ -->
+  <section class="section fade-in">
+    <span class="section-label">05 — Discografia</span>
+    <h2 class="section-title">Uma descida documentada, álbum por álbum</h2>
+
+    <div class="disc-grid">
+      <div class="disc-card">
+        <span class="disc-num">01</span>
+        <div>
+          <p class="disc-title">Facelift</p>
+          <p class="disc-meta">1990 · Columbia · 12 faixas · prod. Dave Jerden<br>Vendeu 40 mil cópias em 6 meses, então a MTV colocou "Man in the Box" em rotação. 400 mil em 6 semanas. Grammy por "Man in the Box".</p>
+        </div>
+        <span class="disc-cert">3× Platina</span>
+      </div>
+      <div class="disc-card">
+        <span class="disc-num">EP</span>
+        <div>
+          <p class="disc-title">Sap</p>
+          <p class="disc-meta">1992 · Columbia · 4 faixas · prod. Rick Parashar<br>Primeiro laboratório do som acústico. Com Ann Wilson, Chris Cornell e Mark Arm. O nome veio de um sonho de Sean Kinney.</p>
+        </div>
+        <span class="disc-cert">Ouro</span>
+      </div>
+      <div class="disc-card">
+        <span class="disc-num">02</span>
+        <div>
+          <p class="disc-title">Dirt</p>
+          <p class="disc-meta">1992 · Columbia · 13 faixas · prod. Dave Jerden<br>Estreou #6. 6 das 13 músicas falam diretamente de heroína. "Rooster", "Would?", "Down in a Hole". O mais vendido da banda. Último com Starr.</p>
+        </div>
+        <span class="disc-cert">5× Platina</span>
+      </div>
+      <div class="disc-card">
+        <span class="disc-num">EP</span>
+        <div>
+          <p class="disc-title">Jar of Flies</p>
+          <p class="disc-meta">1994 · Columbia · 7 faixas · prod. Toby Wright<br>Gravado em uma semana, sem uma canção escrita de antemão. Primeiro EP #1 na Billboard 200. Moscas reais na capa.</p>
+        </div>
+        <span class="disc-cert">4× Platina</span>
+      </div>
+      <div class="disc-card">
+        <span class="disc-num">03</span>
+        <div>
+          <p class="disc-title">Alice in Chains</p>
+          <p class="disc-meta">1995 · Columbia · 14 faixas · prod. Toby Wright<br>Gravado em 9 dias sob ultimato da Sony. Estreou #1 com 189 mil cópias. Staley mal conseguia gravar. A banda nunca fez turnê de suporte.</p>
+        </div>
+        <span class="disc-cert">2× Platina</span>
+      </div>
+      <div class="disc-card">
+        <span class="disc-num">AO VIVO</span>
+        <div>
+          <p class="disc-title">MTV Unplugged</p>
+          <p class="disc-meta">1996 · Columbia · 13 faixas<br>Primeiro show em 2,5 anos. Velas brancas no palco. Cantrell com intoxicação alimentar. Layne com óculos escuros e mangas longas. Estreou #3.</p>
+        </div>
+        <span class="disc-cert">2× Platina</span>
+      </div>
+      <div class="disc-card">
+        <span class="disc-num">04</span>
+        <div>
+          <p class="disc-title">Black Gives Way to Blue</p>
+          <p class="disc-meta">2009 · Virgin/EMI · 11 faixas · com William DuVall<br>Retorno 13 anos depois. Elton John no piano na faixa-título. Estreou #5. Dois singles #1 no Mainstream Rock.</p>
+        </div>
+        <span class="disc-cert">Ouro</span>
+      </div>
+      <div class="disc-card">
+        <span class="disc-num">05</span>
+        <div>
+          <p class="disc-title">The Devil Put Dinosaurs Here</p>
+          <p class="disc-meta">2013 · Capitol · 12 faixas<br>Estreou #2. Temática religiosa e existencial. Três singles dominaram o Mainstream Rock. Grammy por Best Engineered Album.</p>
+        </div>
+        <span class="disc-cert">—</span>
+      </div>
+      <div class="disc-card">
+        <span class="disc-num">06</span>
+        <div>
+          <p class="disc-title">Rainier Fog</p>
+          <p class="disc-meta">2018 · BMG · 10 faixas<br>Primeiro álbum gravado em Seattle em 22 anos. #1 simultâneo em Top Rock, Alternative Albums e Hard Rock Albums. Grammy por Best Rock Album.</p>
+        </div>
+        <span class="disc-cert">—</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider fade-in">
+
+  <!-- ══ 06 LAYNE ════════════════════════ -->
+  <section class="section fade-in">
+    <span class="section-label">06 — Layne Staley</span>
+    <h2 class="section-title">A voz que cantou sua própria autópsia</h2>
+
+    <p>A trajetória de Layne Staley não tem arco de redenção. Não há final esperançoso. Há um homem que documentou sua própria destruição com uma honestidade que tornava impossível desviar o olhar — e depois desapareceu.</p>
+
+    <p>O ponto sem retorno foi a morte de <strong>Demri Lara Parrott</strong> em 29 de outubro de 1996 — sua ex-noiva, morta de intoxicação aguda por opioides aos 27 anos, após endocardite causada por agulhas não esterilizadas. Mark Lanegan disse à Rolling Stone: <em>"Ele nunca se recuperou da morte de Demri. Depois disso, não acho que ele quisesse continuar."</em></p>
+
+    <div class="callout">
+      <p>"Ele nunca se recuperou da morte de Demri. Depois disso, não acho que ele quisesse continuar."</p>
+      <cite>Mark Lanegan (Screaming Trees) · Rolling Stone</cite>
+    </div>
+
+    <p>Após 1996, Staley se isolou quase completamente. Comprou um apartamento no University District de Seattle sob o pseudônimo "John LaRusta". Raramente saía. Sua última aparição pública verificada foi em 31 de outubro de 1998. O homem de 1,85m pesava <strong>39 quilos</strong> quando morreu.</p>
+
+    <p>Em <strong>5 de abril de 2002</strong> — oito anos exatos após a morte de Kurt Cobain — Layne Thomas Staley morreu de overdose de speedball (heroína e cocaína) em seu apartamento. Seu corpo foi encontrado apenas em 19 de abril, duas semanas depois. Foi identificado por registros dentários.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="timeline-year">22 ago 1967</span>
+        <span class="timeline-content">Nascimento em Bellevue, Washington.</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">1987</span>
+        <span class="timeline-content"><strong>Encontro com Jerry Cantrell</strong> no Tacoma Little Theatre. Alice in Chains começa a se formar.</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">1992</span>
+        <span class="timeline-content">Gravação de <em>Dirt</em>. O vício vira arte visceral — 6 das 13 faixas documentam dependência de primeira pessoa.</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">1994</span>
+        <span class="timeline-content"><em>Jar of Flies</em> gravado em uma semana. Último grande momento de plenitude criativa.</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">10 abr 1996</span>
+        <span class="timeline-content"><strong>MTV Unplugged</strong> — último show significativo. Óculos escuros, mangas longas. Velas brancas no palco.</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">3 jul 1996</span>
+        <span class="timeline-content">Último show ao vivo, abrindo para Kiss em Kansas City. Overdose nos bastidores, hospital.</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">29 out 1996</span>
+        <span class="timeline-content">Morte de Demri Parrott. Início do isolamento total.</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">5 abr 2002</span>
+        <span class="timeline-content"><strong>Morte</strong>. Encontrado 19 de abril, identificado por registros dentários. Tinha 34 anos.</span>
+      </div>
+    </div>
+
+    <p>A mãe de Layne, <strong>Nancy McCallum</strong>, fundou o Layne Staley Memorial Fund para ajudar vítimas de dependência. Revelou que seu filho tentou reabilitação <strong>14 vezes</strong>. Em 22 de agosto de 2019, a Cidade de Seattle declarou oficialmente o "Layne Staley Day."</p>
+  </section>
+
+  <hr class="divider fade-in">
+
+  <!-- ══ 07 AO VIVO ════════════════════ -->
+  <section class="section fade-in">
+    <span class="section-label">07 — Ao Vivo</span>
+    <h2 class="section-title">Palcos, turnês e a última vela acesa</h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="timeline-year">1991</span>
+        <span class="timeline-content"><strong>Turnê do Facelift</strong> como abertura do Iggy Pop e do Van Halen. Viram-se saindo de bares minúsculos para arenas em questão de semanas.</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">1993</span>
+        <span class="timeline-content"><strong>Lollapalooza</strong> — participação central na turnê que definiu o grunge no mainstream americano. Seguido de shows no Brasil, onde Staley salvou Mike Starr de overdose com CPR.</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">10 abr 1996</span>
+        <span class="timeline-content"><strong>MTV Unplugged</strong>, Brooklyn Academy of Music. 13 faixas. Velas brancas compradas por Staley no Pike Place Market. Cantrell com intoxicação alimentar. Metallica na plateia. Mike Inez escreveu no baixo: "Friends Don't Let Friends Get Friends Haircuts."</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">2006</span>
+        <span class="timeline-content">Primeira apresentação sem Layne. <strong>William DuVall</strong> cantou "Rooster" num benefício para o tsunami do Oceano Índico. Kinney olhou para os colegas: <em>"Acho que a busca acabou."</em></span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">2009–pres.</span>
+        <span class="timeline-content">Era DuVall: turnês mundiais consistentes, festivais, shows em arenas. A banda demonstrou que o legado sobrevive — e que Cantrell, Kinney e Inez carregam o som com integridade.</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider fade-in">
+
+  <!-- ══ 08 O VIDEOCLIPE ═════════════════ -->
+  <section class="section fade-in">
+    <span class="section-label">08 — O Vídeo</span>
+    <h2 class="section-title">I Stay Away: o circo, as moscas e o stop-motion</h2>
+
+    <p>"I Stay Away" tem um dos videoclipes mais inquietantes do rock dos anos 90 — e um dos poucos que rivaliza com a canção em peso emocional, em vez de simplesmente ilustrá-la.</p>
+
+    <p>Dirigido pelo australiano <strong>Nick Donkin</strong>, do estúdio <strong>Flying Gherkin International</strong> (o mesmo que co-dirigiu <em>The Junky's Christmas</em>, curta em stop-motion baseado em William S. Burroughs e produzido por Francis Ford Coppola em 1993), o clipe é inteiramente construído em <strong>stop-motion e claymation</strong>: versões marionete dos membros da banda viajam a um circo onde um menino sinistro liberta moscas de um pote.</p>
+
+    <p>O que se segue é uma sequência de descontrole controlado: um leão ataca seu domador, um motociclista perde o controle, um lançador de facas acerta sua assistente, e o circo inteiro pega fogo. As moscas se multiplicam. O menino observa, impassível.</p>
+
+    <div class="callout">
+      <p>"Obra-prima esquizofrênica" — a combinação de violão de 12 cordas, quarteto de cordas e a voz oscilatória de Staley num clipe de stop-motion sobre um circo em chamas é uma das imagens mais precisas que o grunge produziu de si mesmo.</p>
+      <cite>The A.V. Club</cite>
+    </div>
+
+    <p>A leitura mais óbvia é autobiográfica: Staley como o menino que solta os insetos — a dependência liberada, o circo em torno dele em colapso, tudo consumido enquanto ele permanece no centro. Mas o clipe funciona porque recusa a didatismo. As moscas não são julgamento. São apenas moscas.</p>
+
+    <p>Os bonecos originais do clipe estão hoje no <strong>Rock and Roll Hall of Fame</strong> em Cleveland. A faixa foi indicada ao Grammy de Best Hard Rock Performance — uma das 11 indicações totais da banda, nenhuma vencida.</p>
+  </section>
+
+  <hr class="divider fade-in">
+
+  <!-- ══ 09 RECONHECIMENTO ════════════════ -->
+  <section class="section fade-in">
+    <span class="section-label">09 — Reconhecimento</span>
+    <h2 class="section-title">11 indicações ao Grammy. Zero vitórias.</h2>
+
+    <p>Alice in Chains acumula <strong>11 indicações ao Grammy sem uma única vitória</strong> — uma das bandas mais indicadas a nunca vencer. Jerry Cantrell usava botões de "Susan Lucci" (a atriz que recebeu 19 indicações ao Emmy antes de ganhar) nas cerimônias. Nenhum venceu. As indicações cobriram toda a carreira, de "Man in the Box" (1992) a <em>Rainier Fog</em> (2019).</p>
+
+    <p>A banda vendeu <strong>mais de 30 milhões de discos mundialmente</strong> e acumulou 18 faixas no Top 10 do Mainstream Rock, com 5 #1. Recebeu o Kerrang! Icon Award (2009). Dois Revolver Golden Gods Awards por <em>Black Gives Way to Blue</em>. O MTV VMA de Best Video from a Film por "Would?" (1993).</p>
+
+    <div class="callout">
+      <p>"Quem não foi influenciado por Alice in Chains? Essa é a verdadeira pergunta."</p>
+      <cite>Apple Music · Playlist "Inspired by Alice in Chains"</cite>
+    </div>
+
+    <p>No entanto, <strong>nunca foram sequer indicados ao Rock and Roll Hall of Fame</strong> — elegíveis desde 2016, continuam ignorados enquanto Nirvana, Pearl Jam, Soundgarden e Foo Fighters já foram introduzidos. A influência está em todo lugar: Godsmack (nomeado em homenagem a uma música de AiC), Korn, Deftones, Breaking Benjamin, Staind (que escreveu "Layne" em tributo), Avenged Sevenfold, Three Days Grace. O Metallica citou Alice in Chains como "inspiração major" para <em>Death Magnetic</em> (2008).</p>
+  </section>
+
+  <hr class="divider fade-in">
+
+  <!-- ══ 10 CONCLUSÃO ═════════════════════ -->
+  <section class="section fade-in">
+    <span class="section-label">10 — Por que importa</span>
+    <h2 class="section-title">Onde a brutalidade encontrou a quietude</h2>
+
+    <p>Alice in Chains não foi a banda mais popular do grunge, nem a mais cool, nem a mais citável em camisetas universitárias. Foi a mais visceral. A que não metaforizou o sofrimento — o descreveu. A que não cantou sobre a raiva de uma geração, mas sobre o que acontece quando você injeta a fuga dessa raiva na veia, dia após dia, até que seu corpo pesa 39 quilos e ninguém nota que você morreu por duas semanas.</p>
+
+    <p><em>Jar of Flies</em> permanece como o momento em que essa honestidade encontrou sua forma mais pura. Não era mais preciso gritar. Não era mais preciso distorcer. Sete canções acústicas, compostas do zero, gravadas em sete dias por quatro homens que não tinham onde morar e não sabiam o que queriam dizer até que disseram.</p>
+
+    <p>O fato de que esse acidente se tornou o primeiro EP a estrear no topo da Billboard — superando toda a maquinaria da indústria musical — é talvez a prova mais eloquente de que a arte mais poderosa nasce quando não há plano, não há pretensão, e não há mais energia para fingir.</p>
+
+    <div class="callout">
+      <p>"Há algo mortalmente sério na miséria, raiva e nojo que os alimenta. Simplesmente, eles soam como se estivessem jogando para valer."</p>
+      <cite>Q Magazine · resenha de Jar of Flies · 1994</cite>
+    </div>
+
+    <p>Layne Staley cantou sua própria destruição com uma clareza que tornava impossível não ouvir. <strong>Jerry Cantrell</strong> construiu o arcabouço musical que tornava essa clareza suportável — e depois sobreviveu a ela. Entre a brutalidade de <em>Dirt</em> e o silêncio que se seguiu à morte de Staley, existe <em>Jar of Flies</em>: o momento exato em que a banda mais escura do grunge provou que a dor mais insuportável não é a que grita.</p>
+
+    <p>É a que sussurra.</p>
+  </section>
+
+  <footer class="fade-in">
+    <p class="footer-label">Fontes Consultadas</p>
+    <p class="footer-sources">
+      Wikipedia — Alice in Chains, Jar of Flies, Layne Staley, Jerry Cantrell, Dirt, Facelift, MTV Unplugged, Mike Starr · AllMusic (Steve Huey) · Pitchfork (retrospectiva Dirt) · The A.V. Club ("Jar of Flies unleashed an accidental masterpiece") · PopMatters ("The Dark Beauty of Alice in Chains' Jar of Flies") · Generation Riff · Paste Magazine · Loudwire · Consequence · Diffuser.fm · Rolling Stone · Q Magazine · Classic Rock Review · SongFacts · Alice in Chains Wiki (Fandom) · IMDb (biografias) · Loudersound · Billboard.com · Number1albums.com · Legacy Recordings · SouthSoundTalk · Riffology.co · Far Out Magazine · Seattle Times · Apollon Undergraduate Journal (Fairfield University)
+    </p>
+    <p class="footer-meta">Nordeste Oculto — Crítica Musical · Abril 2026 · alice-in-chains-jar-of-flies.html</p>
+  </footer>
+
+</div>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.fade-in').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Trigger hero immediately
+  document.querySelectorAll('.hero .fade-in, .hero').forEach(el => {
+    setTimeout(() => el.classList.add('visible'), 100);
+  });
+</script>
+
+</body>
+</html>

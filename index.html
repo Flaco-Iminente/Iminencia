@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nordeste Oculto — Crítica Musical</title>
+<meta name="description" content="Ensaios sobre artistas e álbuns que merecem atenção. Música nordestina e periférica ao cânone.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Barlow:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:     #0a0805;
+    --bg2:    #111009;
+    --card:   #16130c;
+    --gold:   #c8920a;
+    --gold2:  #e8b030;
+    --rust:   #8c3a28;
+    --ash:    #7a7060;
+    --fg:     #e0d8c8;
+    --muted:  #5a5040;
+    --border: #252018;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Barlow', sans-serif;
+    font-size: 16px;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Diagonal grain texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        -68deg,
+        rgba(200,146,42,0.015) 0px,
+        rgba(200,146,42,0.015) 1px,
+        transparent 1px,
+        transparent 24px
+      ),
+      radial-gradient(ellipse at 50% 0%, rgba(200,146,42,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 0% 100%, rgba(140,58,40,0.04) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ——— HERO ——— */
+  .hero {
+    padding: 72px 0 56px;
+    text-align: center;
+  }
+
+  .logotype {
+    display: inline-block;
+    margin-bottom: 32px;
+    animation: breathe 6s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50%       { opacity: 1;   transform: scale(1.04); }
+  }
+
+  .sigil {
+    width: 64px;
+    height: 64px;
+  }
+
+  .hero-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    opacity: 0.8;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 12vw, 88px);
+    line-height: 0.92;
+    letter-spacing: 2px;
+    color: var(--fg);
+    margin-bottom: 8px;
+  }
+
+  .hero-title span {
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    max-width: 400px;
+    margin: 16px auto 0;
+    line-height: 1.6;
+  }
+
+  /* ——— MANIFESTO ——— */
+  .manifesto {
+    padding: 48px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin: 0 0 56px;
+  }
+
+  .manifesto p {
+    font-size: 15px;
+    color: var(--ash);
+    font-weight: 300;
+    font-style: italic;
+    text-align: center;
+    line-height: 1.8;
+  }
+
+  .manifesto strong {
+    color: var(--fg);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* ——— GRID DE ARTIGOS ——— */
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .articles-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 64px;
+  }
+
+  .article-card {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 28px 32px;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s ease, background 0.25s ease;
+    cursor: pointer;
+  }
+
+  .article-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--card-accent, var(--gold));
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.25s ease;
+  }
+
+  .article-card:hover {
+    border-color: var(--card-accent, var(--gold));
+    background: color-mix(in srgb, var(--card-accent, var(--gold)) 4%, var(--card));
+  }
+
+  .article-card:hover::before {
+    transform: scaleY(1);
+  }
+
+  .article-card:hover .card-arrow {
+    transform: translateX(4px);
+    opacity: 1;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 10px;
+  }
+
+  .card-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--card-accent, var(--gold));
+    opacity: 0.7;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .card-band {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    letter-spacing: 1px;
+    color: var(--fg);
+    line-height: 1;
+    flex: 1;
+  }
+
+  .card-arrow {
+    font-size: 20px;
+    color: var(--card-accent, var(--gold));
+    opacity: 0.4;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  .card-album {
+    font-size: 13px;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 400;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .card-desc {
+    font-size: 14px;
+    color: var(--ash);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+  }
+
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+
+  /* ——— DIVIDER ——— */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    position: relative;
+    margin: 0 0 56px;
+  }
+
+  .divider::after {
+    content: '///';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--bg);
+    padding: 0 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 3px;
+  }
+
+  /* ——— FOOTER ——— */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0 48px;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 3px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .footer-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    opacity: 0.6;
+    letter-spacing: 1px;
+    line-height: 1.8;
+  }
+
+  /* ——— ANIMAÇÕES ——— */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .d1 { transition-delay: 0.1s; }
+  .d2 { transition-delay: 0.2s; }
+  .d3 { transition-delay: 0.3s; }
+  .d4 { transition-delay: 0.45s; }
+  .d5 { transition-delay: 0.6s; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="logotype fade-in d1">
+      <!-- Sigil: compasso partido / bússola quebrada -->
+      <svg class="sigil" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="32" r="28" stroke="rgba(200,146,42,0.25)" stroke-width="1"/>
+        <circle cx="32" cy="32" r="20" stroke="rgba(200,146,42,0.15)" stroke-width="0.5"/>
+        <!-- Cardinal marks -->
+        <line x1="32" y1="4" x2="32" y2="12" stroke="rgba(200,146,42,0.6)" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="32" y1="52" x2="32" y2="60" stroke="rgba(200,146,42,0.3)" stroke-width="1" stroke-linecap="round"/>
+        <line x1="4" y1="32" x2="12" y2="32" stroke="rgba(200,146,42,0.3)" stroke-width="1" stroke-linecap="round"/>
+        <line x1="52" y1="32" x2="60" y2="32" stroke="rgba(200,146,42,0.3)" stroke-width="1" stroke-linecap="round"/>
+        <!-- Compass needle — broken, pointing somewhere else -->
+        <line x1="32" y1="32" x2="38" y2="14" stroke="#c8920a" stroke-width="1.5" stroke-linecap="round"/>
+        <polygon points="38,14 35,20 41,20" fill="#c8920a" opacity="0.8"/>
+        <line x1="32" y1="32" x2="26" y2="50" stroke="rgba(140,58,40,0.5)" stroke-width="1" stroke-linecap="round"/>
+        <!-- Center -->
+        <circle cx="32" cy="32" r="2.5" fill="#c8920a"/>
+        <circle cx="32" cy="32" r="1" fill="#0a0805"/>
+        <!-- N mark -->
+        <text x="30" y="11" font-family="monospace" font-size="5" fill="rgba(200,146,42,0.9)" letter-spacing="0">N</text>
+      </svg>
+    </div>
+
+    <p class="hero-tag fade-in d2">Série Editorial · Crítica Musical</p>
+
+    <h1 class="hero-title fade-in d3">Nordeste<br><span>Oculto</span></h1>
+
+    <p class="hero-sub fade-in d4">
+      Ensaios sobre artistas e álbuns que merecem atenção.<br>
+      Relevância subestimada. Voz própria. Sem press release.
+    </p>
+  </header>
+
+  <!-- MANIFESTO -->
+  <div class="manifesto fade-in d5">
+    <p>
+      Não é blog. Não é crítica de jornal.<br>
+      É algo entre o <strong>fanzine de luxo</strong>, o <strong>longread de revista</strong><br>
+      e o <strong>liner notes expandido</strong>.
+    </p>
+  </div>
+
+  <!-- ARTIGOS PUBLICADOS -->
+  <section class="fade-in">
+    <p class="section-label">— Ensaios Publicados</p>
+
+    <div class="articles-grid">
+
+      <!-- The Baggios -->
+      <a class="article-card" href="the-baggios-brutown.html"
+         style="--card-accent: #c8922a;">
+        <span class="card-meta">Rock Periférico · Brasil</span>
+        <div class="card-header">
+          <span class="card-band">The Baggios</span>
+          <span class="card-arrow">→</span>
+        </div>
+        <p class="card-album">Brutown, 2016</p>
+        <p class="card-desc">
+          Rock de garagem feito no ABC paulista — resistência periférica embalada em distorção e raiva contida.
+        </p>
+        <div class="card-tags">
+          <span class="tag">Garage Rock</span>
+          <span class="tag">ABC Paulista</span>
+          <span class="tag">Indie BR</span>
+        </div>
+      </a>
+
+      <!-- Glass Beams -->
+      <a class="article-card" href="glass-beams.html"
+         style="--card-accent: #c8920a;">
+        <span class="card-meta">Psicodelia · Austrália</span>
+        <div class="card-header">
+          <span class="card-band">Glass Beams</span>
+          <span class="card-arrow">→</span>
+        </div>
+        <p class="card-album">Mirage EP + Mahal EP</p>
+        <p class="card-desc">
+          O coletivo mascarado de Melbourne que fundiu raga indiano com krautrock e fez o mundo prestar atenção.
+        </p>
+        <div class="card-tags">
+          <span class="tag">Raga Rock</span>
+          <span class="tag">Krautrock</span>
+          <span class="tag">Psych</span>
+        </div>
+      </a>
+
+      <!-- Angine de Poitrine -->
+      <a class="article-card" href="angine-de-poitrine.html"
+         style="--card-accent: #d4a017;">
+        <span class="card-meta">Math Rock · Canadá</span>
+        <div class="card-header">
+          <span class="card-band">Angine de Poitrine</span>
+          <span class="card-arrow">→</span>
+        </div>
+        <p class="card-album">Vol. 1 (2024) · Vol. II (2026)</p>
+        <p class="card-desc">
+          Duo mascarado de Quebec com guitarras microtonais e linguagem inventada — misticismo como estratégia.
+        </p>
+        <div class="card-tags">
+          <span class="tag">Math Rock</span>
+          <span class="tag">Microtonal</span>
+          <span class="tag">Quebec</span>
+        </div>
+      </a>
+
+      <!-- Alice in Chains -->
+      <a class="article-card" href="alice-in-chains-jar-of-flies.html"
+         style="--card-accent: #6b7c50;">
+        <span class="card-meta">Grunge · Seattle</span>
+        <div class="card-header">
+          <span class="card-band">Alice in Chains</span>
+          <span class="card-arrow">→</span>
+        </div>
+        <p class="card-album">Jar of Flies, 1994</p>
+        <p class="card-desc">
+          O momento exato em que a banda mais escura do grunge provou que a dor mais insuportável é a que sussurra.
+        </p>
+        <div class="card-tags">
+          <span class="tag">Grunge</span>
+          <span class="tag">Alt Metal</span>
+          <span class="tag">Seattle</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="fade-in">
+    <p class="footer-logo">Nordeste Oculto</p>
+    <p class="footer-text">
+      Crítica Musical · Série Editorial<br>
+      Aracaju, Sergipe · Abril 2026
+    </p>
+  </footer>
+
+</div>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.06 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Hero immediate trigger
+  setTimeout(() => {
+    document.querySelectorAll('.hero .fade-in, .manifesto').forEach(el => {
+      el.classList.add('visible');
+    });
+  }, 80);
+</script>
+
+</body>
+</html>

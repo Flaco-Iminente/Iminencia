@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Baggios — Brutown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Barlow:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #100d09;
+    --bg2:     #160f08;
+    --card:    #1a1510;
+    --green:   #c8922a;   /* âmbar/dourado do título */
+    --green2:  #a87220;   /* dourado escuro */
+    --teal:    #8a7560;   /* cinza-marrom do céu tempestuoso */
+    --teal2:   #4a3e30;   /* terra escura */
+    --red:     #8c3a28;   /* ferrugem quente */
+    --red2:    #b04030;   /* tijolo avermelhado */
+    --fg:      #d4c8b4;   /* bege claro / sépia claro */
+    --muted:   #6a5c48;   /* terra média */
+    --border:  #2a2018;   /* borda sépia escura */
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Barlow', sans-serif;
+    font-size: 16px;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Painterly storm texture — referência à pintura épica da capa */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        -72deg,
+        rgba(200,146,42,0.012) 0px,
+        rgba(200,146,42,0.012) 1px,
+        transparent 1px,
+        transparent 22px
+      ),
+      repeating-linear-gradient(
+        18deg,
+        rgba(138,117,96,0.01) 0px,
+        rgba(138,117,96,0.01) 1px,
+        transparent 1px,
+        transparent 28px
+      ),
+      radial-gradient(ellipse at 50% 0%, rgba(200,146,42,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 100%, rgba(140,58,40,0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 660px;
+    margin: 0 auto;
+    padding: 0 22px;
+  }
+
+  /* ——— HERO ——— */
+  .hero {
+    padding: 60px 0 44px;
+    text-align: center;
+    position: relative;
+  }
+
+  /* Owl eye / glitch sigil */
+  .eye-icon {
+    display: inline-block;
+    margin-bottom: 22px;
+    position: relative;
+    animation: pulse-eye 3s ease-in-out infinite;
+  }
+  .eye-icon svg {
+    width: 64px;
+    height: 64px;
+    filter: drop-shadow(0 0 14px rgba(77,255,110,0.6));
+  }
+  @keyframes pulse-eye {
+    0%, 100% { filter: drop-shadow(0 0 8px rgba(200,146,42,0.4)); }
+    50%       { filter: drop-shadow(0 0 22px rgba(200,146,42,0.8)) drop-shadow(0 0 40px rgba(140,58,40,0.3)); }
+  }
+
+  .hero-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 14px;
+  }
+
+  .hero-band {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(18px, 5vw, 24px);
+    letter-spacing: 8px;
+    color: var(--fg);
+    text-transform: uppercase;
+    margin-bottom: 0;
+    opacity: 0.7;
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(58px, 16vw, 96px);
+    line-height: 0.9;
+    letter-spacing: 4px;
+    color: var(--green);
+    text-shadow:
+      0 0 20px rgba(200,146,42,0.35),
+      0 0 60px rgba(200,146,42,0.12),
+      3px 3px 0 #4a3e30;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  /* glitch effect */
+  .hero h1::before {
+    content: 'BRUTOWN';
+    position: absolute;
+    top: 0; left: 0; width: 100%;
+    color: var(--red2);
+    clip: rect(0, 9999px, 0, 0);
+    animation: glitch 4s steps(1) infinite;
+    opacity: 0.6;
+    text-shadow: none;
+  }
+  @keyframes glitch {
+    0%   { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
+    5%   { clip: rect(14px, 9999px, 30px, 0); transform: translate(-3px, 0); }
+    10%  { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
+    55%  { clip: rect(48px, 9999px, 68px, 0); transform: translate(4px, 0); }
+    60%  { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
+    85%  { clip: rect(22px, 9999px, 36px, 0); transform: translate(-2px, 0); }
+    90%  { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
+    100% { clip: rect(0, 9999px, 0, 0); transform: translate(0); }
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 420px;
+    margin: 0 auto 28px;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .stat {
+    flex: 1;
+    text-align: center;
+    padding: 14px 8px;
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+  .stat:last-child { border-right: none; }
+  .stat::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--green2);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .stat:hover::before { opacity: 1; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    color: var(--green);
+    display: block;
+    letter-spacing: 1px;
+    line-height: 1;
+    text-shadow: 0 0 10px rgba(200,146,42,0.4);
+  }
+  .stat-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ——— DIVIDER ——— */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 38px 0;
+    position: relative;
+  }
+  .divider::after {
+    content: '///';
+    position: absolute;
+    top: -9px; left: 50%;
+    transform: translateX(-50%);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--green2);
+    background: var(--bg);
+    padding: 0 10px;
+    letter-spacing: 2px;
+  }
+
+  /* ——— SECTIONS ——— */
+  .section { margin-bottom: 42px; }
+
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 7vw, 42px);
+    letter-spacing: 2px;
+    line-height: 1.05;
+    color: var(--green);
+    margin-bottom: 16px;
+    text-shadow: 0 0 18px rgba(200,146,42,0.18);
+  }
+  h2 .red { color: var(--red); text-shadow: 0 0 14px rgba(212,32,32,0.4); }
+  h2 .teal { color: var(--teal); text-shadow: none; }
+
+  p {
+    margin-bottom: 16px;
+    color: var(--fg);
+    font-weight: 300;
+    font-size: 15.5px;
+  }
+  strong { color: #fff; font-weight: 500; }
+  em { color: var(--green2); font-style: italic; }
+
+  /* ——— CALLOUT ——— */
+  .callout {
+    background: var(--card);
+    border-left: 3px solid var(--green2);
+    padding: 16px 20px;
+    border-radius: 0 6px 6px 0;
+    margin: 20px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .callout::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(200,146,42,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .callout p {
+    margin-bottom: 0;
+    font-size: 15px;
+    font-style: italic;
+    color: rgba(200,216,204,0.9);
+    font-weight: 300;
+  }
+  .callout cite {
+    display: block;
+    margin-top: 10px;
+    font-style: normal;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .callout.red-border { border-left-color: var(--red); }
+  .callout.red-border::after {
+    background: linear-gradient(90deg, rgba(140,58,40,0.05) 0%, transparent 60%);
+  }
+
+  /* ——— ALBUM CARD ——— */
+  .album-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 18px;
+    align-items: flex-start;
+    transition: border-color 0.25s, background 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .album-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--green2), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .album-card:hover { border-color: var(--teal2); }
+  .album-card:hover::before { opacity: 1; }
+
+  .album-card.featured {
+    border-color: var(--green2);
+    background: linear-gradient(135deg, #0d1410 0%, #0a150f 100%);
+  }
+  .album-card.featured::before { opacity: 1; }
+
+  .album-num {
+    width: 56px;
+    height: 56px;
+    border: 1px solid var(--teal2);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--teal);
+    background: rgba(200,146,42,0.06);
+    flex-shrink: 0;
+  }
+  .album-card.featured .album-num {
+    border-color: var(--green2);
+    color: var(--green);
+    background: rgba(200,146,42,0.08);
+    text-shadow: 0 0 10px rgba(200,146,42,0.4);
+  }
+
+  .album-info h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1.5px;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+  .album-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--teal);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .album-card.featured .album-meta { color: var(--green2); }
+
+  .track-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .track {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 3px 8px;
+    transition: all 0.2s;
+  }
+  .track:hover {
+    color: var(--green);
+    border-color: var(--green2);
+    background: rgba(200,146,42,0.06);
+  }
+
+  /* ——— MEMBER CARDS ——— */
+  .member {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+  .member:hover { border-color: var(--teal2); }
+  .member-glyph {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    flex-shrink: 0;
+    border: 1px solid var(--teal2);
+    color: var(--green);
+    background: rgba(200,146,42,0.05);
+  }
+  .member-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: var(--green);
+    margin-bottom: 2px;
+  }
+  .member-role {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+  .member p { margin-bottom: 0; font-size: 14px; color: var(--fg); font-weight: 300; }
+
+  /* ——— TIMELINE ——— */
+  .timeline { }
+  .tl-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0;
+    position: relative;
+    margin-bottom: 0;
+  }
+
+  .tl-year {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--green2);
+    letter-spacing: 1px;
+    text-align: right;
+    padding-right: 16px;
+    padding-top: 3px;
+  }
+
+  .tl-body {
+    border-left: 1px solid var(--border);
+    padding-left: 18px;
+    padding-bottom: 24px;
+    position: relative;
+    font-size: 14.5px;
+    color: var(--fg);
+    font-weight: 300;
+  }
+  .tl-body::before {
+    content: '';
+    position: absolute;
+    left: -4.5px;
+    top: 6px;
+    width: 8px;
+    height: 8px;
+    background: var(--teal2);
+    border: 1px solid var(--green2);
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(200,146,42,0.3);
+  }
+  .tl-item:last-child .tl-body { border-left-color: transparent; }
+
+  /* ——— GENRE TAGS ——— */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 16px 0;
+  }
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    border: 1px solid var(--teal2);
+    border-radius: 3px;
+    padding: 5px 11px;
+    color: var(--teal);
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .tag:hover {
+    border-color: var(--green2);
+    color: var(--green);
+    background: rgba(200,146,42,0.06);
+  }
+  .tag.red { border-color: rgba(212,32,32,0.4); color: rgba(212,32,32,0.7); }
+  .tag.red:hover { border-color: var(--red); color: var(--red2); background: rgba(212,32,32,0.05); }
+
+  /* ——— FEATURED BOX (grammy) ——— */
+  .grammy-box {
+    background: var(--card);
+    border: 1px solid rgba(200,146,42,0.3);
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin: 20px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .grammy-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at top left, rgba(200,146,42,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .grammy-box .g-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--green2);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .grammy-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .grammy-item {
+    flex: 1;
+    min-width: 180px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 14px 16px;
+  }
+  .g-year {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--teal);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .g-album {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: var(--green);
+    margin-bottom: 2px;
+  }
+  .g-cat {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ——— GUEST LIST ——— */
+  .guest-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 8px;
+    margin: 14px 0;
+  }
+  .guest-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 10px 12px;
+    transition: border-color 0.2s;
+  }
+  .guest-item:hover { border-color: var(--red); }
+  .guest-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+  .guest-ref {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  /* ——— FOOTER ——— */
+  footer {
+    text-align: center;
+    padding: 38px 0 50px;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+  }
+  .footer-sig {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 10px;
+    color: var(--green2);
+    display: block;
+    margin-bottom: 14px;
+    text-shadow: 0 0 16px rgba(200,146,42,0.3);
+    opacity: 0.5;
+  }
+  footer p {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 0;
+    letter-spacing: 0.5px;
+    font-weight: 300;
+  }
+
+  /* ——— ANIMATIONS ——— */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .d1 { animation-delay: 0.05s; }
+  .d2 { animation-delay: 0.15s; }
+  .d3 { animation-delay: 0.25s; }
+  .d4 { animation-delay: 0.35s; }
+  .d5 { animation-delay: 0.45s; }
+
+  /* scan line on hover state */
+  @keyframes scan {
+    0%   { background-position: 0 0; }
+    100% { background-position: 0 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+  <header class="hero fade-in">
+    <div class="eye-icon">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- outer ring — stormy grey -->
+        <circle cx="32" cy="32" r="30" stroke="#8a7560" stroke-width="0.5" opacity="0.3"/>
+        <!-- wing feather hints — warm brown -->
+        <path d="M8 32 Q20 14 32 14 Q44 14 56 32 Q44 50 32 50 Q20 50 8 32Z"
+              fill="#1a1510" stroke="#c8922a" stroke-width="1.2"/>
+        <!-- iris — teal grey of barn owl face -->
+        <circle cx="32" cy="32" r="10" fill="#3a4a44" stroke="#c8922a" stroke-width="0.8"/>
+        <!-- pupil — dark amber/rust -->
+        <circle cx="32" cy="32" r="5" fill="#8c3a28"/>
+        <circle cx="32" cy="32" r="5" fill="#8c3a28" opacity="0.6">
+          <animate attributeName="r" values="5;6.5;5" dur="2.5s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.6;1;0.6" dur="2.5s" repeatCount="indefinite"/>
+        </circle>
+        <!-- shine -->
+        <circle cx="34" cy="29" r="1.5" fill="rgba(255,240,200,0.5)"/>
+        <!-- feather hints top — amber -->
+        <path d="M20 16 Q18 8 12 6" stroke="#a87220" stroke-width="1" opacity="0.4"/>
+        <path d="M32 14 Q32 6 28 2" stroke="#a87220" stroke-width="1" opacity="0.4"/>
+        <path d="M44 16 Q46 8 52 6" stroke="#a87220" stroke-width="1" opacity="0.4"/>
+      </svg>
+    </div>
+
+    <div class="hero-tag">São Cristóvão, Sergipe — Blues-Rock · Psicodelia · Grammy Latino</div>
+    <div class="hero-band">The Baggios</div>
+    <h1>BRUTOWN</h1>
+    <p class="hero-sub">O álbum que jogou Sergipe no mapa do rock brasileiro — e garantiu a primeira indicação ao Grammy Latino da banda, em 2017.</p>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">2004</span>
+        <span class="stat-label">fundação</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">2×</span>
+        <span class="stat-label">Grammy Latino</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">5</span>
+        <span class="stat-label">álbuns</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">7</span>
+        <span class="stat-label">países</span>
+      </div>
+    </div>
+  </header>
+
+  <hr class="divider">
+
+  <!-- ORIGEM -->
+  <section class="section fade-in d1">
+    <div class="section-label">01 — Origem</div>
+    <h2>DO ANDARILHO AO <span class="red">CAOS</span></h2>
+    <p>Em março de 2004, em São Cristóvão — quarta cidade mais antiga do Brasil e antiga capital de Sergipe —, <strong>Júlio Andrade (Julico)</strong>, então com 17 anos, e <strong>Lucas Araújo (Lucas Goo)</strong> realizaram o primeiro ensaio da banda. O nome foi uma homenagem a <strong>Baggio</strong>, um músico andarilho que perambulava pelas ruas coloniais da cidade com roupas excêntricas e um violão no ombro, parando em botecos e esquinas para tocar composições próprias e clássicos da Jovem Guarda.</p>
+    <p>"Virou referência para a gente de um sonhador, um cara que queria viver de música", explicou Julico à CartaCapital. Baggio acompanhou o início da trajetória da banda, mas faleceu em 2012 — a faixa <em>"Adios, Baggios"</em> do álbum <em>Sina</em> é a homenagem póstuma. Um documentário chamado <em>Baggio Sedado</em> (2007) foi exibido no projeto Prata da Casa em Sergipe sobre o personagem.</p>
+
+    <div class="callout red-border">
+      <p>"Virou referência para a gente de um sonhador, um cara que queria viver de música."</p>
+      <cite>— Julico, sobre o personagem Baggio</cite>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- MEMBROS -->
+  <section class="section fade-in d1">
+    <div class="section-label">02 — Formação</div>
+    <h2>TRÊS SERGIPANOS, <span class="teal">UM SOM</span></h2>
+
+    <div class="member">
+      <div class="member-glyph">JU</div>
+      <div>
+        <div class="member-name">Julico</div>
+        <div class="member-role">Voz · Guitarra · Violão · Contrabaixo · Produção</div>
+        <p>Júlio Andrade, fundador da banda e cérebro criativo. Produtor artístico de todos os álbuns e fundador do selo <strong>Limaia Discos</strong>. Um truque técnico distintivo: liga a guitarra simultaneamente a um amplificador de guitarra e, oitavada, a um de baixo — similar à técnica de Ray Manzarek no The Doors, preenchendo o espaço sonoro de um trio com dois músicos. Mantém carreira solo paralela com os álbuns <em>Ikê Maré</em> (2020) e <em>Onirikum</em> (2023).</p>
+      </div>
+    </div>
+
+    <div class="member">
+      <div class="member-glyph">GP</div>
+      <div>
+        <div class="member-name">Gabriel Perninha</div>
+        <div class="member-role">Bateria · Percussão</div>
+        <p>Entrou na banda em 2008 com apenas 16 anos, sem experiência profissional em bateria. Formação clássica estabilizada a partir daí, criando o duo original que gravou os álbuns <em>The Baggios</em> (2011), <em>Sina</em> (2013) e <em>Brutown</em> (2016).</p>
+      </div>
+    </div>
+
+    <div class="member">
+      <div class="member-glyph">RR</div>
+      <div>
+        <div class="member-name">Rafael Ramos</div>
+        <div class="member-role">Teclados · Sintetizadores · Órgão · Contrabaixo</div>
+        <p>Vindo da Coutto Orchestra, participou como convidado em <em>Brutown</em> (2016) e foi efetivado a partir de <em>Vulcão</em> (2018), transformando o duo histórico em trio. Sua chegada ampliou drasticamente o vocabulário sonoro da banda.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- O SOM -->
+  <section class="section fade-in d2">
+    <div class="section-label">03 — O Som</div>
+    <h2>BLUES PESADO, <span class="red">SERTÃO</span> E ROCK</h2>
+    <p>O gênero base é <strong>blues-rock</strong>, mas essa classificação conta só metade da história. Julico definiu o processo: <em>"Quis sempre mesclar tudo que gostava de ouvir. O que vou descobrindo, vou querendo colocar nesse liquidificador para gerar esse coquetel sonoro."</em> A evolução atravessou cinco fases distintas ao longo da discografia.</p>
+    <p>Em <em>Brutown</em> (2016), o peso do Black Sabbath encontra o grunge, o rock setentista e a experimentação com teclados — um disco que soa como uma cidade em colapso, retratando a tragédia de Mariana, o massacre no Bataclan e o caos político do impeachment de 2016. Em <em>Vulcão</em> (2018), marchinhas, repente, MPB e desert blues entram no caldeirão. Em <em>Tupã-Rá</em> (2021), o afrobeat e os ritmos nordestinos dominam.</p>
+
+    <div class="tags">
+      <span class="tag">Blues-Rock</span>
+      <span class="tag">Psicodelia</span>
+      <span class="tag">Stoner</span>
+      <span class="tag">Afrobeat</span>
+      <span class="tag">Samba de Coco</span>
+      <span class="tag">Caceteira</span>
+      <span class="tag">Desert Blues</span>
+      <span class="tag">Garage Rock</span>
+      <span class="tag red">Black Sabbath</span>
+      <span class="tag red">Chico Science</span>
+    </div>
+
+    <p style="font-size:13.5px; color:var(--muted);">Influências declaradas: Jimi Hendrix · Black Sabbath · Raul Seixas · Os Mutantes · Buddy Guy · Bombino · Tinariwen · White Stripes · Jorge du Peixe</p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- BRUTOWN O DISCO -->
+  <section class="section fade-in d2">
+    <div class="section-label">04 — Brutown (2016)</div>
+    <h2>A CIDADE <span class="red">QUE BEIRA</span> O CAOS</h2>
+    <p>Gravado no <strong>Estúdio Toca do Bandido</strong>, no Rio de Janeiro, com produção de <strong>Felipe Rodarte</strong> e financiamento via crowdfunding no Catarse (<strong>366 apoiadores</strong>), o disco traz 12 faixas que retratam uma cidade à beira do abismo. As letras dialogam com a tragédia ambiental de Mariana, o massacre no Bataclan, o impeachment de Dilma Rousseff e o caos sociopolítico brasileiro de 2015–16.</p>
+    <p>A arte gráfica — aquela coruja-demônio sobre ratos de terno em fundo teal e verde neon — foi criada por <strong>Neilton Carvalho</strong>, dos Devotos do Ódio. A sonoridade incorpora o peso de Black Sabbath, grunge e rock setentista, com a novidade dos teclados de Rafael Ramos como convidado. A Rolling Stone Brasil elegeu <em>Brutown</em> o <strong>21º melhor álbum brasileiro de 2016</strong>.</p>
+
+    <div class="callout">
+      <p>Cheio de participações de peso, com letras que retratam um cenário caótico, a banda sergipana entrega um dos discos mais importantes do rock brasileiro recente.</p>
+      <cite>— TMDQA!, setembro de 2016</cite>
+    </div>
+
+    <p><strong>Faixas:</strong></p>
+    <div class="track-list" style="margin-bottom:16px;">
+      <span class="track">01. Estigma</span>
+      <span class="track">02. Pé na Cova</span>
+      <span class="track">03. Grita</span>
+      <span class="track">04. Cara de Pão</span>
+      <span class="track">05. Fiat Lux</span>
+      <span class="track">06. Caldeirão das Bruxas</span>
+      <span class="track">07. Saruê</span>
+      <span class="track">08. Dedo Podre</span>
+      <span class="track">09. Vento Norte</span>
+      <span class="track">10. Bois e Bodes</span>
+      <span class="track">11. Sombra e Água Fresca</span>
+      <span class="track">12. Fim do Mundo</span>
+    </div>
+
+    <p><strong>Participações em Brutown:</strong></p>
+    <div class="guest-grid">
+      <div class="guest-item">
+        <div class="guest-name">Emmily Barreto</div>
+        <div class="guest-ref">Far From Alaska</div>
+      </div>
+      <div class="guest-item">
+        <div class="guest-name">Jorge Du Peixe</div>
+        <div class="guest-ref">Nação Zumbi</div>
+      </div>
+      <div class="guest-item">
+        <div class="guest-name">Fernando Catatau</div>
+        <div class="guest-ref">Cidadão Instigado</div>
+      </div>
+      <div class="guest-item">
+        <div class="guest-name">Gabriel Thomaz</div>
+        <div class="guest-ref">Autoramas</div>
+      </div>
+      <div class="guest-item">
+        <div class="guest-name">Érika Martins</div>
+        <div class="guest-ref">Autoramas</div>
+      </div>
+      <div class="guest-item">
+        <div class="guest-name">Rafael Ramos</div>
+        <div class="guest-ref">Teclados (convidado)</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- DISCOGRAFIA COMPLETA -->
+  <section class="section fade-in d3">
+    <div class="section-label">05 — Discografia</div>
+    <h2>CINCO DISCOS, <span class="teal">UMA EVOLUÇÃO</span></h2>
+
+    <div class="album-card">
+      <div class="album-num">01</div>
+      <div class="album-info">
+        <h3>The Baggios</h3>
+        <div class="album-meta">2011 · Deckdisc · 15 faixas</div>
+        <div class="track-list">
+          <span class="track">Get Out Now!</span>
+          <span class="track">Can't Find My Mind</span>
+          <span class="track">Sem Condição</span>
+          <span class="track">+ 12 faixas</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="album-card">
+      <div class="album-num">02</div>
+      <div class="album-info">
+        <h3>Sina</h3>
+        <div class="album-meta">2013 · Independente · 12 faixas · Download gratuito</div>
+        <div class="track-list">
+          <span class="track">Salomé Me Disse</span>
+          <span class="track">Adios, Baggios</span>
+          <span class="track">Em Outras</span>
+          <span class="track">+ 9 faixas</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="album-card featured">
+      <div class="album-num">03</div>
+      <div class="album-info">
+        <h3>Brutown ★</h3>
+        <div class="album-meta">2016 · Toca Discos · 12 faixas · 1ª indicação Grammy Latino</div>
+        <div class="track-list">
+          <span class="track">Estigma</span>
+          <span class="track">Caldeirão das Bruxas</span>
+          <span class="track">Saruê</span>
+          <span class="track">Fim do Mundo</span>
+          <span class="track">+ 8 faixas</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="album-card">
+      <div class="album-num">04</div>
+      <div class="album-info">
+        <h3>Vulcão</h3>
+        <div class="album-meta">2018 · Toca Discos / Natura Musical · 11 faixas · 2ª indicação Grammy Latino</div>
+        <div class="track-list">
+          <span class="track">Deserto</span>
+          <span class="track">Bem-Te-Vi</span>
+          <span class="track">Hendrixiano</span>
+          <span class="track">+ 8 faixas</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="album-card">
+      <div class="album-num">05</div>
+      <div class="album-info">
+        <h3>Tupã-Rá</h3>
+        <div class="album-meta">2021 · Toca Discos · 12 faixas</div>
+        <div class="track-list">
+          <span class="track">Barra Pesada</span>
+          <span class="track">Pisa Macio</span>
+          <span class="track">Mantrayam</span>
+          <span class="track">+ 9 faixas</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- GRAMMY -->
+  <section class="section fade-in d3">
+    <div class="section-label">06 — Reconhecimento</div>
+    <h2>DOIS <span class="green" style="color:var(--green)">GRAMMYS</span> LATINOS</h2>
+
+    <div class="grammy-box">
+      <div class="g-title">Indicações ao Grammy Latino — Melhor Álbum de Rock ou Alternativo em Língua Portuguesa</div>
+      <div class="grammy-row">
+        <div class="grammy-item">
+          <div class="g-year">Grammy Latino 2017</div>
+          <div class="g-album">Brutown</div>
+          <div class="g-cat">Concorrendo com Nando Reis, Blitz, Curumin e Metá-Metá</div>
+        </div>
+        <div class="grammy-item">
+          <div class="g-year">Grammy Latino 2019</div>
+          <div class="g-album">Vulcão</div>
+          <div class="g-cat">Maior User Score da discografia: 87 no Album of the Year</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout red-border">
+      <p>"Sinceramente, poucas coisas mudaram para conseguir show, aumentar cachê. Isso não foi realidade da gente."</p>
+      <cite>— Julico, CartaCapital — sobre o impacto prático das indicações ao Grammy</cite>
+    </div>
+
+    <p>Além do Grammy, a banda acumulou o <strong>Prêmio Prata da Casa</strong> em 3 categorias (2007), o <strong>Festival Aperipê de Música</strong> em 2 categorias (2010), o <strong>Prêmio ARPUB</strong> com "Em Outras" (2011) e indicações ao <strong>Prêmio APCA</strong> e <strong>Prêmio BRAVO!</strong>.</p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- TRAJETÓRIA AO VIVO -->
+  <section class="section fade-in d4">
+    <div class="section-label">07 — Ao Vivo</div>
+    <h2>DO SESC AO <span class="red">LOLLAPALOOZA</span></h2>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">2008</div>
+        <div class="tl-body">Primeiro show grande: abriram para <strong>Os Paralamas do Sucesso</strong> no Projeto Verão de Aracaju — cerca de <strong>30 mil pessoas</strong>.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2013</div>
+        <div class="tl-body"><strong>Virada Cultural de São Paulo</strong>. "Sem Condição" eleita uma das melhores músicas do ano pela Rolling Stone Brasil. <em>Sina</em> entre os 32 melhores discos nacionais do TMDQA!</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2016</div>
+        <div class="tl-body"><strong>Lollapalooza Brasil</strong> — convidados para abrir o festival ao lado de Florence + The Machine, Tame Impala, Eminem e Alabama Shakes. Convite chegou apenas uma semana antes do anúncio do line-up.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">Dez 2015</div>
+        <div class="tl-body">Primeira turnê internacional: <strong>6 shows no México</strong>.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2017</div>
+        <div class="tl-body">Turnê pelos <strong>EUA e Canadá</strong>: Nova York (Knitting Factory), Washington D.C., Pittsburgh, Montreal. Em tour, recebem a notícia da 1ª indicação ao Grammy Latino.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2019</div>
+        <div class="tl-body">Primeira turnê europeia: <strong>23 shows na Itália, França e Suíça</strong>.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2022</div>
+        <div class="tl-body">Turnê mais ambiciosa: <strong>26 shows em 28 dias</strong> — França, Suíça, Inglaterra e Itália. Financiada por vaquinha do público, sem patrocínio governamental.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2024–25</div>
+        <div class="tl-body">Celebração de <strong>20 anos de carreira</strong>: shows especiais no SESC Pompeia, SESC Campinas e Festival Badalando Rock em Aracaju.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- O QUE A CRÍTICA DIZ -->
+  <section class="section fade-in d4">
+    <div class="section-label">08 — Recepção Crítica</div>
+    <h2>O QUE DIZEM <span class="teal">SOBRE ELES</span></h2>
+
+    <div class="callout">
+      <p>"Dá pra dizer que o grupo sergipano hoje seria um nome fácil de consenso para se dar à melhor banda de rock em atividade no país."</p>
+      <cite>— Célula Pop, sobre Tupã-Rá (2021)</cite>
+    </div>
+
+    <div class="callout">
+      <p>"Se há bandas superiores ou no mesmo nível que eles aqui no Brasil, elas são poucas."</p>
+      <cite>— Whiplash.Net, resenha de Vulcão (2018)</cite>
+    </div>
+
+    <div class="callout">
+      <p>"Provavelmente os nomes mais importantes do rock independente nacional."</p>
+      <cite>— Rádio Putzgrila, ao lado de Autoramas e Boogarins</cite>
+    </div>
+
+    <div class="callout red-border">
+      <p>"O que a The Baggios faz é um tipo de sequestro do rock e fazer do nosso jeito."</p>
+      <cite>— Siba, músico e produtor, participante de Tupã-Rá</cite>
+    </div>
+
+    <p>Veículos que cobriram a banda incluem <strong>Rolling Stone Brasil</strong>, <strong>TMDQA!</strong>, <strong>CartaCapital</strong>, <strong>Monkeybuzz</strong>, <strong>Whiplash.Net</strong>, <strong>Folha de São Paulo</strong>, <strong>Estadão</strong> e a <strong>Rádio Senado</strong> (programa especial "Som Brasilis").</p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- CONCLUSÃO -->
+  <section class="section fade-in d5">
+    <div class="section-label">09 — Conclusão</div>
+    <h2>20 ANOS DE <span class="green" style="color:var(--green)">RESISTÊNCIA</span></h2>
+    <p>The Baggios representa um caso raro na música brasileira: uma banda que partiu de uma das menores capitais do país, manteve-se independente por mais de duas décadas, e construiu uma discografia que evolui de forma corajosa a cada disco — do garage blues cru de 2011 ao afrobeat-nordestino-psicodélico de 2021.</p>
+    <p>A trilogia <em>Brutown–Vulcão–Tupã-Rá</em> é um arco narrativo sobre caos, fuga e iluminação, comparável em ambição a qualquer projeto conceitual do rock brasileiro. O nome da banda — homenagem a um andarilho que queria viver de música — funciona como profecia e missão.</p>
+
+    <div class="callout">
+      <p>"A The Baggios mudou o rumo da história e colocou a música sergipana no ecossistema musical nacional de forma relevante e definitiva."</p>
+      <cite>— Banco do Nordeste Cultural</cite>
+    </div>
+
+    <p>O relançamento em vinil de <em>Sina</em> em 2026 — <strong>300 cópias numeradas</strong>, masterizado em Seattle por <strong>Rick Fischer</strong> (Pearl Jam, Cat Power), vinil azul marmorizado 180g — é mais um capítulo de uma história que começou num ensaio de dois adolescentes numa cidade colonial de Sergipe, e ainda não terminou.</p>
+  </section>
+
+  <footer>
+    <span class="footer-sig">/// THE BAGGIOS ///</span>
+    <p>Pesquisa compilada em abril de 2026<br>com fontes de Wikipedia, CartaCapital, Rolling Stone Brasil, TMDQA!,<br>Whiplash.Net, Monkeybuzz, Hits Perdidos, Célula Pop e outros.</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
