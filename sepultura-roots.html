@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sepultura — Roots · Nordeste Oculto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #080807;
+    --bg2:       #100f0c;
+    --fg:        #d6cdb8;
+    --earth:     #8b5e3c;
+    --rust:      #a84c1e;
+    --blood:     #c0392b;
+    --ochre:     #c4893a;
+    --bone:      #e0d4b8;
+    --muted:     #5a5245;
+    --border:    #1e1c18;
+    --card:      #0e0d0a;
+    --accent:    #b84a28;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    line-height: 1.78;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Tribal geometric background — linhas cruzadas em ângulo */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse at 15% 20%, rgba(168,76,30,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 85% 80%, rgba(139,94,60,0.07) 0%, transparent 50%),
+      repeating-linear-gradient(
+        60deg,
+        rgba(168,76,30,0.025) 0px,
+        rgba(168,76,30,0.025) 1px,
+        transparent 1px,
+        transparent 40px
+      ),
+      repeating-linear-gradient(
+        -60deg,
+        rgba(139,94,60,0.018) 0px,
+        rgba(139,94,60,0.018) 1px,
+        transparent 1px,
+        transparent 40px
+      );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Grain overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.7;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 660px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ——— HERO ——— */
+  .hero {
+    padding: 72px 0 52px;
+    text-align: center;
+  }
+
+  /* Ícone SVG tribal — losango com pontas, referência a grafismo Xavante */
+  .hero-icon {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 28px;
+    animation: pulse-tribal 4s ease-in-out infinite;
+  }
+  .hero-icon svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 16px rgba(168,76,30,0.55));
+  }
+  @keyframes pulse-tribal {
+    0%, 100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 10px rgba(168,76,30,0.4)); }
+    50%       { transform: scale(1.07) rotate(3deg); filter: drop-shadow(0 0 28px rgba(168,76,30,0.75)); }
+  }
+
+  .hero-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 20px;
+    opacity: 0.9;
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(64px, 18vw, 110px);
+    line-height: 0.88;
+    color: var(--bone);
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    text-shadow: 0 0 60px rgba(168,76,30,0.2);
+  }
+
+  .hero-album {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(24px, 6vw, 38px);
+    letter-spacing: 8px;
+    color: var(--rust);
+    margin-bottom: 20px;
+    text-shadow: 0 0 30px rgba(168,76,30,0.4);
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.3px;
+    max-width: 420px;
+    margin: 0 auto 36px;
+    line-height: 1.6;
+  }
+
+  /* Stats block */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    background: var(--card);
+    margin-bottom: 0;
+  }
+  .stat {
+    padding: 18px 12px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: var(--ochre);
+    line-height: 1;
+    letter-spacing: 1px;
+    display: block;
+  }
+  .stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ——— DIVIDER ——— */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 52px 0 40px;
+  }
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .divider span {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--rust);
+    letter-spacing: 2px;
+    opacity: 0.7;
+  }
+
+  /* ——— SEÇÕES ——— */
+  .section { margin-bottom: 56px; }
+
+  .section-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 7vw, 42px);
+    color: var(--bone);
+    letter-spacing: 1.5px;
+    line-height: 1.05;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 15.5px;
+    color: var(--fg);
+    font-weight: 300;
+    margin-bottom: 16px;
+  }
+  p:last-child { margin-bottom: 0; }
+
+  strong { color: var(--bone); font-weight: 600; }
+  em { font-style: italic; color: var(--ochre); }
+
+  /* ——— CALLOUT ——— */
+  .callout {
+    border-left: 3px solid var(--rust);
+    padding: 18px 20px 18px 24px;
+    background: rgba(168,76,30,0.05);
+    margin: 28px 0;
+    position: relative;
+  }
+  .callout::before {
+    content: '"';
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    color: var(--rust);
+    opacity: 0.3;
+    position: absolute;
+    top: -8px;
+    left: 16px;
+    line-height: 1;
+  }
+  .callout p {
+    font-size: 15px;
+    font-style: italic;
+    color: var(--bone);
+    font-weight: 400;
+    margin: 0 0 8px;
+    line-height: 1.65;
+  }
+  .callout cite {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--rust);
+    text-transform: uppercase;
+    font-style: normal;
+  }
+
+  /* ——— TIMELINE ——— */
+  .timeline { margin: 28px 0; }
+  .tl-item {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 0 20px;
+    margin-bottom: 20px;
+    align-items: start;
+  }
+  .tl-year {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: var(--rust);
+    letter-spacing: 1px;
+    padding-top: 2px;
+    line-height: 1.2;
+  }
+  .tl-body {
+    border-left: 1px solid var(--border);
+    padding-left: 20px;
+    padding-bottom: 4px;
+    position: relative;
+  }
+  .tl-body::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 8px;
+    width: 7px;
+    height: 7px;
+    background: var(--rust);
+    transform: rotate(45deg);
+  }
+  .tl-body strong {
+    display: block;
+    font-size: 13px;
+    color: var(--bone);
+    margin-bottom: 3px;
+  }
+  .tl-body span {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ——— ALBUM CARD ——— */
+  .album-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 22px 24px;
+    margin: 12px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .album-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--rust);
+  }
+  .album-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+  }
+  .album-card-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+  }
+  .album-card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--ochre);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .album-card-meta {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .album-card p {
+    font-size: 13.5px;
+    margin-bottom: 0;
+  }
+  .album-highlight {
+    border: 1px solid rgba(168,76,30,0.3);
+    background: rgba(168,76,30,0.05);
+  }
+  .album-highlight .album-card-title {
+    color: var(--blood);
+    font-size: 22px;
+  }
+
+  /* ——— TAGS ——— */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 20px 0;
+  }
+  .tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 5px 10px;
+  }
+  .tag-accent {
+    color: var(--rust);
+    border-color: rgba(168,76,30,0.35);
+    background: rgba(168,76,30,0.04);
+  }
+
+  /* ——— TRACKLIST / FAIXAS-CHAVE ——— */
+  .tracklist { margin: 20px 0; }
+  .track {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    gap: 12px;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .track:last-child { border-bottom: none; }
+  .track-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-align: right;
+  }
+  .track-name {
+    font-size: 14px;
+    color: var(--bone);
+    font-weight: 500;
+  }
+  .track-feat {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    color: var(--rust);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .track-note {
+    font-size: 12px;
+    color: var(--muted);
+    grid-column: 2 / -1;
+    margin-top: -4px;
+    font-weight: 300;
+  }
+
+  /* ——— HIGHLIGHT BOX ——— */
+  .highlight-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 24px;
+    margin: 28px 0;
+  }
+  .highlight-box h3 {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 16px;
+  }
+  .hb-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .hb-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .hb-icon {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: var(--rust);
+    opacity: 0.8;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .hb-text strong {
+    display: block;
+    font-size: 12px;
+    color: var(--bone);
+    margin-bottom: 2px;
+  }
+  .hb-text span {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ——— CHART POSITIONS ——— */
+  .chart-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 20px 0;
+  }
+  .chart-item {
+    background: var(--card);
+    padding: 14px;
+    text-align: center;
+  }
+  .chart-pos {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--ochre);
+    line-height: 1;
+    letter-spacing: 1px;
+  }
+  .chart-country {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ——— MEMBER CARD ——— */
+  .members { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+  .member {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 14px;
+    align-items: center;
+    padding: 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+  }
+  .member-glyph {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--rust);
+    text-align: center;
+    line-height: 1;
+  }
+  .member-name {
+    font-size: 14px;
+    color: var(--bone);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .member-role {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* ——— FADE IN ——— */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .d1 { transition-delay: 0.05s; }
+  .d2 { transition-delay: 0.15s; }
+  .d3 { transition-delay: 0.25s; }
+  .d4 { transition-delay: 0.35s; }
+  .d5 { transition-delay: 0.45s; }
+
+  /* ——— FOOTER ——— */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0 48px;
+    margin-top: 64px;
+  }
+  .footer-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .footer-sources {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+  .footer-sources a {
+    color: var(--rust);
+    text-decoration: none;
+    opacity: 0.8;
+  }
+  .footer-brand {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    margin-top: 24px;
+    opacity: 0.5;
+  }
+
+  @media (max-width: 480px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stats .stat:nth-child(2) { border-right: none; }
+    .hb-grid { grid-template-columns: 1fr; }
+    .chart-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ——— HERO ——— -->
+  <section class="hero">
+
+    <!-- Ícone SVG: grafismo losangular inspirado em pintura corporal Xavante -->
+    <div class="hero-icon fade-in d1">
+      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Losango externo -->
+        <polygon points="40,4 76,40 40,76 4,40" stroke="#a84c1e" stroke-width="1.5" fill="none" opacity="0.7"/>
+        <!-- Losango médio -->
+        <polygon points="40,14 66,40 40,66 14,40" stroke="#8b5e3c" stroke-width="1" fill="none" opacity="0.5"/>
+        <!-- Losango interno preenchido -->
+        <polygon points="40,24 56,40 40,56 24,40" fill="#a84c1e" opacity="0.9"/>
+        <!-- Centro -->
+        <polygon points="40,32 48,40 40,48 32,40" fill="#c4893a"/>
+        <!-- Raios / pontas externas -->
+        <line x1="40" y1="4" x2="40" y2="14" stroke="#a84c1e" stroke-width="1.5" opacity="0.6"/>
+        <line x1="76" y1="40" x2="66" y2="40" stroke="#a84c1e" stroke-width="1.5" opacity="0.6"/>
+        <line x1="40" y1="76" x2="40" y2="66" stroke="#a84c1e" stroke-width="1.5" opacity="0.6"/>
+        <line x1="4" y1="40" x2="14" y2="40" stroke="#a84c1e" stroke-width="1.5" opacity="0.6"/>
+        <!-- Pontos nos vértices -->
+        <circle cx="40" cy="4"  r="2" fill="#c4893a"/>
+        <circle cx="76" cy="40" r="2" fill="#c4893a"/>
+        <circle cx="40" cy="76" r="2" fill="#c4893a"/>
+        <circle cx="4"  cy="40" r="2" fill="#c4893a"/>
+      </svg>
+    </div>
+
+    <div class="hero-tag fade-in d1">Nordeste Oculto · Crítica Musical</div>
+
+    <h1 class="fade-in d2">SEPULTURA</h1>
+    <div class="hero-album fade-in d2">ROOTS · 1996</div>
+
+    <p class="hero-sub fade-in d3">
+      Como quatro músicos de Belo Horizonte viajaram ao coração do Mato Grosso,
+      gravaram com os Xavante e entregaram ao mundo o disco de metal mais improvável,
+      controverso e influente da década — destruindo, no processo, tudo o que tinham construído.
+    </p>
+
+    <!-- Stats -->
+    <div class="stats fade-in d4">
+      <div class="stat">
+        <span class="stat-num">12</span>
+        <span class="stat-label">Anos de banda</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">2M+</span>
+        <span class="stat-label">Cópias vendidas</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">#4</span>
+        <span class="stat-label">UK Charts</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">16</span>
+        <span class="stat-label">Faixas</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ——— 01 — ORIGEM ——— -->
+  <div class="divider fade-in"><span>///</span></div>
+
+  <section class="section fade-in">
+    <span class="section-label">01 — Origem</span>
+    <h2>De Belo Horizonte para o abismo</h2>
+
+    <p>
+      Para entender o que <em>Roots</em> significa, é preciso voltar à <strong>Belo Horizonte de 1984</strong> — uma cidade no interior de um país em frangalhos. A ditadura militar agonizava. A inflação rumo a 2.000% ao ano. O pai dos irmãos Cavalera havia morrido de ataque cardíaco, deixando a família em ruína. <strong>Max tinha 15 anos. Igor, 14.</strong>
+    </p>
+    <p>
+      No mesmo período em que o Brasil saía às ruas no movimento Diretas Já, os dois irmãos fundavam uma banda cujo nome — <em>sepultura</em>, tradução literal de <em>grave</em> — Max encontrou lendo a letra de "Dancing on Your Grave", do Motörhead. O contexto não era metafórico: era material.
+    </p>
+    <p>
+      BH fervilhava com uma cena underground que nascia da precariedade. A <strong>Cogumelo Records</strong>, loja de discos transformada em selo, funcionava como epicentro — publicando o Sarcófago, o Mutilator, o Holocausto. Sem acesso fácil a discos importados, os jovens metaleiros mineiros recorriam à troca de fitas cassete com fanzines da Europa e dos EUA, construindo uma rede artesanal que funcionava como internet analógica.
+    </p>
+
+    <div class="callout">
+      <p>A primeira vez que ouvi Venom, foi numa fita emprestada de um amigo. Alguém disse: é o Motörhead do diabo! Depois disso, paramos de ouvir Iron Maiden.</p>
+      <cite>Igor Cavalera</cite>
+    </div>
+
+    <p>
+      A entrada de <strong>Andreas Kisser</strong> em 1987, substituindo o guitarrista original Jairo Guedz, completou a formação que mudaria tudo. Kisser, paulista de São Bernardo do Campo, trouxe precisão técnica e sensibilidade melódica que elevaram o nível da banda dramaticamente. E em 1988, o jovem A&R da Roadrunner Records <strong>Monte Conner</strong> assinou o Sepultura — sem nunca ter visto a banda ao vivo.
+    </p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">1984</div>
+        <div class="tl-body">
+          <strong>Fundação em BH</strong>
+          <span>Max e Igor Cavalera, Paulo Jr. e Jairo Guedz. Nome retirado de letra do Motörhead.</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1986</div>
+        <div class="tl-body">
+          <strong>Morbid Visions</strong>
+          <span>Primeiro álbum pela Cogumelo Records. Chama atenção de fanzines internacionais.</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1987</div>
+        <div class="tl-body">
+          <strong>Entrada de Kisser</strong>
+          <span>A formação clássica se completa. Quatro homens, um destino.</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1988</div>
+        <div class="tl-body">
+          <strong>Roadrunner Records</strong>
+          <span>Max voa a Nova York com passagens grátis de um amigo que trabalhava na Pan Am.</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1991</div>
+        <div class="tl-body">
+          <strong>Rock in Rio II</strong>
+          <span>100 mil pessoas. Estimados 540 milhões de telespectadores. O Sepultura vira sinônimo de exportação cultural brasileira.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ——— 02 — O ÁLBUM ——— -->
+  <div class="divider fade-in"><span>///</span></div>
+
+  <section class="section fade-in">
+    <span class="section-label">02 — O Álbum</span>
+    <h2>A floresta como estúdio</h2>
+
+    <p>
+      A ideia de <em>Roots</em> nasceu de um sonho — literalmente. Max Cavalera assistiu ao filme <em>At Play in the Fields of the Lord</em> (1991), no qual Tom Berenger salta de paraquedas numa aldeia amazônica, e ficou obcecado com a imagem. Ele queria gravar com indígenas brasileiros. Citou Paul Simon como referência — o artista ocidental que vai até a fonte. Mas havia uma diferença crucial: ao contrário de Simon, o Sepultura não era do Primeiro Mundo se apropriando do Terceiro. Eram brasileiros redescobriindo seu próprio território.
+    </p>
+    <p>
+      Max contatou <strong>Angela Pappiani</strong>, coordenadora do Núcleo de Cultura Indígena. Ela sugeriu os <strong>Xavante</strong>, povo do Mato Grosso com histórico de interação mais aberta — mas também de resistência feroz à colonização, tendo sido escravizados no século XVIII e forçados a relocações devastadoras sob Getúlio Vargas.
+    </p>
+
+    <div class="callout">
+      <p>Não estava nem sobre música. Estávamos falando de uma expedição à National Geographic.</p>
+      <cite>Max Cavalera — BraveWords, 2021</cite>
+    </div>
+
+    <p>
+      Em <strong>5 de novembro de 1995</strong>, a comitiva chegou à <strong>Aldeia Pimentel Barbosa</strong>, no Mato Grosso. O produtor <strong>Ross Robinson</strong> trouxe um gravador de 8 canais e baterias de carro para alimentar o equipamento na selva. As regras eram claras: nada de drogas ou álcool; a tribo poderia cancelar tudo a qualquer momento. A estadia durou três dias.
+    </p>
+    <p>
+      O que se registrou ali foi o <strong>canto cerimonial "Datsi Wawere"</strong> — ritual de cura Xavante — que se tornou a base de "Itsári" (palavra que significa <em>raízes</em> na língua Xavante). O encarte traz a inscrição enfática: <strong>"No overdubs!!!"</strong>
+    </p>
+
+    <div class="callout">
+      <p>A única maneira de compor música era se alguém da tribo sonhasse com ela. Não podiam simplesmente escrever uma letra ou melodia. Tem que ser transmitido em sonho.</p>
+      <cite>Igor Cavalera sobre os Xavante — Exclaim!, 2014</cite>
+    </div>
+
+    <p>
+      Um porta-voz Xavante revelou o que os levou a aceitar: <em>"Tínhamos visto fotos do Sepultura e sabíamos que eram diferentes, com seus cabelos longos e muitas tatuagens. Sabíamos também que tinham sido discriminados, como nós. Por causa disso, ficamos muito curiosos."</em> O restante do álbum foi gravado no <strong>Indigo Ranch Studios</strong>, em Malibu — o mesmo estúdio construído pelo Moody Blues em 1973.
+    </p>
+  </section>
+
+  <!-- ——— 03 — O SOM ——— -->
+  <div class="divider fade-in"><span>///</span></div>
+
+  <section class="section fade-in">
+    <span class="section-label">03 — O Som</span>
+    <h2>Ross Robinson e a arquitetura do caos controlado</h2>
+
+    <p>
+      <strong>Ross Robinson</strong> gravava tudo "flat", sem processamento, preferindo mover microfones e trocar equipamentos até encontrar o timbre certo no próprio ar. Usava uma máquina de fita 3M de 1975, que conferia saturação analógica gordurosa. Para <em>Roots</em>, extraiu o máximo do kit pesado de Igor, do baixo Musicman de Paulo Jr., e das guitarras afinadas para o centro da terra por Max e Kisser.
+    </p>
+
+    <div class="highlight-box">
+      <h3>Anatomia Sonora</h3>
+      <div class="hb-grid">
+        <div class="hb-item">
+          <span class="hb-icon">▶</span>
+          <div class="hb-text">
+            <strong>Groove Metal + Tribal</strong>
+            <span>Riffs lentos e esmagadores sobre percussão cerimonial Xavante</span>
+          </div>
+        </div>
+        <div class="hb-item">
+          <span class="hb-icon">▶</span>
+          <div class="hb-text">
+            <strong>Berimbau / Maracatu</strong>
+            <span>Instrumentos afro-brasileiros integrados sem ornamentação</span>
+          </div>
+        </div>
+        <div class="hb-item">
+          <span class="hb-icon">▶</span>
+          <div class="hb-text">
+            <strong>Fita analógica 3M</strong>
+            <span>Saturação quente que nenhum plugin replica com fidelidade</span>
+          </div>
+        </div>
+        <div class="hb-item">
+          <span class="hb-icon">▶</span>
+          <div class="hb-text">
+            <strong>Mixagem Andy Wallace</strong>
+            <span>O mesmo engenheiro de Nirvana e Rage Against the Machine</span>
+          </div>
+        </div>
+        <div class="hb-item">
+          <span class="hb-icon">▶</span>
+          <div class="hb-text">
+            <strong>Sem overdubs no campo</strong>
+            <span>Os cantos Xavante gravados ao vivo na aldeia, ao ar livre</span>
+          </div>
+        </div>
+        <div class="hb-item">
+          <span class="hb-icon">▶</span>
+          <div class="hb-text">
+            <strong>Português + Inglês</strong>
+            <span>Primeira vez que a banda cantou extensamente em sua língua nativa</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p>Roots saiu e se tornou o padrão para todo álbum de estúdio dos Foo Fighters por dez anos. Sonicamente o álbum mais poderoso que eu já havia ouvido.</p>
+      <cite>Dave Grohl — Foo Fighters</cite>
+    </div>
+
+    <div class="tags">
+      <span class="tag tag-accent">Groove Metal</span>
+      <span class="tag tag-accent">Tribal</span>
+      <span class="tag tag-accent">Afro-Brasileiro</span>
+      <span class="tag">Nu-Metal Proto</span>
+      <span class="tag">Indigenismo</span>
+      <span class="tag">World Metal</span>
+      <span class="tag">Post-Colonial Metal</span>
+      <span class="tag">Carlinhos Brown</span>
+      <span class="tag">Ross Robinson</span>
+    </div>
+
+    <!-- Faixas-chave -->
+    <h2 style="margin-top:28px; margin-bottom:16px; font-size:28px;">Faixas que reescreveram o possível</h2>
+    <div class="tracklist">
+      <div class="track">
+        <span class="track-num">01</span>
+        <span class="track-name">Roots Bloody Roots</span>
+        <span class="track-feat">MVP</span>
+      </div>
+      <div class="track-note">Riff esmagador sobre percussão tribal. O grito de pertencimento. Vídeo filmado em catacumbas de Salvador com capoeiristas e percussionistas do Timbalada.</div>
+
+      <div class="track">
+        <span class="track-num">03</span>
+        <span class="track-name">Attitude</span>
+        <span class="track-feat"></span>
+      </div>
+      <div class="track-note">Abre com berimbau antes de explodir em feedback. A brutalidade que não precisa explicar sua gentileza.</div>
+
+      <div class="track">
+        <span class="track-num">06</span>
+        <span class="track-name">Ratamahatta</span>
+        <span class="track-feat">+ Carlinhos Brown</span>
+      </div>
+      <div class="track-note">Majoritariamente em português. Zé do Caixão e Lampião como figuras épicas. Stop-motion de Fred Stuhr. A faixa mais ousada do disco.</div>
+
+      <div class="track">
+        <span class="track-num">07</span>
+        <span class="track-name">Lookaway</span>
+        <span class="track-feat">+ Jonathan Davis · Mike Patton · DJ Lethal</span>
+      </div>
+      <div class="track-note">A constelação mais improvável de convidados já reunida num disco de metal.</div>
+
+      <div class="track">
+        <span class="track-num">10</span>
+        <span class="track-name">Ambush</span>
+        <span class="track-feat"></span>
+      </div>
+      <div class="track-note">Homenagem a Chico Mendes, assassinado em 1988. O disco como arquivo histórico.</div>
+
+      <div class="track">
+        <span class="track-num">12</span>
+        <span class="track-name">Itsári</span>
+        <span class="track-feat">+ Xavante</span>
+      </div>
+      <div class="track-note">Canto cerimonial de cura gravado na Aldeia Pimentel Barbosa. No overdubs. Sagrado.</div>
+
+      <div class="track">
+        <span class="track-num">15</span>
+        <span class="track-name">Dictatorshit</span>
+        <span class="track-feat"></span>
+      </div>
+      <div class="track-note">Ataque direto ao golpe militar de 1964. Sem meias palavras.</div>
+    </div>
+  </section>
+
+  <!-- ——— 04 — FORMAÇÃO ——— -->
+  <div class="divider fade-in"><span>///</span></div>
+
+  <section class="section fade-in">
+    <span class="section-label">04 — Formação</span>
+    <h2>Os quatro que destruíram paredes</h2>
+
+    <div class="members">
+      <div class="member">
+        <div class="member-glyph">MAX</div>
+        <div>
+          <div class="member-name">Max Cavalera</div>
+          <div class="member-role">Guitarra · Voz · Compositor · 1984–1996</div>
+        </div>
+      </div>
+      <div class="member">
+        <div class="member-glyph">IGR</div>
+        <div>
+          <div class="member-name">Igor Cavalera</div>
+          <div class="member-role">Bateria · Percussão · 1984–2006</div>
+        </div>
+      </div>
+      <div class="member">
+        <div class="member-glyph">PAU</div>
+        <div>
+          <div class="member-name">Paulo Jr.</div>
+          <div class="member-role">Baixo Musicman · Fundador · 1984–2023</div>
+        </div>
+      </div>
+      <div class="member">
+        <div class="member-glyph">AND</div>
+        <div>
+          <div class="member-name">Andreas Kisser</div>
+          <div class="member-role">Guitarra · Composição · 1987–presente</div>
+        </div>
+      </div>
+    </div>
+
+    <p>
+      Os convidados de <em>Roots</em> formam um mapa do momento: <strong>Carlinhos Brown</strong> (percussão e vocais em "Ratamahatta"), <strong>Jonathan Davis</strong> do Korn, <strong>Mike Patton</strong> do Faith No More, <strong>DJ Lethal</strong> do House of Pain/Limp Bizkit, <strong>David Silveria</strong> do Korn, e os guerreiros Xavante da Aldeia Pimentel Barbosa.
+    </p>
+  </section>
+
+  <!-- ——— 05 — DISCOGRAFIA ——— -->
+  <div class="divider fade-in"><span>///</span></div>
+
+  <section class="section fade-in">
+    <span class="section-label">05 — Discografia</span>
+    <h2>A escalada até o pico</h2>
+
+    <div class="album-card">
+      <div class="album-card-header">
+        <span class="album-card-num">001</span>
+      </div>
+      <div class="album-card-title">Morbid Visions</div>
+      <div class="album-card-meta">1986 · Cogumelo Records · 9 faixas</div>
+      <p>Death/thrash gravado em dois dias. Primeiros ecos chegam a fanzines europeus.</p>
+    </div>
+
+    <div class="album-card">
+      <div class="album-card-header">
+        <span class="album-card-num">002</span>
+      </div>
+      <div class="album-card-title">Schizophrenia</div>
+      <div class="album-card-meta">1987 · Cogumelo Records · 8 faixas</div>
+      <p>Amadurecimento técnico após a entrada de Kisser. Monte Conner ouve e assina a banda na Roadrunner.</p>
+    </div>
+
+    <div class="album-card">
+      <div class="album-card-header">
+        <span class="album-card-num">003</span>
+      </div>
+      <div class="album-card-title">Beneath the Remains</div>
+      <div class="album-card-meta">1989 · Roadrunner Records · 9 faixas</div>
+      <p>Orçamento de US$ 8.000. AllMusic: 4.5/5. "Um dos álbuns mais essenciais do death/thrash de todos os tempos."</p>
+    </div>
+
+    <div class="album-card">
+      <div class="album-card-header">
+        <span class="album-card-num">004</span>
+      </div>
+      <div class="album-card-title">Arise</div>
+      <div class="album-card-meta">1991 · Roadrunner Records · 10 faixas</div>
+      <p>Billboard 200, posição 119. Rock in Rio II para 100 mil pessoas. O Sepultura vira fenômeno global.</p>
+    </div>
+
+    <div class="album-card">
+      <div class="album-card-header">
+        <span class="album-card-num">005</span>
+      </div>
+      <div class="album-card-title">Chaos A.D.</div>
+      <div class="album-card-meta">1993 · Roadrunner Records · 14 faixas</div>
+      <p>Billboard 200 #32. UK #11. Certificado de ouro nos EUA. "Kaiowas" planta a semente de tudo que viria. Primeiro disco da Roadrunner no top 40 americano.</p>
+    </div>
+
+    <div class="album-card album-highlight">
+      <div class="album-card-header">
+        <span class="album-card-num">006 · FOCAL</span>
+      </div>
+      <div class="album-card-title">Roots</div>
+      <div class="album-card-meta">February 1996 · Roadrunner Records · 16 faixas · 72 min</div>
+      <p>O disco que redefiniu o metal global. Gravado na Aldeia Xavante, Malibu e Phoenix. Produção de Ross Robinson. 2+ milhões de cópias. UK #4, Billboard #27, Europa #2.</p>
+    </div>
+  </section>
+
+  <!-- ——— 06 — RECONHECIMENTO ——— -->
+  <div class="divider fade-in"><span>///</span></div>
+
+  <section class="section fade-in">
+    <span class="section-label">06 — Reconhecimento</span>
+    <h2>O impacto que não para de crescer</h2>
+
+    <p>
+      A crítica especializada recebeu <em>Roots</em> com uma polarização que espelhava a própria natureza do disco. A <strong>AllMusic</strong> concedeu 4,5/5, chamando o Sepultura de "talvez a banda de metal mais distinta e original dos anos 90". A <strong>Metal Hammer</strong> o elegeu <em>álbum nº 1 de 1996</em>. A <strong>Kerrang!</strong> o posicionou como o <em>segundo disco que você precisa ouvir antes de morrer</em>, atrás apenas de <em>In Utero</em>.
+    </p>
+    <p>
+      Do outro lado: o <strong>Entertainment Weekly</strong> deu C−. Robert Christgau classificou como "Dud". E nos fóruns do Metal Archives, a divisão persiste — puristas de thrash consideraram o disco uma traição. A polarização é, ela própria, a melhor evidência de que o álbum importava.
+    </p>
+
+    <div class="chart-grid">
+      <div class="chart-item">
+        <div class="chart-pos">#27</div>
+        <div class="chart-country">Billboard 200</div>
+      </div>
+      <div class="chart-item">
+        <div class="chart-pos">#4</div>
+        <div class="chart-country">Reino Unido</div>
+      </div>
+      <div class="chart-item">
+        <div class="chart-pos">#2</div>
+        <div class="chart-country">Europa</div>
+      </div>
+      <div class="chart-item">
+        <div class="chart-pos">#1</div>
+        <div class="chart-country">UK Rock &amp; Metal</div>
+      </div>
+      <div class="chart-item">
+        <div class="chart-pos">#3</div>
+        <div class="chart-country">Austrália</div>
+      </div>
+      <div class="chart-item">
+        <div class="chart-pos">#57</div>
+        <div class="chart-country">Melhores Álbuns Brasileiros · RS Brasil</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p>Uma obra-prima, realizada por uma banda com um coração enorme e um intelecto ainda maior.</p>
+      <cite>Martin Popoff — 11º melhor disco de metal de todos os tempos</cite>
+    </div>
+
+    <p>
+      <em>Roots</em> entrou para o <strong>Hall da Fama da Decibel Magazine</strong> como apenas o terceiro álbum a receber a honra. A <strong>Rolling Stone Brasil</strong> o nomeou o <strong>57º melhor álbum da música brasileira</strong> — colocando um disco de metal ao lado de clássicos da MPB, da tropicália e do samba. Martin Popoff o classificou como o <strong>11º melhor disco de metal de todos os tempos</strong>.
+    </p>
+  </section>
+
+  <!-- ——— 07 — AO VIVO ——— -->
+  <div class="divider fade-in"><span>///</span></div>
+
+  <section class="section fade-in">
+    <span class="section-label">07 — Ao Vivo</span>
+    <h2>A turnê que terminou em Londres</h2>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">1996</div>
+        <div class="tl-body">
+          <strong>Lançamento de Roots · Fevereiro</strong>
+          <span>Álbum lançado mundialmente pela Roadrunner. A turnê global começa imediatamente.</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1996</div>
+        <div class="tl-body">
+          <strong>Monsters of Rock · Donington, Reino Unido</strong>
+          <span>O último festival no formato clássico. 50 mil pessoas. Ao lado de Kiss, Ozzy Osbourne e Korn. Max toca alguns shows como trio após a morte de seu enteado Dana Wells.</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1996</div>
+        <div class="tl-body">
+          <strong>Brixton Academy · Londres · 16 de dezembro</strong>
+          <span>O último show com Max Cavalera. Documentado em <em>Under a Pale Grey Sky</em>. Ninguém na plateia sabia que era o fim de uma era.</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1997</div>
+        <div class="tl-body">
+          <strong>Max anuncia sua saída · Janeiro</strong>
+          <span>A separação é pública. O Sepultura continua com Derrick Green. Max funda o Soulfly.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ——— 08 — DIMENSÃO POLÍTICA ——— -->
+  <div class="divider fade-in"><span>///</span></div>
+
+  <section class="section fade-in">
+    <span class="section-label">08 — Dimensão Política</span>
+    <h2>O Brasil de FHC sangra nas entrelinhas</h2>
+
+    <p>
+      <em>Roots</em> foi lançado em fevereiro de 1996. Dois meses depois, em <strong>17 de abril</strong>, 19 integrantes do MST foram executados pela polícia militar do Pará no <strong>Massacre de Eldorado dos Carajás</strong>. O Brasil de Fernando Henrique Cardoso vendia a imagem de estabilidade econômica via Plano Real enquanto implementava privatizações agressivas — e o campo brasileiro ardia em conflitos fundiários. Os Xavante carregavam cicatrizes de séculos de escravização e relocação forçada.
+    </p>
+    <p>
+      <em>Roots</em> não é um álbum de protesto no sentido panfletário. É algo mais escorregadio e, talvez, mais potente: <strong>um ato de identificação cultural que opera como política</strong>. "Dictatorshit" ataca o golpe de 64. "Ambush" homenageia Chico Mendes. "Ratamahatta" mergulha nas favelas. Mas o gesto mais radical é "Itsári" — entregar quatro minutos e 49 segundos de um disco de metal a um canto cerimonial de cura, sem processamento, sem concessão ao ouvinte ocidental.
+    </p>
+
+    <div class="callout">
+      <p>Em Roots, sombras da fricção entre o Brasil moderno e o indígena flutuam numa sopa metálica desordenada que emana uma consciência autoconsciente da história colonial e pós-colonial do Brasil.</p>
+      <cite>PopMatters, "Greetings From the Third World"</cite>
+    </div>
+
+    <p>
+      A capa do álbum, criada por <strong>Michael Whelan</strong>, usa a imagem de um <strong>homem Karajá retirada de uma cédula de 1.000 cruzeiros de 1990</strong> — a moeda que FHC substituiu pelo Real. O rosto de um indígena estampado numa moeda extinta de uma economia que colapsou: o simbolismo é quase insuportável em sua precisão.
+    </p>
+    <p>
+      E há um paradoxo que nunca se resolve: quatro brasileiros que passaram doze anos cantando em inglês, vivendo em Phoenix, Arizona, decidiram — justamente no auge de sua carreira global — mergulhar no Brasil profundo que desconheciam. O terreno sonoro de <em>Roots</em> era tão exótico para os próprios membros da banda quanto para o público internacional.
+    </p>
+
+    <div class="callout">
+      <p>Nos últimos oito anos, todo mundo me perguntava quando nossas raízes iam realmente aparecer no nosso som. Ninguém vai ouvir este disco e achar que somos de L.A.</p>
+      <cite>Max Cavalera, 1996</cite>
+    </div>
+  </section>
+
+  <!-- ——— 09 — CONCLUSÃO ——— -->
+  <div class="divider fade-in"><span>///</span></div>
+
+  <section class="section fade-in">
+    <span class="section-label">09 — Por que importa</span>
+    <h2>As raízes que ainda sangram</h2>
+
+    <p>
+      A lista de artistas que citam <em>Roots</em> como influência é uma cartografia do metal dos últimos 30 anos: <strong>Korn, Slipknot, Machine Head, Gojira, Alien Weaponry, Code Orange, Arandu Arakuaa</strong>. Joe Duplantier, do Gojira, admitiu sobre "Amazonia" (2021): <em>"Nós os copiamos, mas não foi de propósito."</em> O Alien Weaponry, da Nova Zelândia, é comparado diretamente ao Sepultura da era <em>Roots</em> por integrar a cultura Māori ao metal.
+    </p>
+    <p>
+      Ross Robinson levou a estética deste disco diretamente para as produções de Korn, Limp Bizkit e Slipknot — redefinindo o que o nu-metal seria. Mas o impacto vai além: <em>Roots</em> inaugurou a ideia de que <strong>o metal pode ser um veículo de expressão pós-colonial</strong>. Antes de 1996, o metal era fundamentalmente uma conversa entre EUA, Reino Unido e Escandinávia. Depois de <em>Roots</em>, bandas de Botsuana, Indonésia, Índia e Mongólia passaram a explorar suas tradições dentro do metal sem pedir licença.
+    </p>
+
+    <div class="callout">
+      <p>Com Roots, a banda provou de uma vez por todas que o gênero, como o jazz, pode acomodar estilos nativos de qualquer cultura.</p>
+      <cite>Nashville Scene</cite>
+    </div>
+
+    <p>
+      <em>Roots</em> não é um álbum confortável. Carrega contradições que nunca se resolvem — brasileiros que precisaram de uma mediadora para acessar o Brasil profundo, um gesto anti-comercial empacotado pela Roadrunner, uma celebração de pertencimento que precedeu a maior ruptura da história da banda. A capa estampa o rosto de um indígena numa moeda extinta, num país que continua incapaz de lidar com seus próprios fantasmas coloniais.
+    </p>
+    <p>
+      Mas é precisamente nessas tensões irresolvidas que reside a força do disco. <em>Roots</em> não oferece respostas limpas. Oferece algo mais raro: a evidência sonora de que a colisão entre mundos incompatíveis pode produzir beleza. A beleza brutal de "Roots Bloody Roots" esmagando seus próprios ouvintes. A beleza sagrada de "Itsári" recusando qualquer interferência. E a beleza trágica de quatro músicos que alcançaram o ponto mais alto de sua arte juntos e nunca conseguiram voltar ao mesmo lugar.
+    </p>
+    <p>
+      A Folha de São Paulo cravou em 1996: <em>"O samba do futuro é o metal."</em> Trinta anos depois, a frase soa menos como manchete e mais como profecia.
+    </p>
+  </section>
+
+  <!-- ——— FOOTER ——— -->
+  <footer class="footer fade-in">
+    <div class="footer-label">Fontes & Pesquisa</div>
+    <div class="footer-sources">
+      Wikipedia (Roots, Sepultura) · Metal Archives · AllMusic · Rolling Stone · Kerrang! · Metal Hammer ·
+      PopMatters ("Greetings From the Third World") · Loudwire ("30 Years Ago: Roots") · BraveWords (Max Cavalera, 2021) ·
+      Exclaim! (Xavante / Igor Cavalera, 2014) · Loudersound ("The Story Behind Sepultura's Roots") ·
+      Remezcla ("How Roots Influenced Latin American Metal Bands") · Revolver Magazine ·
+      The Quietus ("Roots at 30") · GRAMMY.com (25th Anniversary) · Consequence of Sound ·
+      Riffology ("The Making of Roots") · Academia.edu (Idelber Avelar, 2003) ·
+      ABQ Journal (Max Cavalera interview) · Pertout.com (Ross Robinson) ·
+      Discogs · Last.fm
+    </div>
+    <div class="footer-brand">Nordeste Oculto · Crítica Musical · Abril 2026</div>
+  </footer>
+
+</div>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
