@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rage Against the Machine — Rage Against the Machine · IMINÊNCIA Ω</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@300;400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #070608;
+    --bg2:       #0d0b0e;
+    --fg:        #c8bfcc;
+    --fire:      #e85d04;
+    --ember:     #dc2f02;
+    --amber:     #f48c06;
+    --ash:       #b5b0be;
+    --smoke:     #6b6475;
+    --bone:      #ede8f0;
+    --muted:     #4a4353;
+    --border:    #1a171f;
+    --card:      #0f0c13;
+    --accent:    #e85d04;
+    --heat:      #faa307;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.80;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Textura fogo/cinzas — ondas de calor ascendentes */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse at 50% 100%, rgba(232,93,4,0.12) 0%, transparent 55%),
+      radial-gradient(ellipse at 20% 70%, rgba(220,47,2,0.07) 0%, transparent 45%),
+      radial-gradient(ellipse at 80% 60%, rgba(244,140,6,0.05) 0%, transparent 40%),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 79px,
+        rgba(232,93,4,0.018) 79px,
+        rgba(232,93,4,0.018) 80px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 59px,
+        rgba(220,47,2,0.015) 59px,
+        rgba(220,47,2,0.015) 60px
+      );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Grain noise */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.65;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 660px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ——— HERO ——— */
+  .hero {
+    padding: 80px 0 56px;
+    text-align: center;
+  }
+
+  /* Elemento visual: chama SVG animada */
+  .hero-icon {
+    display: inline-block;
+    width: 72px;
+    height: 88px;
+    margin-bottom: 32px;
+  }
+  .flame-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 20px rgba(232,93,4,0.7));
+    animation: flame-flicker 2.8s ease-in-out infinite;
+  }
+  @keyframes flame-flicker {
+    0%   { transform: scaleX(1)    scaleY(1)    rotate(-1deg); filter: drop-shadow(0 0 14px rgba(232,93,4,0.6)); }
+    20%  { transform: scaleX(0.96) scaleY(1.04) rotate(1deg);  filter: drop-shadow(0 0 24px rgba(244,140,6,0.8)); }
+    40%  { transform: scaleX(1.03) scaleY(0.97) rotate(-1.5deg); filter: drop-shadow(0 0 18px rgba(220,47,2,0.7)); }
+    60%  { transform: scaleX(0.97) scaleY(1.05) rotate(0.5deg); filter: drop-shadow(0 0 28px rgba(250,163,7,0.85)); }
+    80%  { transform: scaleX(1.02) scaleY(0.98) rotate(-1deg); filter: drop-shadow(0 0 16px rgba(232,93,4,0.65)); }
+    100% { transform: scaleX(1)    scaleY(1)    rotate(-1deg); filter: drop-shadow(0 0 14px rgba(232,93,4,0.6)); }
+  }
+
+  .hero-tag {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--fire);
+    margin-bottom: 22px;
+    opacity: 0.9;
+  }
+
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(58px, 16vw, 104px);
+    font-weight: 900;
+    line-height: 0.87;
+    color: var(--bone);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    text-shadow: 0 0 80px rgba(232,93,4,0.18);
+  }
+
+  .hero-album {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(20px, 5vw, 30px);
+    font-weight: 700;
+    letter-spacing: 10px;
+    color: var(--fire);
+    margin-bottom: 8px;
+    text-shadow: 0 0 24px rgba(232,93,4,0.45);
+  }
+
+  .hero-year {
+    font-family: 'Fira Code', monospace;
+    font-size: 11px;
+    color: var(--smoke);
+    letter-spacing: 3px;
+    margin-bottom: 32px;
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    color: var(--smoke);
+    font-weight: 300;
+    letter-spacing: 0.2px;
+    max-width: 430px;
+    margin: 0 auto 40px;
+    line-height: 1.65;
+  }
+
+  /* Stats block */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    background: var(--card);
+    margin-bottom: 0;
+  }
+  .stat {
+    padding: 18px 10px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--amber);
+    line-height: 1;
+    letter-spacing: 1px;
+    display: block;
+  }
+  .stat-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 8.5px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 5px;
+    display: block;
+    line-height: 1.3;
+  }
+
+  /* ——— DIVIDER ——— */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 54px 0 42px;
+  }
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .divider span {
+    font-family: 'Fira Code', monospace;
+    font-size: 11px;
+    color: var(--fire);
+    letter-spacing: 3px;
+    opacity: 0.75;
+  }
+
+  /* ——— SEÇÕES ——— */
+  .section { margin-bottom: 58px; }
+
+  .section-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .section h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(30px, 7vw, 46px);
+    font-weight: 800;
+    color: var(--bone);
+    letter-spacing: 0.5px;
+    line-height: 1.02;
+    margin-bottom: 22px;
+  }
+
+  p {
+    font-size: 15.5px;
+    color: var(--fg);
+    font-weight: 300;
+    margin-bottom: 17px;
+  }
+  p:last-child { margin-bottom: 0; }
+
+  strong { color: var(--bone); font-weight: 600; }
+  em { font-style: italic; color: var(--amber); }
+
+  /* ——— CALLOUT ——— */
+  .callout {
+    border-left: 3px solid var(--fire);
+    padding: 18px 20px 18px 26px;
+    background: rgba(232,93,4,0.04);
+    margin: 30px 0;
+    position: relative;
+  }
+  .callout::before {
+    content: '"';
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 64px;
+    font-weight: 900;
+    color: var(--fire);
+    opacity: 0.22;
+    position: absolute;
+    top: -10px;
+    left: 16px;
+    line-height: 1;
+  }
+  .callout p {
+    font-size: 15px;
+    font-style: italic;
+    color: var(--bone);
+    font-weight: 400;
+    margin: 0 0 9px;
+    line-height: 1.65;
+  }
+  .callout cite {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--fire);
+    text-transform: uppercase;
+    font-style: normal;
+  }
+
+  /* ——— MEMBRO CARD ——— */
+  .members { display: flex; flex-direction: column; gap: 10px; margin: 24px 0; }
+  .member {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 16px;
+    align-items: start;
+    padding: 16px 18px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .member::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, var(--ember), transparent);
+    opacity: 0.4;
+  }
+  .member-glyph {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px;
+    color: var(--fire);
+    text-align: center;
+    padding-top: 2px;
+    letter-spacing: 1px;
+    line-height: 1.4;
+    opacity: 0.85;
+  }
+  .member-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--bone);
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+  .member-role {
+    font-family: 'Fira Code', monospace;
+    font-size: 9.5px;
+    color: var(--fire);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+    opacity: 0.8;
+  }
+  .member-bio {
+    font-size: 13px;
+    color: var(--smoke);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ——— TRACKLIST ——— */
+  .tracklist { margin: 22px 0; }
+  .track {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    gap: 12px;
+    align-items: baseline;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .track:last-child { border-bottom: none; }
+  .track-num {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-align: right;
+  }
+  .track-name {
+    font-size: 14px;
+    color: var(--bone);
+    font-weight: 500;
+  }
+  .track-feat {
+    font-family: 'Fira Code', monospace;
+    font-size: 9px;
+    color: var(--fire);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .track-note {
+    font-size: 12px;
+    color: var(--smoke);
+    grid-column: 2 / -1;
+    margin-top: -5px;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  /* ——— TÉCNICA: MORELLO BOX ——— */
+  .morello-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 24px 0;
+  }
+  .morello-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .morello-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 40px; height: 40px;
+    background: radial-gradient(circle at 100% 100%, rgba(232,93,4,0.08), transparent 70%);
+  }
+  .morello-tech {
+    font-family: 'Fira Code', monospace;
+    font-size: 9.5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--fire);
+    margin-bottom: 7px;
+    opacity: 0.9;
+  }
+  .morello-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--bone);
+    letter-spacing: 0.3px;
+    margin-bottom: 7px;
+    line-height: 1.1;
+  }
+  .morello-desc {
+    font-size: 12.5px;
+    color: var(--smoke);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+  .morello-item.wide {
+    grid-column: 1 / -1;
+  }
+
+  /* ——— HIGHLIGHT BOX ——— */
+  .highlight-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 24px 26px;
+    margin: 28px 0;
+    position: relative;
+  }
+  .highlight-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(180deg, var(--fire), var(--ember));
+  }
+  .highlight-box h3 {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--fire);
+    margin-bottom: 14px;
+  }
+  .hb-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .hb-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .hb-icon {
+    font-family: 'Fira Code', monospace;
+    font-size: 11px;
+    color: var(--fire);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .hb-text strong {
+    display: block;
+    font-size: 12.5px;
+    color: var(--bone);
+    margin-bottom: 2px;
+  }
+  .hb-text span {
+    font-size: 12px;
+    color: var(--smoke);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  /* ——— CHART GRID ——— */
+  .chart-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 22px 0;
+  }
+  .chart-item {
+    background: var(--card);
+    padding: 16px 12px;
+    text-align: center;
+  }
+  .chart-pos {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--amber);
+    line-height: 1;
+    letter-spacing: 1px;
+  }
+  .chart-country {
+    font-family: 'Fira Code', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-top: 4px;
+    text-transform: uppercase;
+  }
+
+  /* ——— CAPA BOX ——— */
+  .cover-box {
+    background: var(--card);
+    border: 1px solid rgba(232,93,4,0.25);
+    padding: 0;
+    margin: 28px 0;
+    overflow: hidden;
+  }
+  .cover-header {
+    background: rgba(232,93,4,0.07);
+    padding: 14px 22px;
+    border-bottom: 1px solid rgba(232,93,4,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cover-header-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 9.5px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--fire);
+    opacity: 0.9;
+  }
+  .cover-header-date {
+    font-family: 'Fira Code', monospace;
+    font-size: 9.5px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+  .cover-body {
+    padding: 22px 26px;
+  }
+  .cover-body p {
+    font-size: 14.5px;
+    margin-bottom: 14px;
+  }
+  .cover-body p:last-child { margin-bottom: 0; }
+
+  /* ——— FLAME STAT (ondas de calor ascendentes na capa) ——— */
+  .fire-banner {
+    background: rgba(232,93,4,0.04);
+    border: 1px solid rgba(232,93,4,0.12);
+    border-left: 3px solid var(--ember);
+    padding: 18px 22px;
+    margin: 28px 0;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .fire-banner-icon {
+    font-size: 28px;
+    line-height: 1;
+    opacity: 0.85;
+  }
+  .fire-banner-text {
+    flex: 1;
+  }
+  .fire-banner-text strong {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--bone);
+    letter-spacing: 0.5px;
+    margin-bottom: 3px;
+  }
+  .fire-banner-text span {
+    font-size: 13px;
+    color: var(--smoke);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  /* ——— TAGS ——— */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 20px 0;
+  }
+  .tag {
+    font-family: 'Fira Code', monospace;
+    font-size: 9.5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 5px 10px;
+  }
+  .tag-fire {
+    color: var(--fire);
+    border-color: rgba(232,93,4,0.3);
+    background: rgba(232,93,4,0.04);
+  }
+
+  /* ——— FADE IN ——— */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .d1 { transition-delay: 0.05s; }
+  .d2 { transition-delay: 0.15s; }
+  .d3 { transition-delay: 0.25s; }
+  .d4 { transition-delay: 0.35s; }
+
+  /* ——— FOOTER ——— */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0 52px;
+    margin-top: 72px;
+  }
+  .footer-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .footer-sources {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.75;
+    font-weight: 300;
+  }
+  .footer-brand {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px;
+    color: var(--fire);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 24px;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 500px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stats .stat:nth-child(2) { border-right: none; }
+    .stats .stat:nth-child(3) { border-right: 1px solid var(--border); border-top: 1px solid var(--border); }
+    .stats .stat:nth-child(4) { border-right: none; border-top: 1px solid var(--border); }
+    .morello-grid { grid-template-columns: 1fr; }
+    .hb-grid { grid-template-columns: 1fr; }
+    .chart-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ——— HERO ——— -->
+  <header class="hero">
+
+    <!-- Chama SVG animada — símbolo visual único desta edição -->
+    <div class="hero-icon">
+      <svg class="flame-svg" viewBox="0 0 72 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- corpo principal da chama -->
+        <path d="M36 84 C18 84 8 70 8 56 C8 46 14 38 18 30 C20 26 20 20 18 14 C22 18 24 24 24 30 C26 24 28 16 26 8 C30 14 32 22 30 30 C34 24 36 16 36 8 C38 16 40 24 42 30 C40 22 42 14 46 8 C44 16 46 24 48 30 C52 24 54 18 58 14 C56 20 56 26 58 30 C62 38 64 46 64 56 C64 70 54 84 36 84Z" fill="url(#fireGrad1)" opacity="0.95"/>
+        <!-- núcleo brilhante -->
+        <path d="M36 78 C24 78 16 68 16 56 C16 48 20 42 24 36 C26 32 27 28 26 24 C30 28 32 34 30 40 C34 34 36 26 36 20 C38 26 40 34 42 40 C40 34 42 28 46 24 C45 28 46 32 48 36 C52 42 56 48 56 56 C56 68 48 78 36 78Z" fill="url(#fireGrad2)" opacity="0.7"/>
+        <!-- ponta da chama -->
+        <path d="M36 16 C35 24 32 30 30 36 C34 30 36 22 36 16Z" fill="#faa307" opacity="0.6"/>
+        <defs>
+          <linearGradient id="fireGrad1" x1="36" y1="84" x2="36" y2="8" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#dc2f02"/>
+            <stop offset="45%" stop-color="#e85d04"/>
+            <stop offset="75%" stop-color="#f48c06"/>
+            <stop offset="100%" stop-color="#faa307"/>
+          </linearGradient>
+          <linearGradient id="fireGrad2" x1="36" y1="78" x2="36" y2="20" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#faa307"/>
+            <stop offset="60%" stop-color="#f48c06" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0.3"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="hero-tag">IMINÊNCIA Ω · Ensaio Sonoro</div>
+    <h1>RAGE<br>AGAINST<br>THE<br>MACHINE</h1>
+    <div class="hero-album">RAGE AGAINST THE MACHINE</div>
+    <div class="hero-year">// EPIC RECORDS · 1992 //</div>
+    <p class="hero-sub">O primeiro disco a soldar hip-hop e metal numa declaração política sem concessões. Gravado enquanto Los Angeles ardia. Lançado quando a América não queria ouvir.</p>
+
+    <div class="stats fade-in">
+      <div class="stat">
+        <span class="stat-num">3M+</span>
+        <span class="stat-label">cópias EUA</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">10</span>
+        <span class="stat-label">faixas<br>zero synth</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">'63</span>
+        <span class="stat-label">ano da capa</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">#1</span>
+        <span class="stat-label">UK natal<br>2009</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ——— 01 — FORMAÇÃO ——— -->
+  <div class="divider fade-in"><span>// 01 //</span></div>
+
+  <section class="section fade-in">
+    <span class="section-label">01 — Quatro heranças</span>
+    <h2>A Banda</h2>
+
+    <p>
+      O Rage Against the Machine não nasceu de quatro músicos procurando um som. Nasceu de quatro heranças políticas convergindo num mesmo ponto de fúria. O primeiro ensaio conjunto ocorreu em <strong>31 de agosto de 1991</strong>, no Sunburst Studios em North Hollywood. Em menos de um ano, a banda já tinha um contrato com a Epic Records e estava gravando seu primeiro álbum.
+    </p>
+
+    <div class="members">
+
+      <div class="member fade-in">
+        <div class="member-glyph">voz<br>///</div>
+        <div>
+          <div class="member-name">Zack de la Rocha</div>
+          <div class="member-role">Vocal · compositor</div>
+          <div class="member-bio">
+            Nasceu em 1970, em Long Beach. Filho do muralista chicano <strong>Roberto "Beto" de la Rocha</strong>, do coletivo Los Four — primeiro grupo de arte chicana exposto num grande museu americano. Bisavô combatente da Revolução Mexicana. Cresceu dividido entre a Irvine suburbana branca da mãe e a Lincoln Heights chicana do pai. Aos 13 anos presenciou o pai em colapso nervoso destruir as próprias pinturas. Absorveu simultaneamente hardcore punk (Minor Threat, Black Flag) e hip-hop (Public Enemy, Eric B. &amp; Rakim). Antes do RATM, cantava no <em>Inside Out</em>, onde escreveu uma canção chamada literalmente "Rage Against the Machine" para um segundo álbum nunca gravado.
+          </div>
+        </div>
+      </div>
+
+      <div class="member fade-in">
+        <div class="member-glyph">git<br>///</div>
+        <div>
+          <div class="member-name">Tom Morello</div>
+          <div class="member-role">Guitarra · arquiteto do som</div>
+          <div class="member-bio">
+            Nascido em 1964, no Harlem. Filho de <strong>Ngethe Njoroge</strong> — queniano da etnia Kikuyu, combatente da <strong>Revolta Mau Mau</strong> contra o colonialismo britânico, primeiro embaixador queniano nas Nações Unidas, primo de Jomo Kenyatta. Criado pela mãe, professora americana, em <strong>Libertyville, Illinois</strong> — cidade quase inteiramente branca onde era o único garoto negro. Graduou-se em Ciência Política em <strong>Harvard em 1986</strong>, praticando guitarra até oito horas por dia. Trabalhou como assistente de agenda do senador Alan Cranston antes de se mudar para LA. Um colega de colegial: Adam Jones, futuro guitarrista do Tool.
+          </div>
+        </div>
+      </div>
+
+      <div class="member fade-in">
+        <div class="member-glyph">bxo<br>///</div>
+        <div>
+          <div class="member-name">Tim Commerford</div>
+          <div class="member-role">Baixo · groove</div>
+          <div class="member-bio">
+            Nascido em 1968, em Irvine. Filho de um engenheiro da NASA. Conheceu Zack na escola primária — foi de la Rocha quem literalmente <strong>ensinou Tim a tocar baixo aos quinze anos</strong>, mostrando onde colocar os dedos. Juntos formaram o Juvenile Expression no colegial. Tocava exclusivamente com os dedos, nunca com palheta. Influências: Rush, Steve Harris do Iron Maiden, Cypress Hill. Sua mãe, matemática, foi diagnosticada com tumor cerebral quando ele tinha sete anos e morreu em 1988.
+          </div>
+        </div>
+      </div>
+
+      <div class="member fade-in">
+        <div class="member-glyph">bat<br>///</div>
+        <div>
+          <div class="member-name">Brad Wilk</div>
+          <div class="member-role">Bateria · fundação</div>
+          <div class="member-bio">
+            Nascido em 1968, em Portland. Ascendência judaica germano-russa — família com sobreviventes do Holocausto. Começou na bateria aos treze anos. Influências incomuns para um baterista de metal: <strong>John Bonham, Keith Moon, Art Blakey, John Coltrane, James Brown e George Clinton</strong> — síntese de rock, jazz e funk que define o pulso do álbum. Fez audição tanto para o Lock Up de Morello quanto para o que viria a ser o Pearl Jam, sem entrar em nenhum.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ——— 02 — CONTEXTO ——— -->
+  <div class="divider fade-in"><span>// 02 //</span></div>
+
+  <section class="section fade-in">
+    <span class="section-label">02 — A América em chamas</span>
+    <h2>Los Angeles, 1992</h2>
+
+    <p>
+      O álbum começou a ser gravado em abril de 1992. Em 29 de abril de 1992, o júri de Simi Valley absolveu os quatro policiais que espancaram Rodney King. <strong>Los Angeles explodiu.</strong> Seis dias de motins: 63 mortos, mais de 2.300 feridos, cerca de 12.000 presos, mais de US$ 1 bilhão em danos. A Guarda Nacional, o Exército e os Fuzileiros Navais foram mobilizados.
+    </p>
+
+    <div class="callout">
+      <p>De certa forma, o disco foi profético. Todas as letras foram escritas antes dos motins — e então Los Angeles pegou fogo exatamente como descrevíamos.</p>
+      <cite>Tom Morello</cite>
+    </div>
+
+    <p>
+      A Guerra do Golfo havia terminado dezoito meses antes, deixando um rastro de patriotismo militarizado. A recessão de 1990–91 devastava especialmente o sul da Califórnia. O PMRC pressionava pela censura musical — contra o qual a mãe de Morello havia fundado a Parents for Rock and Rap. Francis Fukuyama proclamava "o fim da história" e a vitória definitiva do capitalismo. <strong>Era precisamente esse triunfalismo que a banda recusava.</strong>
+    </p>
+
+    <div class="fire-banner fade-in">
+      <div class="fire-banner-icon">🔥</div>
+      <div class="fire-banner-text">
+        <strong>"Killing in the Name" foi escrita antes dos motins de LA.</strong>
+        <span>O verso "Some of those that work forces / Are the same that burn crosses" conectava diretamente a polícia à Ku Klux Klan. Os eventos de 29 de abril de 1992 o transformaram em documento histórico.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ——— 03 — IDEOLOGIA ——— -->
+  <div class="divider fade-in"><span>// 03 //</span></div>
+
+  <section class="section fade-in">
+    <span class="section-label">03 — Programa, não postura</span>
+    <h2>A Política Como Método</h2>
+
+    <p>
+      O RATM se diferenciava de qualquer banda anterior pela <strong>sistematicidade de sua política</strong>. Não era atitude — era programa. Chomsky, Zinn, Fanon, Malcolm X, os Panteras Negras e o zapatismo não eram referências decorativas nos encartes. Eram o aparato conceitual que organizava cada letra.
+    </p>
+
+    <div class="highlight-box fade-in">
+      <h3>Arquivo Ideológico — Influências Documentadas</h3>
+      <div class="hb-grid">
+        <div class="hb-item">
+          <div class="hb-icon">//</div>
+          <div class="hb-text">
+            <strong>Noam Chomsky</strong>
+            <span>Manufacturing Consent, Year 501 — framework central sobre mídia e poder imperial americano</span>
+          </div>
+        </div>
+        <div class="hb-item">
+          <div class="hb-icon">//</div>
+          <div class="hb-text">
+            <strong>Howard Zinn</strong>
+            <span>A People's History of the United States — história americana como instrumento de dominação</span>
+          </div>
+        </div>
+        <div class="hb-item">
+          <div class="hb-icon">//</div>
+          <div class="hb-text">
+            <strong>Frantz Fanon</strong>
+            <span>Os Condenados da Terra — teoria anticolonial que informava a visão de Terceiro Mundo da banda</span>
+          </div>
+        </div>
+        <div class="hb-item">
+          <div class="hb-icon">//</div>
+          <div class="hb-text">
+            <strong>Black Panther Party</strong>
+            <span>Huey Newton e George Jackson — Revolutionary Suicide e Soledad Brother na lista de leitura</span>
+          </div>
+        </div>
+        <div class="hb-item">
+          <div class="hb-icon">//</div>
+          <div class="hb-text">
+            <strong>Malcolm X</strong>
+            <span>Referenciado diretamente em "Wake Up": "Ya know they murdered X / And tried to blame it on Islam"</span>
+          </div>
+        </div>
+        <div class="hb-item">
+          <div class="hb-icon">//</div>
+          <div class="hb-text">
+            <strong>EZLN / Zapatismo</strong>
+            <span>A conexão mais profunda — de la Rocha viajou múltiplas vezes a Chiapas após janeiro de 1994</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>
+      "Wake Up" é o manifesto mais explícito do disco. A parte falada no final cita literalmente um memorando do FBI de <strong>4 de março de 1968</strong>, do programa clandestino COINTELPRO — a operação de infiltração e destruição de organizações políticas domésticas. Não é metáfora. É um documento real lido em voz alta sobre um groove de 120 BPM. A canção foi usada na cena final de Matrix (1999) — a fusão perfeita entre despertar ficcional e despertar político.
+    </p>
+
+    <p>
+      A contradição de assinar com a Epic Records, subsidiária da Sony, foi a crítica mais persistente. A defesa de Morello tornou-se canônica: <em>"Quando se vive numa sociedade capitalista, a moeda da disseminação de informação passa por canais capitalistas. Noam Chomsky se oporia a seus livros serem vendidos na Barnes & Noble? Não."</em>
+    </p>
+  </section>
+
+  <!-- ——— 04 — TOM MORELLO / TÉCNICA ——— -->
+  <div class="divider fade-in"><span>// 04 //</span></div>
+
+  <section class="section fade-in">
+    <span class="section-label">04 — Sem sintetizadores, sem desculpas</span>
+    <h2>Tom Morello e a Reinvenção da Guitarra Elétrica</h2>
+
+    <p>
+      O aviso nos créditos do álbum — <strong>"No samples, keyboards or synthesizers used in the making of this recording"</strong> — era uma declaração de princípio e um desafio. Cada som aparentemente eletrônico, cada textura de sintetizador, cada scratch de DJ que você ouve no disco foi produzido organicamente por quatro instrumentos acústicos. A guitarra de Morello era a principal responsável por esse truque impossível.
+    </p>
+
+    <p>
+      Morello graduou-se em Harvard — mas sua educação em guitarra era radicalmente autodidata. Sem professor formal, sem técnica convencional, ele desenvolveu um vocabulário inteiramente próprio que <strong>não existia antes dele</strong>. Não se tratava apenas de efeitos — era uma reconfiguração do que a guitarra elétrica pode fazer enquanto instrumento.
+    </p>
+
+    <div class="morello-grid fade-in">
+
+      <div class="morello-item">
+        <div class="morello-tech">Técnica #1</div>
+        <div class="morello-title">Kill Switch / Toggle Switch</div>
+        <div class="morello-desc">
+          O seletor de captadores da guitarra usado como interruptor rítmico — mutar e desmutar o sinal em velocidade, criando efeitos percussivos que imitam scratching de DJ. Morello desenvolveu a técnica acidentalmente ao observar o interruptor. O resultado soa como vinil riscado sobre um riff de metal pesado.
+        </div>
+      </div>
+
+      <div class="morello-item">
+        <div class="morello-tech">Técnica #2</div>
+        <div class="morello-title">DigiTech Whammy WH-1</div>
+        <div class="morello-desc">
+          O Whammy Pedal de primeira geração (1989) permitia mudanças de pitch em até duas oitavas com o pé. Morello o usava para criar glissandos alienígenas, simulações de theremin e efeitos de "bomba em queda livre" que pontuam solos inteiros — sons que o ouvinte associa a sintetizadores.
+        </div>
+      </div>
+
+      <div class="morello-item">
+        <div class="morello-tech">Técnica #3</div>
+        <div class="morello-title">Feedback Controlado</div>
+        <div class="morello-desc">
+          Posicionamento preciso do corpo em relação ao amplificador (Marshall JCM800 50W) para gerar e controlar feedback. Não como ruído acidental, mas como nota sustentada e modulável — feedback como melodia, não como distorção.
+        </div>
+      </div>
+
+      <div class="morello-item">
+        <div class="morello-tech">Técnica #4</div>
+        <div class="morello-title">Percussão na Guitarra</div>
+        <div class="morello-desc">
+          Arranhões, golpes, mutes agressivos e manipulações físicas das cordas com objetos não convencionais. O resultado é uma camada rítmica adicional sobre a bateria de Wilk — a guitarra funciona simultaneamente como instrumento harmônico e percussivo.
+        </div>
+      </div>
+
+      <div class="morello-item">
+        <div class="morello-tech">Técnica #5</div>
+        <div class="morello-title">Atrás da Pestana</div>
+        <div class="morello-desc">
+          Em "Township Rebellion", Morello toca as cordas <em>atrás da pestana</em> da Fender Telecaster — a região entre o zero e as cravelhas. O som é metálico, atonalmente percussivo, completamente estranho. É o tipo de "descoberta" que só acontece quando alguém nunca aprendeu as regras.
+        </div>
+      </div>
+
+      <div class="morello-item">
+        <div class="morello-tech">Técnica #6</div>
+        <div class="morello-title">Dunlop Crybaby + Riffs</div>
+        <div class="morello-desc">
+          O pedal wah usado não apenas em solos mas como instrumento de filtragem rítmica sobre riffs inteiros — modulando o timbre de acordo com a letra. Combinado ao drop-D (afinação básica do álbum), criava graves que vinham do baixo mas pertenciam à guitarra.
+        </div>
+      </div>
+
+      <div class="morello-item wide">
+        <div class="morello-tech">O Instrumento</div>
+        <div class="morello-title">"Arm the Homeless" — a Guitarra do Álbum</div>
+        <div class="morello-desc">
+          A guitarra principal do álbum era uma Fender Telecaster de 1966 remontada com captadores EMG, que Morello chamava de "Arm the Homeless". O nome era uma declaração política em si — um instrumento com o slogan de um movimento pintado no corpo, tocado para centenas de milhares de pessoas. O amplificador era um Marshall JCM800 de 50 watts — configuração minimalista, sem processamento de palco além dos pedais. O som nu, sujo e sem reverbos artificiais era parte da estética deliberadamente anti-glamour do disco.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="callout">
+      <p>Minha abordagem como guitarrista sempre foi não ter nenhuma abordagem. Eu aprendi guitarra de trás para frente. Enquanto aprendi técnicas básicas de como tocar os acordes e fazer riffs de metal, eu completamente ignorei qualquer julgamento sobre o que é e o que não é possível com o instrumento.</p>
+      <cite>Tom Morello</cite>
+    </div>
+
+    <p>
+      A síntese de Morello não era apenas técnica — era filosófica. Ele era um <strong>fã de hip-hop tanto quanto de metal</strong>. "King of Rock" do Run-DMC, ele dizia, "virou minha vida de cabeça para baixo". O scratch de Grandmaster Flash, as texturas de Terminator X do Public Enemy, o sampling como ferramenta narrativa — tudo isso entrou na sua compreensão de o que uma guitarra poderia fazer. O resultado foi um guitarrista de metal que pensava como um DJ, e um DJ que só usava uma Telecaster.
+    </p>
+  </section>
+
+  <!-- ——— 05 — A CAPA ——— -->
+  <div class="divider fade-in"><span>// 05 //</span></div>
+
+  <section class="section fade-in">
+    <span class="section-label">05 — A imagem que mudou uma guerra</span>
+    <h2>Thích Quảng Đức</h2>
+
+    <p>
+      A capa do álbum não é uma metáfora. É um registro documental de uma morte real. Essa literalidade é o que lhe confere poder insuportável — e é exatamente por isso que a banda a escolheu.
+    </p>
+
+    <div class="cover-box fade-in">
+      <div class="cover-header">
+        <span class="cover-header-label">// Saigon · 11 de Junho de 1963</span>
+        <span class="cover-header-date">Foto: Malcolm Browne / AP</span>
+      </div>
+      <div class="cover-body">
+        <p>
+          <strong>Thích Quảng Đức</strong> tinha cerca de 66 anos quando se sentou na posição de lótus na interseção do Boulevard Phan Đình Phùng com a Rua Lê Văn Duyệt, a poucos quarteirões do Palácio Presidencial de Saigon. Era monge budista há mais de cinquenta anos. Construíra 31 templos. Passara três anos em retiro solitário nas montanhas. Não era um jovem radical — era um ancião que escolheu deliberadamente o fogo.
+        </p>
+        <p>
+          Despejaram cinco litros de gasolina sobre ele. Acendeu um fósforo. <strong>Durante aproximadamente dez minutos, enquanto as chamas consumiam sua carne, Thích Quảng Đức não moveu um músculo, não emitiu um som.</strong>
+        </p>
+        <p>
+          O jornalista David Halberstam estava presente: <em>"As chamas vinham de um ser humano; seu corpo estava lentamente definhando e encolhendo... Atrás de mim eu podia ouvir os soluços dos vietnamitas que agora se reuniam. Eu estava chocado demais para chorar, confuso demais para fazer anotações."</em>
+        </p>
+      </div>
+    </div>
+
+    <p>
+      O contexto era a <strong>crise budista de 1963</strong> no Vietnã do Sul. O presidente Ngô Đình Diệm, católico devoto, governava com flagrante favoritismo religioso. Em 8 de maio de 1963, após tropas do governo abrirem fogo sobre uma manifestação budista em Huế, matando nove civis desarmados, a comunidade budista do país entrou em escalada de resistência. Quảng Đức escolheu ser a resposta mais extrema possível.
+    </p>
+
+    <p>
+      A fotografia foi tirada por <strong>Malcolm Browne</strong>, correspondente-chefe da Associated Press em Saigon. Ele cultivara relações com monges budistas por dois anos. Na noite anterior, recebeu a informação de que algo importante aconteceria. A maioria dos correspondentes ignorou o aviso. Browne não. Usou uma câmera Petri barata e focou exclusivamente nas configurações técnicas enquanto um ser humano ardia na sua frente.
+    </p>
+
+    <div class="callout">
+      <p>Nenhuma foto jornalística na história gerou tanta emoção ao redor do mundo como essa. Vamos ter que fazer algo a respeito daquele regime.</p>
+      <cite>John F. Kennedy, ao ver a foto pela primeira vez</cite>
+    </div>
+
+    <p>
+      A foto ganhou o <strong>World Press Photo do Ano de 1963</strong>. Browne recebeu o Prêmio Pulitzer em 1964. Em 1º de novembro de 1963, generais sul-vietnamitas deram um golpe de Estado. <strong>Diệm foi assassinado em 2 de novembro de 1963.</strong> O historiador Seth Jacobs afirmou que Quảng Đức "reduziu o experimento americano com Diệm a cinzas". Uma foto tirada por um jornalista com uma câmera barata mudou o curso de uma guerra.
+    </p>
+
+    <p>
+      Madame Nhu, cunhada de Diệm e primeira-dama de facto, chamou a imolação de "churrasco": <em>"Deixem-nos queimar e bateremos palmas."</em> Seus comentários horrorizaram Washington e aceleraram o abandono americano do regime.
+    </p>
+
+    <p>
+      Tom Morello explicou a escolha: <em>"A foto na capa, do monge se autoimolando por suas crenças, era uma que pensamos capturar a integridade e o poder que estávamos buscando em nossas canções."</em> A imagem condensava tudo: autossacrifício como forma de resistência, a documentação de uma morte real como recusa à abstração política, a continuidade entre o Vietnã de 1963 e a América de 1992. Os agradecimentos do álbum incluem Bobby Sands — grevista de fome do IRA, morto na prisão em 1981 — e Huey P. Newton, cofundador dos Panteras Negras. <strong>Figuras que, como Quảng Đức, encarnavam resistência contra o poder estatal ao custo da própria vida.</strong>
+    </p>
+  </section>
+
+  <!-- ——— 06 — O ÁLBUM ——— -->
+  <div class="divider fade-in"><span>// 06 //</span></div>
+
+  <section class="section fade-in">
+    <span class="section-label">06 — Dez faixas, zero concessão</span>
+    <h2>O Álbum</h2>
+
+    <p>
+      Gravado entre abril e maio de 1992 com o produtor <strong>Garth "GGGarth" Richardson</strong> — canadense que adiantou US$ 20.000 do próprio cartão de crédito antes mesmo da assinatura do contrato. O estúdio principal foi o <strong>Sound City Studios, em Van Nuys</strong> — os mesmos estúdios onde o Nirvana gravara <em>Nevermind</em> poucos meses antes. A mixagem ficou com <strong>Andy Wallace</strong>, que também havia mixado <em>Nevermind</em>.
+    </p>
+
+    <p>
+      Um <strong>sistema de PA de concerto completo</strong> foi montado na sala de gravação. Quando a banda travou no ambiente estéril do estúdio, a solução foi simples: convidar amigos, simular um show, e gravar as bases essencialmente ao vivo. A produção é deliberadamente seca — sem reverbs artificiais, sem a estética saturada dos anos 1980. O resultado soa como uma banda tocando na mesma sala que você.
+    </p>
+
+    <div class="tracklist fade-in">
+      <div class="track">
+        <div class="track-num">01</div>
+        <div class="track-name">Bombtrack</div>
+        <div class="track-feat"></div>
+        <div class="track-note">Abertura como manifesto incendiário. O riff em drop-D estabelece o tom antes que qualquer palavra seja dita.</div>
+      </div>
+      <div class="track">
+        <div class="track-num">02</div>
+        <div class="track-name">Killing in the Name</div>
+        <div class="track-feat">hino</div>
+        <div class="track-note">Oito linhas líricas distintas e dezesseis repetições de "Fuck you, I won't do what you tell me". O riff nasceu quando Morello ensinava drop-D a um aluno. #1 nas paradas britânicas de Natal em 2009.</div>
+      </div>
+      <div class="track">
+        <div class="track-num">03</div>
+        <div class="track-name">Take the Power Back</div>
+        <div class="track-feat"></div>
+        <div class="track-note">Ataque ao currículo eurocêntrico. O baixo de Commerford domina a mixagem em groove funk.</div>
+      </div>
+      <div class="track">
+        <div class="track-num">04</div>
+        <div class="track-name">Settle for Nothing</div>
+        <div class="track-feat"></div>
+        <div class="track-note">O momento mais introvertido do disco — pobreza, abandono, violência como herança.</div>
+      </div>
+      <div class="track">
+        <div class="track-num">05</div>
+        <div class="track-name">Bullet in the Head</div>
+        <div class="track-feat"></div>
+        <div class="track-note">Dissecção da manipulação midiática. Abre com riff de baixo seco e solitário. "A yellow ribbon instead of a swastika."</div>
+      </div>
+      <div class="track">
+        <div class="track-num">06</div>
+        <div class="track-name">Know Your Enemy</div>
+        <div class="track-feat">feat. MJK</div>
+        <div class="track-note">Vocais adicionais de Maynard James Keenan (Tool) e percussão de Stephen Perkins (Jane's Addiction). Perry Farrell foi convidado mas não pôde comparecer.</div>
+      </div>
+      <div class="track">
+        <div class="track-num">07</div>
+        <div class="track-name">Wake Up</div>
+        <div class="track-feat">COINTELPRO</div>
+        <div class="track-note">Cita um memorando do FBI de 4/03/1968. Nomeia J. Edgar Hoover, Martin Luther King Jr. e Malcolm X como alvos do programa. Encerrou Matrix (1999).</div>
+      </div>
+      <div class="track">
+        <div class="track-num">08</div>
+        <div class="track-name">Fistful of Steel</div>
+        <div class="track-feat"></div>
+        <div class="track-note">Solo de Morello usando exclusivamente o toggle switch — o scratch mais puro do álbum.</div>
+      </div>
+      <div class="track">
+        <div class="track-num">09</div>
+        <div class="track-name">Township Rebellion</div>
+        <div class="track-feat"></div>
+        <div class="track-note">Conecta Joanesburgo ao South Central. Morello toca cordas atrás da pestana para criar sons metalicamente percussivos únicos.</div>
+      </div>
+      <div class="track">
+        <div class="track-num">10</div>
+        <div class="track-name">Freedom</div>
+        <div class="track-feat">Leonard Peltier</div>
+        <div class="track-note">Encerramento dedicado ao ativista do American Indian Movement encarcerado. O grito final — tomada única — é catártico ao ponto de dor.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ——— 07 — IMPACTO ——— -->
+  <div class="divider fade-in"><span>// 07 //</span></div>
+
+  <section class="section fade-in">
+    <span class="section-label">07 — Vendas e rastro</span>
+    <h2>O Impacto</h2>
+
+    <p>
+      Antes da Lollapalooza de 1993, o disco havia vendido aproximadamente <strong>75.000 cópias</strong>. Após a turnê do festival — na qual, em Filadélfia, os quatro membros subiram ao palco completamente nus, com fita adesiva sobre as bocas e "PMRC" pintado nos peitos, ficando em silêncio por quinze minutos — as vendas saltaram para <strong>400.000</strong>.
+    </p>
+
+    <div class="chart-grid fade-in">
+      <div class="chart-item">
+        <div class="chart-pos">3×PT</div>
+        <div class="chart-country">EUA<br>3 milhões</div>
+      </div>
+      <div class="chart-item">
+        <div class="chart-pos">3×PT</div>
+        <div class="chart-country">UK<br>900 mil</div>
+      </div>
+      <div class="chart-item">
+        <div class="chart-pos">5×PT</div>
+        <div class="chart-country">Austrália</div>
+      </div>
+      <div class="chart-item">
+        <div class="chart-pos">#221</div>
+        <div class="chart-country">Rolling Stone<br>500 maiores</div>
+      </div>
+      <div class="chart-item">
+        <div class="chart-pos">9.1</div>
+        <div class="chart-country">Pitchfork<br>retrospectiva</div>
+      </div>
+      <div class="chart-item">
+        <div class="chart-pos">2023</div>
+        <div class="chart-country">Rock & Roll<br>Hall of Fame</div>
+      </div>
+    </div>
+
+    <p>
+      Em <strong>21 de fevereiro de 1993</strong>, a versão não censurada de "Killing in the Name" foi transmitida ao vivo na BBC Radio 1 por erro do apresentador Bruno Brookes — suspenso por uma semana. Em <strong>dezembro de 2009</strong>, uma campanha organizada no Facebook elevou "Killing in the Name" ao <strong>primeiro lugar nas paradas de Natal do Reino Unido</strong>, vendendo mais de 502.000 cópias em uma semana — o primeiro single exclusivamente digital a conquista essa posição. No pós-11 de Setembro de 2001, a Clear Channel incluiu <strong>toda a discografia do RATM</strong> numa lista de músicas "liricamente questionáveis" para o rádio.
+    </p>
+
+    <div class="callout">
+      <p>O sofrimento humano não mudou. O racismo não mudou. As coisas na verdade regrediram. O Rage Against the Machine escreveu um disco incrível que era atual — e será atual vez após vez após vez.</p>
+      <cite>Garth Richardson, produtor do álbum</cite>
+    </div>
+  </section>
+
+  <!-- ——— 08 — CONCLUSÃO ——— -->
+  <div class="divider fade-in"><span>// 08 //</span></div>
+
+  <section class="section fade-in">
+    <span class="section-label">08 — Por que importa</span>
+    <h2>O Fogo Que Não Se Apaga</h2>
+
+    <p>
+      O álbum de estreia do Rage Against the Machine realizou algo que a teoria política sozinha não poderia: transformou Chomsky, Zinn, Fanon e os Panteras Negras em <strong>energia cinética</strong> — em riffs, gritos e grooves que atravessaram fronteiras de classe, idioma e gênero musical. A chama de Thích Quảng Đức na capa não é ornamento. É declaração ontológica: <em>nós nos vemos como continuação de uma linhagem de resistência radical que se imola antes de se render.</em>
+    </p>
+
+    <p>
+      Tom Morello criou uma linguagem de guitarra que só existe porque ele nunca aprendeu as regras. O toggle switch, o Whammy, o feedback como melodia, as cordas atrás da pestana — cada técnica era uma violação do que a guitarra "deveria" fazer, transformada em vocabulário original. Trinta anos depois, ainda é impossível imitar sem soar como imitação.
+    </p>
+
+    <p>
+      O fato de que letras escritas em 1991 sobre brutalidade policial, manipulação midiática e supressão de movimentos políticos seguem ressoando com precisão cirúrgica não atesta a profecia da banda. Atesta a <strong>persistência das estruturas que ela denunciava</strong>. O disco permanece atual não por nostalgia, mas por fracasso histórico.
+    </p>
+
+    <div class="tags fade-in">
+      <span class="tag tag-fire">hip-hop metal</span>
+      <span class="tag tag-fire">anticapitalismo</span>
+      <span class="tag tag-fire">LA 1992</span>
+      <span class="tag">Epic Records</span>
+      <span class="tag">Sound City Studios</span>
+      <span class="tag">Thích Quảng Đức</span>
+      <span class="tag">Malcolm Browne</span>
+      <span class="tag">COINTELPRO</span>
+      <span class="tag">zapatismo</span>
+      <span class="tag">zero synth</span>
+    </div>
+  </section>
+
+  <!-- ——— FOOTER ——— -->
+  <footer class="footer fade-in">
+    <div class="footer-label">Fontes &amp; Pesquisa</div>
+    <div class="footer-sources">
+      Wikipedia (Rage Against the Machine, álbum, Thích Quảng Đức, Buddhist Crisis, Malcolm Browne, Tom Morello, Zack de la Rocha, Tim Commerford, Brad Wilk, Garth Richardson) · Louder Sound ("It was like holding a live wire"; "My Life Story: Tom Morello"; "The Real Story of the Debut Album") · Riffology ("A 90s Revolution") · Happy Mag ("Engineering the Sound") · Far Out Magazine (capa política; primeiro show 1991) · Slate ("24 Years Too Early") · Diffuser.fm ("Cover Stories") · American Songwriter ("Killing in the Name") · VICE ("Tom Morello on Political Stance") · Journal of the History of Ideas ("Radical Historians") · SAGE Publications (Encyclopedia of Activism) · Open Culture (lista de 132 livros) · Council on Foreign Relations (Thích Quảng Đức) · Rare Historical Photos (The Burning Monk 1963) · TIME Magazine (Malcolm Browne, The Burning Monk) · World Press Photo 1963 · Veterans Breakfast Club (Thích Quảng Đức) · Global Nonviolent Action Database (Swarthmore) · Encyclopedia Britannica (LA Riots 1992) · Grokipedia · Discogs · Last.fm · Guitar World · Neural DSP · Produce Like A Pro (Garth Richardson) · CrimethInc. (LA Riots retrospective) · Albumism (30th Anniversary) · Kerrang! · NPR
+    </div>
+    <div class="footer-brand">IMINÊNCIA Ω · Crítica Musical · Aracaju, Abril 2026</div>
+  </footer>
+
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.07 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
